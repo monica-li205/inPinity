@@ -6,4 +6,4 @@ CREATE TABLE comments (
   post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE,
   date_posted DATE,
   comment_text TEXT
-)
+);

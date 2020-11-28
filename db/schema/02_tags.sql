@@ -5,4 +5,4 @@ CREATE TABLE tags (
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE,
   tag_name VARCHAR(255) NOT NULL,
-)
+);
