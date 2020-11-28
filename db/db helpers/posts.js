@@ -7,7 +7,41 @@ const pool = new Pool({
   database: 'midterm'
 });
 
-// -- retrieve all posts for homepage
+// /**
+//  * Get all posts for tag
+//  * @param {{}} options An object containing query options.
+//  * @param {*} limit The number of results to return.
+//  * @return {Promise<[{}]>}  A promise to the properties.
+//  */
+// const getAllPostsForTag = function(options, limit = 100) {
+//   const queryParams = [];
+//   let queryString = `
+//   // SELECT id, user_id, thumbnail_photo, date_created, url, title, description, rating, is_liked
+//   FROM properties
+//   LEFT JOIN property_reviews ON properties.id = property_id
+//   `;
+
+//   if (options.city) {
+//     queryParams.push(`%${options.city}%`);
+//     queryString += `WHERE city LIKE $${queryParams.length} `;
+//   }
+
+//   queryParams.push(limit);
+//   queryString += `
+//   GROUP BY properties.id
+//   ORDER BY cost_per_night
+//   LIMIT $${queryParams.length};
+//   `;
+
+//   console.log(queryString, queryParams);
+
+//   return pool.query(queryString, queryParams)
+//   .then(res => res.rows);
+
+// }
+// exports.getAllProperties = getAllProperties;
+
+
 // SELECT id, user_id, thumbnail_photo, date_created, url, title, description, rating, is_liked
 // FROM posts
 
