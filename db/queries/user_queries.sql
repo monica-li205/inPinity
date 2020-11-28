@@ -1,10 +1,15 @@
 -- retrieve user with email
-SELECT name, username, password, email
+SELECT id, name, username, password, email
 FROM users
 WHERE email = 'alice@gmail.com'
 
+-- retrieve user with id
+SELECT id, name, username, password, email
+FROM users
+WHERE id = 1
+
 -- retrieve user with username
-SELECT name, username, password, email
+SELECT id, name, username, password, email
 FROM users
 WHERE username = 'Alice123'
 
