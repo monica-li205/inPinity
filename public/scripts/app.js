@@ -5,7 +5,7 @@ $(document).ready(function (e) {
     })
     .done((posts) => {
       for (post of posts.posts) {
-        $('.container').append(createPostElement(post));
+        $('.posts-container').append(createPostElement(post));
       }
     })
 })
