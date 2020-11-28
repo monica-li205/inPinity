@@ -7,4 +7,17 @@ const pool = new Pool({
   database: 'midterm'
 });
 
-// create new user
+/**
+ * Add a new user to the database.
+ * @param {{name: string, password: string, email: string}} user
+ * @return {Promise<{}>}
+ */
+const addUser =  function(user) {
+  return pool.query(`
+  INSERT INTO users (name, username, password, email)
+  VALUES ($1, $2, $3, $4);
+  `, [user.name, user.username, user.password, user.email])
+  .then(user)
+  .catch(err => console.error('query error', err.stack));
+}
+exports.addUser = addUser;
