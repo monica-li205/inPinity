@@ -14,6 +14,7 @@ module.exports = (db) => {
     db.query()
       .then(data => {
         const users = data.rows;
+        console.log(users);
         res.json({ users });
       })
       .catch(err => {
@@ -22,14 +23,14 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
   // Registering new user
   router.post("/", (req, res) => {
-    const queryString = `
-    `;
     db.query()
     .then(res => res.rows)
     .catch(err => err);
   });
+
   // Edit user info
   router.patch("/:id", (req, res) => {
     const id = req.params.body[id];
