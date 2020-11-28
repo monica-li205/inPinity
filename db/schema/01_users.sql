@@ -15,6 +15,7 @@ CREATE TABLE posts (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   thumbnail_photo VARCHAR(255) NOT NULL,
   date_created DATE,
+  url VARCHAR(2083),
   title VARCHAR(255) NOT NULL,
   description TEXT,
   tags_id INTEGER REFERENCES tags(id) ON DELETE CASCADE,
