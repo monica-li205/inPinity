@@ -2,7 +2,6 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db, helpers) => {
-  // Logging in user
   router.get("/", (req, res) => {
     
     helpers.getAllPosts(db)

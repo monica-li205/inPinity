@@ -10,15 +10,17 @@ $(document).ready(function (e) {
     })
 })
 
-
 const createPostElement = function (post) {
   let $post = $(`
-    <div class="post">
-      <h3 class="title">${escape(post.title)}</h3>
-      <img class="thumbnail" src="${escape(post.thumbnail_photo)}"></img>
-      <p class="description">${escape(post.description)}</p>
-      <p class="post-owner">${escape(post.user_id)}</p>
-    </div>
+    <a href="${post.url}">
+      <h3 class="title">${post.title}</h3>
+      <img src="${post.thumbnail_photo}" alt="" class="thumbnail">
+      <p class="description">${post.description}</p>
+      <p for="" class="post-owner">Owner: ${post.user_id}</p>
+      <p class="date-posted">${post.date_created}</p>
+      <p for="" class="rating">${post.rating}</p>
+      <p for="" class="liked">${post.is_liked}</p>
+    </a>
   `)
   return $post;
 }

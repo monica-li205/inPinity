@@ -10,6 +10,9 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 const postHelpers = require('./db/db_helpers/posts.js');
+const userHelpers = require('./db/db_helpers/users.js');
+const cookieSession = require('cookie-session');
+
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -25,6 +28,7 @@ app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -32,18 +36,24 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['secret'],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
 const postRoutes = require("./routes/posts");
-
+const loginPageRouter = require("./routes/login");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/posts", postRoutes(db, postHelpers));
+app.use("/login", loginPageRouter());
 // Note: mount other resources here, using the same pattern above
 
 
