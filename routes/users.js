@@ -8,30 +8,51 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = (db) => {
-  // Login user
-
+module.exports = (db, helpers) => {
 
   router.get("/", (req, res) => {
-    const queryString = "SELECT * FROM users"
-    db.query(queryString)
-      .then(data => {
-        const users = data.rows;
-        console.log(users);
-        res.json({
-          users
+    db.query("SELECT * FROM users;")
+    .then(data => {
+      const users = data.rows;
+      res.json({ users });
+    })
+  })
+  
+  // Get user by ID
+  router.get("/:id", (req, res) => {
+    helpers.getUserWithId(db, req.params.id)
+    .then(user => {
+      res.json(user);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({
+          error: err.message
         });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({
-            error: err.message
-          });
-      });
+    });
   });
 
+  // Register new user
+  router.post("/", (req, res) => {
+    const user = req.body;
+    helpers.getUserWithUsername(db, user.username)
+    .then(data => {
+      if (data) {
+        res.status(400).send("User exists");
+        return;
+      } 
+      helpers.addUser(db, user)
+      .then(data => {
+        const newUser = data.rows;
+        res.json(newUser);
+      })
+      .catch(err => err);
+    })
+    .catch(err => err);
+  })
 
+  // Login user
   router.post("/login", (req, res) => {
     const user = req.body;
     console.log(user);
@@ -62,7 +83,7 @@ module.exports = (db) => {
   });
 
   router.post("/logout", (req, res) => {
-    req.session.user_id = null;
+    req.session = null;
     res.render("index");
   })
 

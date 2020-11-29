@@ -1,19 +1,10 @@
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  user: 'labber',
-  password: 'labber',
-  host: 'localhost',
-  database: 'midterm'
-});
-
 /**
  * Get a single user from the database given their email.
  * @param {String} email
  * @return {Promise<{}>}
  */
 const getUserWithEmail = function(email) {
-  return pool.query(`
+  return db.query(`
   SELECT id, name, username, password, email
   FROM users
   WHERE email = $1
@@ -28,9 +19,9 @@ exports.getUserWithEmail = getUserWithEmail;
  * @param {string} id
  * @return {Promise<{}>}
  */
-const getUserWithId = function(id) {
-  return pool.query(`
-  SELECT id, name, username, password, email
+const getUserWithId = function(db, id) {
+  return db.query(`
+  SELECT *
   FROM users
   WHERE id = $1
   `, [id])
@@ -44,9 +35,9 @@ exports.getUserWithId = getUserWithId;
  * @param {string} username
  * @return {Promise<{}>}
  */
-const getUserWithUsername = function(username) {
-  return pool.query(`
-  SELECT id, name, username, password, email
+const getUserWithUsername = function(db, username) {
+  return db.query(`
+  SELECT *
   FROM users
   WHERE username = $1
   `, [username])
@@ -60,8 +51,8 @@ exports.getUserWithUsername = getUserWithUsername;
  * @param {{name: string, user.username, password: string, email: string}} user
  * @return {Promise<{}>}
  */
-const addUser =  function(user) {
-  return pool.query(`
+const addUser =  function(db, user) {
+  return db.query(`
   INSERT INTO users (name, username, password, email)
   VALUES ($1, $2, $3, $4);
   `, [user.name, user.username, user.password, user.email])
