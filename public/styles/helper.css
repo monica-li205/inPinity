@@ -22,3 +22,9 @@
   justify-content: center;
   align-items: center;
 }
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}

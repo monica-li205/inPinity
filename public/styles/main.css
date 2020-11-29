@@ -1,7 +1,35 @@
+/* Styles */
+
 a {
   text-decoration: none;
   color: gray;
 }
 a:hover {
   text-decoration: none;
+}
+
+/* Nav bar */
+header i {
+  margin-left: 0.8rem;
+}
+
+/* Box Article */
+.fav_box img {
+  width: 100%;
+}
+
+.box_img {
+  width: 100%;
+}
+
+/* Post Elements */
+.avatar {
+  border-radius: 50%;
+  width: 2rem;
+}
+
+/* Each Post */
+article {
+  outline-style: solid;
+  border-radius: 5%;
 }
