@@ -14,7 +14,7 @@ const pool = new Pool({
  */
 const getAllUsersPosts = function(user_id) {
   return pool.query(`
-  SELECT id, user_id, thumbnail_photo, date_created, url, title, description, rating, is_liked
+  SELECT id, user_id, thumbnail_photo, date_created, url, title, description, is_liked
   FROM posts
   WHERE user_id = $1
   `, [user_id])
@@ -29,7 +29,7 @@ exports.getAllUsersPosts = getAllUsersPosts;
  */
 const getAllUsersPostsForACategory = function(user_id, category) {
   return pool.query(`
-  SELECT id, user_id, thumbnail_photo, date_created, url, title, description, rating, is_liked
+  SELECT id, user_id, thumbnail_photo, date_created, url, title, description, is_liked
   FROM posts
   JOIN categories on posts.id = post_id
   WHERE user_id = $1
@@ -47,7 +47,7 @@ exports.getAllUsersPostsForACategory = getAllUsersPostsForACategory;
  */
 const getAllUsersPostsForACategory = function(user_id, category) {
   return pool.query(`
-  SELECT id, user_id, thumbnail_photo, date_created, url, title, description, rating, is_liked
+  SELECT id, user_id, thumbnail_photo, date_created, url, title, description, is_liked
   FROM posts
   JOIN categories on posts.id = post_id
   WHERE user_id = $1
