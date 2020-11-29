@@ -1,9 +1,11 @@
 <%- include('./partials/head'); %>
 <body>
   <%- include('./partials/header'); %>
-  <main class="col-12 flex-hor">
-    <div class="post_area col-8"><%- include('./partials/posts_each'); %></div>
-    <div class="assist_area col-4">
+  <main class="flex-hor">
+    <div class="post_area col-8 col-md-6 col-sm-6">
+      <%- include('./partials/posts_each'); %>
+    </div>
+    <div class="assist_area col-4 col-md-6 col-sm-6">
       <div class="popular_board">
         <%- include('./partials/popular_board'); %>
       </div>
