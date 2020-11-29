@@ -1,0 +1,1 @@
+-- INSERT INTO posts (category_id, thumbnail_photo, date_created, url, title, description)
