@@ -30,7 +30,7 @@ module.exports = (db, helpers) => {
         .json({
           error: err.message
         });
-    });
+    });``
   });
 
   // Register new user
