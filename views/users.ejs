@@ -1,0 +1,20 @@
+<%- include('./partials/head'); %>
+<body>
+  <%- include('./partials/header'); %>
+  <main class="flex-ver">
+    <div class="user-profile">
+      <img src="images/profile-hex.png" alt="avatar" />
+      <h2>user name</h2>
+    </div>
+
+    <div class="action-btn">
+      <i>pen</i>
+      <span>Edit</span>
+      <i>add</i>
+      <span>add</span>
+    </div>
+
+    <div class="board_area"><%- include('./partials/board_each'); %></div>
+  </main>
+  <%- include('./partials/footer'); %>
+</body>
