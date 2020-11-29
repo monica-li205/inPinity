@@ -82,6 +82,13 @@ app.get("/upo", (req, res) => {
   res.render("user_posts");
 });
 
+app.get("/post", (req, res) => {
+  res.render("posts");
+});
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
