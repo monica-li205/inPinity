@@ -8,6 +8,5 @@ CREATE TABLE posts (
   url VARCHAR(2083),
   title VARCHAR(255) NOT NULL,
   description TEXT,
-  rating SMALLINT NOT NULL DEFAULT 0,
   is_liked BOOLEAN NOT NULL DEFAULT FALSE
 );

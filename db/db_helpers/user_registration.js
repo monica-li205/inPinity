@@ -9,7 +9,7 @@ const pool = new Pool({
 
 /**
  * Add a new user to the database.
- * @param {{name: string, password: string, email: string}} user
+ * @param {{name: string, user.username, password: string, email: string}} user
  * @return {Promise<{}>}
  */
 const addUser =  function(user) {
