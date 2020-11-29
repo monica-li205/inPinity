@@ -5,10 +5,26 @@
   <main class="">
     <form action="" class="flex-row-space">
       <div class="image_create flex-col">
-        <img src="" alt="create a imag" />
+        <div class="up-box">
+          <!-- <input
+            id="media-upload-input"
+            type="file"
+            accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff,image/webp"
+            style="
+              cursor: pointer;
+              height: 50%;
+              opacity: 0;
+              position: absolute;
+              width: 50%;
+              left: 0px;
+              top: 0px;
+              font-size: 0px;
+            "
+          /> -->
+        </div>
         <button>UPLOAD IMAGE</button>
       </div>
-      <div class="edit_input flex-col">
+      <div class="flex-col">
         <label for="tag">add tags</label>
         <input type="text" />
         <label for="board">Add to board</label>
@@ -27,7 +43,6 @@
         <input type="text" />
         <button>save</button>
       </div>
-
     </form>
   </main>
   <%- include('./partials/footer'); %>

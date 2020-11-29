@@ -2,19 +2,23 @@
 <body>
   <%- include('./partials/header'); %>
   <main class="flex-col">
-    <div class="user-profile">
+    <div class="user-profile flex-col-center">
       <img src="images/profile-hex.png" alt="avatar" />
       <h2>user name</h2>
     </div>
 
-    <div class="action-btn">
-      <i class="fa fa-pencil"></i>
-      <span>Edit</span>
-      <i class="fa fa-plus"></i>
-      <span>add</span>
+    <div class="action-btn flex-row-space">
+      <div>
+        <i class="fa fa-pencil"></i>
+        <span>Edit</span>
+      </div>
+      <div>
+        <i class="fa fa-plus"></i>
+        <span>add</span>
+      </div>
     </div>
 
-    <div class="board_area"><%- include('./partials/board_each'); %></div>
+    <div class="board_area"><%- include('./partials/board'); %></div>
   </main>
   <%- include('./partials/footer'); %>
 </body>

@@ -33,3 +33,10 @@ article {
   outline-style: solid;
   border-radius: 5%;
 }
+
+/* Upload image */
+.up-box {
+  background-color: lightgray;
+  width: 50%;
+  height: 50%;
+}
