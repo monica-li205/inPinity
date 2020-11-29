@@ -62,6 +62,15 @@ app.get("/users", (req, res) => {
 app.get("/create_post", (req, res) => {
   res.render("create_post");
 });
+
+app.get("/create_board", (req, res) => {
+  res.render("create_board");
+});
+
+app.get("/user_post", (req, res) => {
+  res.render("user_post");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
