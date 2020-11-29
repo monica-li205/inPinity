@@ -1,20 +1,29 @@
-<article class="fav_box">
-  <a href="${post.url}">
-    <img
-      src="https://cdn.dribbble.com/users/146124/screenshots/14664420/media/48be6b80d8b275d5d54e7fe86c567bc6.jpg"
-      alt="I am a unknown image"
-      class="thumbnail"
-    />
-  </a>
-
-  <div class="">
-    <div class="title">I am a random title</div>
-  </div>
-  <div class="flex-row-space">
-    <p class="post-owner">Owner</p>
-    <div class="flex-row-center">
-      <p class="rating"><i class="fa fa-star"></i></p>
-      <p class="liked"><i class="fa fa-heart"></i></p>
+<article>
+  <a href="${post.url}" class="card box">
+    <div class="card-img-top image_edit">
+      <img
+        src="https://cdn.dribbble.com/users/146124/screenshots/14664420/media/48be6b80d8b275d5d54e7fe86c567bc6.jpg"
+        alt="image"
+        class="thumbnail box_img"
+      />
     </div>
-  </div>
+    <div class="card-body">
+      <h5 class="title">Fake Title</h5>
+      <p class="card-text description">${post.description}</p>
+    </div>
+    <footer class="flex-row-space-center">
+      <div class="flex-row-center ml-2">
+        <img
+          src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Round&hairColor=Auburn&facialHairType=Blank&clotheType=Overall&clotheColor=Black&eyeType=Dizzy&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=Light"
+          class="avatar mb-2"
+          style="width: 2rem"
+        />
+        <p class="post-owner mt-2 ml-2">id</p>
+      </div>
+      <div class="flex-row-center mt-2">
+        <p class="rating mr-2"><i class="fa fa-star mr-2">rating</i></p>
+        <p class="liked mr-2"><i class="fa fa-heart mr-2">likes</i></p>
+      </div>
+    </footer>
+  </a>
 </article>

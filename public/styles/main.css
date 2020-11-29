@@ -30,8 +30,11 @@ header i {
 
 /* Each Post */
 article {
-  outline-style: solid;
-  border-radius: 5%;
+  border-radius: 2%;
+  /* outline: 1px solid; */
+  font-size: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Upload image */
@@ -39,4 +42,43 @@ article {
   background-color: lightgray;
   width: 50%;
   height: 50%;
+}
+
+/* center */
+.center {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-gap: 3rem 1.5rem;
+}
+/* Grid */
+.home {
+  display: grid;
+  height: 100vh;
+  /* grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr; */
+  grid-template-areas:
+    "post post post aside"
+    "post post post aside"
+    "post post post aside"
+    "post post post aside";
+  grid-gap: 0.2rem;
+  font-weight: 800;
+  font-size: 12px;
+  text-align: center;
+}
+.posts {
+  grid-area: post;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(358px, 1fr));
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+}
+aside {
+  grid-area: aside;
+}
+
+.popular_board {
+}
+.favourite_board {
 }

@@ -1,18 +1,24 @@
 <%- include('./partials/head'); %>
 <body>
   <%- include('./partials/header'); %>
-  <main class="flex-row-space">
-    <div class="post_area col-8"><%- include('./partials/fake_post'); %></div>
-    <div class="assist_area col-4">
-      <div class="popular_board">
-        <%- include('./partials/popular_board'); %>
-      </div>
-      <div class="favourite_board grid">
-        <!-- <div class="fav_box"><%- include('./partials/favourite_board'); %></div> -->
-        <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
-        <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
-      </div>
+  <div class="flex-col-center"><%- include('./partials/popular_board'); %></div>
+  <main class="home">
+    <div class="center post-area" class="">
+      <%- include('./partials/fake_post'); %><%-
+      include('./partials/fake_post'); %><%- include('./partials/fake_post');
+      %><%- include('./partials/fake_post'); %><%-
+      include('./partials/fake_post'); %><%- include('./partials/fake_post');
+      %><%- include('./partials/fake_post'); %>
     </div>
+
+    <aside class="favourite-board">
+      <!-- <div class="fav_box"><%- include('./partials/favourite_board'); %></div> -->
+      <h3>Most Liked</h3>
+      <div class="center">
+        <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
+        <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
+      </div>
+    </aside>
   </main>
   <%- include('./partials/footer'); %>
 </body>
