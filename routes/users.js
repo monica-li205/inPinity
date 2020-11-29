@@ -6,37 +6,96 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = (db) => {
   // Login user
+
+
   router.get("/", (req, res) => {
-    db.query()
+    const queryString = "SELECT * FROM users"
+    db.query(queryString)
       .then(data => {
         const users = data.rows;
         console.log(users);
-        res.json({ users });
+        res.json({
+          users
+        });
       })
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
+          .json({
+            error: err.message
+          });
       });
   });
 
-  // Registering new user
-  router.post("/", (req, res) => {
-    db.query()
-    .then(res => res.rows)
-    .catch(err => err);
+
+  router.post("/login", (req, res) => {
+    const user = req.body;
+    console.log(user);
+    const sql = `SELECT * FROM users WHERE email = $1;`;
+    const param = [user.email];
+    db.query(sql, param)
+      .then(data => {
+        const userRecord = data.rows[0];
+        if (!userRecord || userRecord.password !== user.password) {
+          res.status(300).send("not allowed");
+          return;
+        }
+        userRecord.password = undefined;
+        console.log(userRecord.id);
+        req.session.user_id = userRecord.id;
+        // res.send(userRecord);
+        const templateVars = {...userRecord};
+        console.log(templateVars);
+        res.render("index", templateVars);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({
+            error: err.message
+          });
+      });
   });
 
+  router.post("/logout", (req, res) => {
+    req.session.user_id = null;
+    res.render("index");
+  })
+
   // Edit user info
-  router.patch("/:id", (req, res) => {
-    const id = req.params.body[id];
-    db.quer()
-    .then(res => res.rows)
-    .catch(err => err);
+  router.put("/:id", (req, res) => {
+    const data = req.body;
+    console.log(req.body);
+    if (!req.params.id) {
+      res.status(400).send("bad request");
+      return;
+    }
+    const params = [data.email, req.params.id];
+    const sql = `UPDATE users SET email = $1 WHERE id = $2 RETURNING *`;
+    
+    db.query(sql, params)
+      .then(data => {
+        const userRecord = data.rows[0];
+        console.log(userRecord);
+        if (!userRecord) {
+          res.status(300).send("not allowed");
+          return;
+        }
+        userRecord.password = undefined;
+        // req.session.user_id = userRecord.id;
+        res.send(userRecord);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({
+            error: err.message
+          });
+      });
   })
   return router;
 };
