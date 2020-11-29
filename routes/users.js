@@ -17,7 +17,7 @@ module.exports = (db, helpers) => {
       res.json({ users });
     })
   })
-  
+
   // Get user by ID
   router.get("/:id", (req, res) => {
     helpers.getUserWithId(db, req.params.id)
@@ -54,23 +54,21 @@ module.exports = (db, helpers) => {
 
   // Login user
   router.post("/login", (req, res) => {
+    
     const user = req.body;
-    console.log(user);
     const sql = `SELECT * FROM users WHERE email = $1;`;
     const param = [user.email];
     db.query(sql, param)
       .then(data => {
         const userRecord = data.rows[0];
         if (!userRecord || userRecord.password !== user.password) {
-          res.status(300).send("not allowed");
+          res.status(400).send("not allowed");
           return;
         }
         userRecord.password = undefined;
-        console.log(userRecord.id);
         req.session.user_id = userRecord.id;
         // res.send(userRecord);
         const templateVars = {...userRecord};
-        console.log(templateVars);
         res.render("index", templateVars);
       })
       .catch(err => {
@@ -101,7 +99,6 @@ module.exports = (db, helpers) => {
     db.query(sql, params)
       .then(data => {
         const userRecord = data.rows[0];
-        console.log(userRecord);
         if (!userRecord) {
           res.status(300).send("not allowed");
           return;

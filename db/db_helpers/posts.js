@@ -19,10 +19,27 @@ const getPostWithId = (db, id) => {
 }
 exports.getPostWithId = getPostWithId;
 
+const addPost = (db, user, params) => {
+  const queryParams = [
+    user,
+    params.thumbnail_photo,
+    params.url,
+    params.title,
+    params.description
+  ];
+  const queryString = `
+  INSERT INTO posts (user_id, thumbnail_photo, url, title, description)
+  VALUES ($1, $2, $3, $4, $5);
+  `
+  return db.query(queryString, queryParams)
+  .then(res => res.rows)
+  .catch(err => err);
+}
+exports.addPost = addPost;
+
 const editPost = (db, id, params) => {
   const queryParams = [];
 
-  console.log(queryParams);
   let queryString = `
     UPDATE posts SET
   `;
@@ -49,3 +66,17 @@ const editPost = (db, id, params) => {
   .catch(err => err);
 }
 exports.editPost = editPost;
+
+const getPostOwner = (db, id) => {
+  const queryString = `
+    SELECT users.id as post_owner
+    FROM posts
+    JOIN users ON users.id = user_id
+    WHERE posts.id = $1;
+  `;
+
+  return db.query(queryString, [id])
+  .then(data => data.rows[0])
+  .catch(err => err);
+}
+exports.getPostOwner = getPostOwner;

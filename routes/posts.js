@@ -19,6 +19,21 @@ module.exports = (db, helpers) => {
     .catch(err => err);
   })
 
+  // Add new post
+  router.post("/", (req, res) => {
+    const params = req.body;
+    const user = req.session.user_id;
+    if (user) {
+      helpers.addPost(db, user, params)
+      .then(post => {
+        res.json(post);
+      })
+      .catch(err => err);
+    } else {
+      res.status(400).send("Not allowed");
+    }
+  })
+
   // Edit specific post by ID
   router.put("/:id", (req, res) => {
     const queryParams = [req.body];
@@ -28,5 +43,20 @@ module.exports = (db, helpers) => {
     })
     .catch(err => err);
   })
+
+  // Delete post if owner
+  router.delete("/:id", (req, res) => {
+    helpers.getPostOwner(db, req.params.id)
+    .then(post => {
+      if (post.post_owner === req.session.user_id) {
+        db.query("DELETE FROM posts WHERE id = $1", [req.params.id])
+        .then(res.status(200).send("Post deleted"))
+        .catch(err => err);
+      }
+      res.status(400).send("Not allowed");
+    })
+    .catch(err => err);
+  })
+
   return router;
 };
