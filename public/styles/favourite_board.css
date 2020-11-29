@@ -1,0 +1,15 @@
+.fav_box img {
+  width: 100%;
+}
+
+.fav_box {
+  margin-right: 1rem;
+}
+
+.box_img {
+  width: 100%;
+}
+
+.avatar {
+  border-radius: 50%;
+}

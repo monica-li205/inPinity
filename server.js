@@ -66,6 +66,10 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/f", (req, res) => {
+  res.render("fake_index");
+});
+
 app.get("/users", (req, res) => {
   res.render("users");
 });
