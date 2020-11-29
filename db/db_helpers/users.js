@@ -3,7 +3,7 @@
  * @param {String} email
  * @return {Promise<{}>}
  */
-const getUserWithEmail = function(email) {
+const getUserWithEmail = function(db, email) {
   return db.query(`
   SELECT id, name, username, password, email
   FROM users
@@ -60,3 +60,31 @@ const addUser =  function(db, user) {
   .catch(err => console.error('query error', err.stack));
 }
 exports.addUser = addUser;
+
+const editUser = function(db, user, params) {
+  const queryParams = [];
+  
+  let queryString = `UPDATE users SET`;
+
+  if (params.email) {
+    queryParams.push(params.email);
+    if (queryParams.length > 1) {
+      queryString += `, `;
+    }
+    queryString += ` email = $${queryParams.length}`;
+  }
+  if (params.password) {
+    queryParams.push(params.password);
+    if (queryParams.length > 1) {
+      queryString += `, `;
+    }
+    queryString += ` password = $${queryParams.length}`;
+  }
+  queryParams.push(user);
+  queryString += ` WHERE id = $${queryParams.length}`;
+  
+  return db.query(queryString,queryParams)
+  .then(res => res.rows)
+  .catch(err => err);
+}
+exports.editUser = editUser;

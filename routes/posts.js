@@ -31,6 +31,7 @@ module.exports = (db, helpers) => {
       .catch(err => err);
     } else {
       res.status(400).send("Not allowed");
+      return;
     }
   })
 
@@ -54,6 +55,7 @@ module.exports = (db, helpers) => {
         .catch(err => err);
       }
       res.status(400).send("Not allowed");
+      return;
     })
     .catch(err => err);
   })
