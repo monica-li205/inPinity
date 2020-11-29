@@ -1,14 +1,14 @@
 -- retrieve all posts for homepage
-SELECT id, user_id, thumbnail_photo, date_created, url, title, description, rating, is_liked
+SELECT id, user_id, thumbnail_photo, date_created, url, title, description, is_liked
 FROM posts
 
 -- retrieve all posts for a category
-SELECT id, user_id, thumbnail_photo, date_created, url, title, description, rating, is_liked
+SELECT id, user_id, thumbnail_photo, date_created, url, title, description, is_liked
 FROM posts
 JOIN categories on category_id = categories.id
 WHERE categories.name = 'nature'
 
--- retrive tags for a post
+-- retreive tags for a post
 SELECT id, category_id, post_id, name
 FROM tags
 JOIN posts on post_id = posts.id
