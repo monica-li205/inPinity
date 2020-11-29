@@ -1,13 +1,14 @@
 <%- include('./partials/head'); %>
+
 <body>
   <%- include('./partials/header'); %>
   <main class="">
     <form action="" class="flex-hor">
-      <div class="image_create">
+      <div class="image_create flex-ver">
         <img src="" alt="create a imag" />
         <button>UPLOAD IMAGE</button>
       </div>
-      <div class="edit_input">
+      <div class="edit_input flex-ver">
         <label for="tag">add tags</label>
         <input type="text" />
         <label for="board">Add to board</label>
@@ -24,8 +25,9 @@
         <textarea name="" id="" cols="30" rows="10"> </textarea>
         <label for="link">add link</label>
         <input type="text" />
+        <button>save</button>
       </div>
-      <button>save</button>
+
     </form>
   </main>
   <%- include('./partials/footer'); %>
