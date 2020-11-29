@@ -80,3 +80,8 @@ article {
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-gap: 3rem 1.5rem;
 }
+
+/* edit create board */
+.box-container {
+  background-color: lightblue;
+}
