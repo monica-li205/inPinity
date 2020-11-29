@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home Page</title>
-
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
-
-  <body>
-    <h1>Hello World!</h1>
-    <section class="posts-container">
-    </section>
-  </body>
-</html>
+<%- include('./partials/head'); %>
+<body>
+  <%- include('./partials/header'); %>
+  <main class="flex-hor">
+    <div class="post_area col-8 col-md-6 col-sm-6">
+      <%- include('./partials/posts_each'); %>
+    </div>
+    <div class="assist_area col-4 col-md-6 col-sm-6">
+      <div class="popular_board">
+        <%- include('./partials/popular_board'); %>
+      </div>
+      <div class="favourite_board">
+        <%- include('./partials/favourite_board'); %>
+      </div>
+    </div>
+  </main>
+  <%- include('./partials/footer'); %>
+</body>
