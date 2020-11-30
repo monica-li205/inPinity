@@ -18,10 +18,6 @@ article img {
   width: 100%;
 }
 
-.box_img {
-  width: 100%;
-}
-
 /* Post Elements */
 .avatar {
   border-radius: 50%;
@@ -84,4 +80,9 @@ article {
 /* edit create board */
 .box-container {
   background-color: lightblue;
+}
+
+/* remove dots from bootstrap */
+.dropdown {
+  list-style-type: none;
 }
