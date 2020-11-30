@@ -66,6 +66,10 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/main", (req, res) => {
+  res.render("main");
+});
+
 app.get("/users", (req, res) => {
   res.render("users");
 });
