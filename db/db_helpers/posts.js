@@ -1,6 +1,9 @@
 const getAllPosts = (db) => {
   const queryString = `
-    SELECT * FROM posts;
+    SELECT posts.*, ROUND(AVG(ratings.rating)) as rating
+    FROM ratings
+    JOIN posts on post_id = posts.id
+    GROUP BY posts.id;
   `
   return db.query(queryString)
   .then(res => res.rows)
@@ -10,8 +13,11 @@ exports.getAllPosts = getAllPosts;
 
 const getPostWithId = (db, id) => {
   const queryString = `
-    SELECT * FROM posts
-    WHERE id = $1;
+    SELECT posts.*, ROUND(AVG(ratings.rating)) as rating
+    FROM ratings
+    JOIN posts on post_id = posts.id
+    WHERE posts.id = $1
+    GROUP BY posts.id;
   `;
   return db.query(queryString, [id])
   .then(res => res.rows[0])

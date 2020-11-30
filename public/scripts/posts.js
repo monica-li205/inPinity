@@ -1,21 +1,21 @@
 $(document).ready(function (e) {
-  console.log("got here");
-  $.ajax({
-      method: "GET",
-      url: "/api/posts"
-    })
-    .done((posts) => {
-      console.log(posts);
-    })
+  loadPosts();
 })
+
+const renderPosts = function(posts) {
+  const $post_area = $("#post-area");
+  for (const post of posts) {
+    $post_area.append(createPostElement(post));
+  }
+}
 
 const createPostElement = function (post) {
   let $post = $(`
   <article>
-  <a href="${post.url}" class="card box">
+  <a href="${escape(post.url)}" class="card box">
     <div class="card-img-top image_edit">
       <img
-        src="https://cdn.dribbble.com/users/146124/screenshots/14664420/media/48be6b80d8b275d5d54e7fe86c567bc6.jpg"
+        src="${escape(post.thumbnail_photo)}"
         alt="image"
         class="thumbnail box_img"
       />
@@ -31,17 +31,27 @@ const createPostElement = function (post) {
           class="avatar mb-2"
           style="width: 2rem"
         />
-        <p class="post-owner mt-2 ml-2">id</p>
+        <p class="post-owner mt-2 ml-2">${escape(post.user_id)}</p>
       </div>
       <div class="flex-row-center mt-2">
-        <p class="rating mr-2"><i class="fa fa-star mr-2">rating</i></p>
-        <p class="liked mr-2"><i class="fa fa-heart mr-2">likes</i></p>
+        <p class="rating mr-2">${escape(post.rating)}<i class="fa fa-star mr-2"></i></p>
+        <p class="liked mr-2"><i class="fa fa-heart mr-2">${escape(post.is_liked)}</i></p>
       </div>
     </footer>
   </a>
 </article>
   `)
   return $post;
+}
+
+const loadPosts = function() {
+  $.ajax({
+    method: "GET",
+    url: "/api/posts"
+  })
+  .then(data => {
+    renderPosts(data);
+  });
 }
 
 const escape = function (str) {
