@@ -52,11 +52,13 @@ app.use(
 const usersRoutes = require("./routes/users");
 const postRoutes = require("./routes/posts");
 const loginPageRouter = require("./routes/login");
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db, userHelpers));
 app.use("/api/posts", postRoutes(db, postHelpers));
 app.use("/login", loginPageRouter());
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -85,9 +87,9 @@ app.get("/upo", (req, res) => {
 app.get("/post", (req, res) => {
   res.render("posts");
 });
-app.get("/login", (req, res) => {
-  res.render("login");
-});
+// app.get("/login", (req, res) => {
+//   res.render("login");
+// });
 app.get("/register", (req, res) => {
   res.render("register");
 });

@@ -1,13 +1,17 @@
-<%- include('./partials/head'); %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/posts.js"></script>
+
+
+  <%- include('./partials/head'); %>
+</head>
+
 <body>
   <%- include('./partials/header'); %>
   <main id="container">
     <div id="post-area">
-      <%- include('./partials/posts_each'); %><%-
-      include('./partials/posts_each'); %><%- include('./partials/posts_each');
-      %><%- include('./partials/posts_each'); %><%-
-      include('./partials/posts_each'); %><%- include('./partials/posts_each');
-      %><%- include('./partials/posts_each'); %>
     </div>
 
     <aside id="aside">
@@ -36,3 +40,4 @@
   </main>
   <%- include('./partials/footer'); %>
 </body>
+</html>

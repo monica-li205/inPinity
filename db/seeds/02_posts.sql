@@ -1,8 +1,8 @@
 INSERT INTO posts (user_id, thumbnail_photo, date_created, url, title, description, category)
 -- id 1
-VALUES (1, 'https://github.com/psyphur/lhl-midterm/blob/feature_add_seeds/docs/01.png?raw=true', '2020-11-24',  'https://planterina.com/', 'Planterina', 'This is a cool website about plants', 'plants'),
+VALUES (1, 'https://github.com/psyphur/lhl-midterm/blob/master/docs/01.png', '2020-11-24',  'https://planterina.com/', 'Planterina', 'This is a cool website about plants', 'plants'),
 -- id 2
-(2, 'https://github.com/psyphur/lhl-midterm/blob/feature_add_seeds/docs/02.png?raw=true', '2020-11-24',  'https://allaboutcats.com/', 'All About Cats', 'This is a cool website about cats', 'animals'),
+(2, 'https://github.com/psyphur/lhl-midterm/blob/master/docs/02.png?raw=true', '2020-11-24',  'https://allaboutcats.com/', 'All About Cats', 'This is a cool website about cats', 'animals'),
 -- id 3
 (3, 'https://github.com/psyphur/lhl-midterm/blob/feature_add_seeds/docs/03.png?raw=true', '2020-11-24',  'https://www.adayinthekitchen.com/chinese-winter-solstice-soup/', 'Chinese Winter Solstice Soup', 'This is a cool recipe', 'food'),
 -- id 4
