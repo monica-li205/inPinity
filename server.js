@@ -68,10 +68,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/users", (req, res) => {
-  res.render("users");
-});
-
 app.get("/cp", (req, res) => {
   res.render("create_post");
 });
