@@ -4,7 +4,7 @@
   <%- include('./partials/header'); %>
 
   <h1 class="flex-col-center mt-5">Login</h1>
-  <form action="" class="login-form flex-col-center">
+  <form class="login-form flex-col-center" action="/api/users/login" method="POST">
     <div class="flex-col">
       <label for="email">Email: </label>
       <input type="email" name="email" />

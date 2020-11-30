@@ -66,8 +66,7 @@ module.exports = (db, helpers) => {
       }
       userRecord.password = undefined;
       req.session.user_id = userRecord.id;
-      const templateVars = {...userRecord};
-      console.log(templateVars);
+      const templateVars = {userRecord};
       res.render("index", templateVars);
     })
     .catch(err => err);

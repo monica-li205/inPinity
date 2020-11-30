@@ -2,7 +2,7 @@ const getAllPosts = (db, offset) => {
   const queryString = `
     SELECT posts.*, ROUND(AVG(ratings.rating)) as rating
     FROM ratings
-    JOIN posts on post_id = posts.id
+    RIGHT JOIN posts on post_id = posts.id
     GROUP BY posts.id
     LIMIT 10 OFFSET $1;
   `
