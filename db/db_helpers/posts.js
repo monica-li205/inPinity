@@ -1,8 +1,12 @@
-const getAllPosts = (db) => {
+const getAllPosts = (db, offset) => {
   const queryString = `
-    SELECT * FROM posts;
+    SELECT posts.*, ROUND(AVG(ratings.rating)) as rating
+    FROM ratings
+    RIGHT JOIN posts on post_id = posts.id
+    GROUP BY posts.id
+    LIMIT 10 OFFSET $1;
   `
-  return db.query(queryString)
+  return db.query(queryString, [offset])
   .then(res => res.rows)
   .catch(err => err);
 }
@@ -10,8 +14,11 @@ exports.getAllPosts = getAllPosts;
 
 const getPostWithId = (db, id) => {
   const queryString = `
-    SELECT * FROM posts
-    WHERE id = $1;
+    SELECT posts.*, ROUND(AVG(ratings.rating)) as rating
+    FROM ratings
+    JOIN posts on post_id = posts.id
+    WHERE posts.id = $1
+    GROUP BY posts.id;
   `;
   return db.query(queryString, [id])
   .then(res => res.rows[0])

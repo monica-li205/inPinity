@@ -1,12 +1,30 @@
 <%- include('./partials/head'); %>
 <body>
-  <%- include('./partials/header'); %>
-
-  <h1 class="flex-col-center mt-5">Login</h1>
-  <form action="" class="login-form flex-col-center">
-    <div class="flex-col">
-      <label for="email">Email: </label>
-      <input type="email" name="email" />
+<!-- Modal -->
+<div class="modal fade" id="login-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="login-form flex-col-center" action="/" method="POST">
+          <div class="flex-col">
+            <label for="email">Email: </label>
+            <input type="email" name="email" />
+          </div>
+          <div class="flex-col">
+            <label for="password">Password: </label>
+            <input type="text" name="password" />
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="flex-col">
       <label for="password">Password: </label>

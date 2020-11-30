@@ -1,16 +1,10 @@
+<script type="text/javascript" src="/scripts/app.js"></script>
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="/"><i class="fa fa-scribd fa-2x"></i></a>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -27,6 +21,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/users">VIEW MY BOARDS</a>
         </li>
+        <% } %>
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input
@@ -51,9 +46,29 @@
         >
           <i class="fa fa-user-circle-o fa-2x"></i>
         </a>
+        <%- include('../login'); %>
+        <%- include('../register'); %>
+
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="nav-link" href="/login">login</a>
-          <a class="nav-link" href="/register">register</a>
+          <% if (!user) { %>
+          <!-- Button trigger modal -->
+          <ul>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login-form">
+              Login
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#register-form">
+              Register
+            </button>
+
+          </ul>
+
+
+          <% } %>
+          <% if (user) { %>
+          <form action="/logout" method="POST">
+            <button class="btn btn-danger" type="submit">Logout</button>
+          </form>
+          <% } %>
         </div>
       </li>
     </div>

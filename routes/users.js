@@ -53,30 +53,32 @@ module.exports = (db, helpers) => {
   })
 
   // Login user
-  router.post("/login", (req, res) => {
-    
-    const user = req.body;
-    const email = user.email;
+  // router.post("/login", (req, res) => {
+  //   const user = req.body;
+  //   const email = user.email;
 
-    helpers.getUserWithEmail(db, email)
-    .then(data => {
-      const userRecord = data;
-      if (!userRecord || userRecord.password !== user.password) {
-        res.status(400).send("Invalid login");
-        return;
-      }
-      userRecord.password = undefined;
-      req.session.user_id = userRecord.id;
-      const templatevars = {...userRecord};
-      res.render("index", templatevars);
-    })
-    .catch(err => err);
-  });
+  //   console.log(email);
+  //   helpers.getUserWithEmail(db, email)
+  //   .then(data => {
+  //     const userRecord = data;
+  //     if (!userRecord || userRecord.password !== user.password) {
+  //       // res.status(400).send("Invalid login");
+  //       res.status(401).send("Unauthorized");
+  //       return;
+  //     }
+  //     userRecord.password = undefined;
+  //     req.session.user_id = userRecord.id;
+  //     const templateVars = {user: userRecord};
+  //     res.render("index", templateVars);
+  //     // res.redirect("/");
+  //   })
+  //   .catch(err => err);
+  // });
 
-  router.post("/logout", (req, res) => {
-    req.session = null;
-    res.render("index");
-  })
+  // router.post("/logout", (req, res) => {
+  //   req.session = null;
+  //   res.render("index");
+  // })
 
   // Edit user info
   router.put("/:id", (req, res) => {
