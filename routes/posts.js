@@ -3,7 +3,9 @@ const router  = express.Router();
 
 module.exports = (db, helpers) => {
   router.get("/", (req, res) => {
-    helpers.getAllPosts(db)
+    const offset = Number(Object.values(req.query));
+    
+    helpers.getAllPosts(db, offset)
     .then(posts => {
       res.json(posts);
     })
