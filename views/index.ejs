@@ -2,17 +2,9 @@
 <body>
   <%- include('./partials/header'); %>
   <main id="container">
-    <div id="post-area">
-      <%- include('./partials/posts_each'); %><%-
-      include('./partials/posts_each'); %><%- include('./partials/posts_each');
-      %><%- include('./partials/posts_each'); %><%-
-      include('./partials/posts_each'); %><%- include('./partials/posts_each');
-      %><%- include('./partials/posts_each'); %>
-    </div>
-
     <aside id="aside">
       <%- include('./partials/profile'); %>
-      <div class="">
+      <section id="search-area">
         <h3>Popular Board</h3>
         <div class="input-group">
           <select class="custom-select" id="inputGroupSelect01">
@@ -22,17 +14,24 @@
             <option value="tag3">Tag 3</option>
           </select>
         </div>
-      </div>
-      <div>
+      </section>
+      <section id="fav-area">
         <h3>Most Liked</h3>
-        <div id="fav-area">
+        <div id="fav-post-area">
           <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
           <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
           <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
           <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
         </div>
-      </div>
+      </section>
     </aside>
+    <section id="post-area">
+      <%- include('./partials/posts_each'); %><%-
+      include('./partials/posts_each'); %><%- include('./partials/posts_each');
+      %><%- include('./partials/posts_each'); %><%-
+      include('./partials/posts_each'); %><%- include('./partials/posts_each');
+      %><%- include('./partials/posts_each'); %>
+    </section>
   </main>
   <%- include('./partials/footer'); %>
 </body>
