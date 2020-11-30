@@ -1,17 +1,24 @@
 <%- include('./partials/head'); %>
 <body>
   <%- include('./partials/header'); %>
-  <main class="flex-col">
+  <main class="flex-col main-content" id="blur">
     <%- include('./partials/profile'); %>
     <h1 class="flex-col-center">Board name</h1>
-    <div class="center">
-      <%- include('./partials/posts_each'); %>
-      <div class="action">
-        <i class="fa fa-pencil"></i>
-        <i class="fa fa-trash"></i>
-      </div>
+    <div class="alert"><%- include('./partials/alert'); %></div>
+
+    <div class="center" id="blur">
+      <%- include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %> <%-
+      include('./partials/post_editable'); %>
     </div>
-    <%- include('./edit_post'); %>
   </main>
-  <%- include('./partials/footer'); %>
+  <%- include('./partials/edit_post'); %> <%- include('./partials/footer'); %>
 </body>

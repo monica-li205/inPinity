@@ -1,20 +1,19 @@
 <%- include('./partials/head'); %>
 <body>
   <%- include('./partials/header'); %>
-  <main class="flex-row-space box-container">
+  <section class="flex-col-center box-container">
     <form action="" class="flex-row-space">
-      <div class="image_create flex-col">
-        <img src="" alt="create a imag" />
-        <button>UPLOAD IMAGE</button>
-      </div>
-      <div class="form_input flex-col">
+      <%- include('./partials/upload'); %>
+      <div class="flex-col">
         <label for="tag">Name</label>
         <input type="text" />
         <label for="title">Tags</label>
         <input type="text" />
-        <button>create</button>
+        <button type="submit" class="mt-2 btn btn-info btn-lg btn-block">
+          create
+        </button>
       </div>
     </form>
-  </main>
+  </section>
   <%- include('./partials/footer'); %>
 </body>

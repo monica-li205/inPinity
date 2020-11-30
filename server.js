@@ -65,6 +65,17 @@ app.use("/", index(db, userHelpers));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+app.get("/main", (req, res) => {
+  res.render("main");
+});
+
+app.get("/users", (req, res) => {
+  res.render("users");
+});
+
+app.get("/cp", (req, res) => {
+  res.render("create_post");
+});
 
 app.get("/cb", (req, res) => {
   res.render("create_board");
@@ -83,7 +94,9 @@ app.get("/post", (req, res) => {
 app.get("/register", (req, res) => {
   res.render("register");
 });
-
+app.get("/search", (req, res) => {
+  res.render("search_result");
+});
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
