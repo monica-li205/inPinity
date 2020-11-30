@@ -1,19 +1,11 @@
 let offset = 0;
 
 $(document).ready(function (e) {
-  let loadMoreDelay = false;
-
   loadPosts();
 
   $(window).scroll(function (e) {
     if ($(window).scrollTop() + 1 >= $(document.body).height() - $(window).height()) {
-      if (loadMoreDelay === false) {
-        loadMoreDelay = true;
-        loadMore()
-        setTimeout(function () {
-          loadMoreDelay = false;
-        }, 3000);
-      }
+      loadMore();
     }
   })
 })
