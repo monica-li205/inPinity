@@ -1,8 +1,22 @@
 $(document).ready(function (e) {
+  let loadMoreDelay = false;
+
   loadPosts();
+
+  $(window).scroll(function (e) {
+    if ($(window).scrollTop() + 1 >= $(document.body).height() - $(window).height()) {
+      if (loadMoreDelay === false) {
+        loadMoreDelay = true;
+        loadMore()
+        setTimeout(function () {
+          loadMoreDelay = false;
+        }, 3000);
+      }
+    }
+  })
 })
 
-const renderPosts = function(posts) {
+const renderPosts = function (posts) {
   const $post_area = $("#post-area");
   for (const post of posts) {
     $post_area.append(createPostElement(post));
@@ -44,14 +58,26 @@ const createPostElement = function (post) {
   return $post;
 }
 
-const loadPosts = function() {
+const loadPosts = function () {
   $.ajax({
-    method: "GET",
-    url: "/api/posts"
-  })
-  .then(data => {
-    renderPosts(data);
-  });
+      method: "GET",
+      url: "/api/posts"
+    })
+    .then(data => {
+      renderPosts(data);
+    });
+}
+
+const loadMore = function () {
+  let offset = 0;
+  offset += 10;
+  $.ajax({
+      method: "GET",
+      url: `/api/posts?offset=${offset}`
+    })
+    .then(data => {
+      renderPosts(data);
+    })
 }
 
 const escape = function (str) {
