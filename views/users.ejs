@@ -1,20 +1,25 @@
 <%- include('./partials/head'); %>
 <body>
   <%- include('./partials/header'); %>
-  <main class="flex-ver">
-    <div class="user-profile">
-      <img src="images/profile-hex.png" alt="avatar" />
-      <h2>user name</h2>
+  <main class="flex-col">
+    <%- include('./partials/profile'); %>
+
+    <div class="action-btn flex-row-space">
+      <div>
+        <a href="/edit_boards" class="link"></a><i class="fa fa-pencil"></i>
+        <span>Edit</span>
+      </div>
+      <div>
+        <a href="/cb" class="link"> <i class="fa fa-plus"></i></a>
+        <span>add</span>
+      </div>
     </div>
 
-    <div class="action-btn">
-      <i class="fa fa-pencil"></i>
-      <span>Edit</span>
-      <i class="fa fa-plus"></i>
-      <span>add</span>
+    <div class="center">
+      <%- include('./partials/board'); %><%- include('./partials/board'); %><%-
+      include('./partials/board'); %><%- include('./partials/board'); %><%-
+      include('./partials/board'); %><%- include('./partials/board'); %>
     </div>
-
-    <div class="board_area"><%- include('./partials/board_each'); %></div>
   </main>
   <%- include('./partials/footer'); %>
 </body>

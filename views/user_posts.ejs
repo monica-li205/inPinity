@@ -1,15 +1,17 @@
 <%- include('./partials/head'); %>
 <body>
   <%- include('./partials/header'); %>
-  <main class="flex-ver">
-    <h1 class="flex-ver-center">Board name</h1>
-    <div class="post_area">
+  <main class="flex-col">
+    <%- include('./partials/profile'); %>
+    <h1 class="flex-col-center">Board name</h1>
+    <div class="center">
       <%- include('./partials/posts_each'); %>
       <div class="action">
-          <i class="fa fa-pencil"></i>
-          <i class="fa fa-trash"></i>
+        <i class="fa fa-pencil"></i>
+        <i class="fa fa-trash"></i>
+      </div>
     </div>
-      <%- include('./edit_post'); %>
+    <%- include('./edit_post'); %>
   </main>
   <%- include('./partials/footer'); %>
 </body>

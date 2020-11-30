@@ -1,0 +1,87 @@
+/* Styles */
+
+a {
+  text-decoration: none;
+  color: gray;
+}
+a:hover {
+  text-decoration: none;
+}
+
+/* Nav bar */
+header i {
+  margin-left: 0.8rem;
+}
+
+/* Box Article */
+.fav_box img {
+  width: 100%;
+}
+
+.box_img {
+  width: 100%;
+}
+
+/* Post Elements */
+.avatar {
+  border-radius: 50%;
+  width: 2rem;
+}
+
+/* Each Post */
+article {
+  border-radius: 2%;
+  /* outline: 1px solid; */
+  font-size: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Upload image */
+.upload-box {
+  background-color: lightgray;
+  width: 50%;
+  height: 50%;
+}
+/* Grid */
+#container {
+  width: 98vw;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas: "post-area aside";
+  grid-gap: 3rem 1.5rem;
+}
+/* grid area */
+#aside {
+  grid-area: aside;
+  display: grid;
+  grid-template-rows: 1fr 0.2fr auto;
+  grid-gap: 1rem;
+  place-self: start end;
+}
+
+#post-area {
+  grid-area: post-area;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  place-self: start end;
+}
+#fav-area {
+  grid-area: post;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 1rem;
+}
+
+.center {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-gap: 3rem 1.5rem;
+}
+
+/* edit create board */
+.box-container {
+  background-color: lightblue;
+}
