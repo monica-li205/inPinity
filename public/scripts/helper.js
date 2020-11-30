@@ -27,4 +27,15 @@ $(document).ready(function () {
     topFunction();
     $("form").show("fast");
   });
+
+  // edit board
+  const $editBoard = $("#edit-board-btn");
+  $editBoard.click(function () {
+    $("#blur").toggleClass("active");
+    $("#popup").toggleClass("active");
+  });
+  $("#cancel").click(function () {
+    $("#blur").toggleClass("active");
+    $("#popup").toggleClass("active");
+  });
 });
