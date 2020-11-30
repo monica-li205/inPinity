@@ -1,9 +1,5 @@
 -- Users table seeds here (Example)
 INSERT INTO users (name, username, password, email)
-<<<<<<< routes
-VALUES ('Alice Smith', 'Alice123', 'password', 'alice@gmail.com');
-VALUES ('Bob', 'Bobbie', '1234', 'bob@gmail.com');
-=======
 -- id 1
 VALUES ('Alice Smith', 'Alice123', 'password', 'Alice@gmail.com'),
 -- id 2
@@ -24,4 +20,3 @@ VALUES ('Alice Smith', 'Alice123', 'password', 'Alice@gmail.com'),
 ('Aneeka Tapia', 'Aneeka123', 'password', 'Aneeka@gmail.com'),
 -- id 10
 ('Leslie Nope', 'Leslie123', 'password', 'Leslie@gmail.com');
->>>>>>> master

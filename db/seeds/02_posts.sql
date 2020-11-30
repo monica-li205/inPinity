@@ -1,11 +1,3 @@
-<<<<<<< routes
-INSERT INTO posts (user_id, thumbnail_photo, date_created, url, title, description, is_liked)
-VALUES (1, 'https://github.com/psyphur/lhl-midterm/blob/master/docs/planterina_thumbnail.png?raw=true', '2020-11-24',  'https://planterina.com/', 'Planterina', 'This is a cool website about plants', true);
-INSERT INTO posts (user_id, thumbnail_photo, date_created, url, title, description, is_liked)
-VALUES (1, 'https://github.com/psyphur/lhl-midterm/blob/master/docs/allaboutcats_thumbnail.png?raw=true', '2020-11-24',  'https://allaboutcats.com/', 'All About Cats', 'This is a cool website about cats', true);
-INSERT INTO posts (user_id, thumbnail_photo, date_created, url, title, description, is_liked)
-VALUES (5, 'https://github.com/psyphur/lhl-midterm/blob/master/docs/allaboutcats_thumbnail.png?raw=true', '2020-11-24',  'https://allaboutcats.com/', 'All About Cats', 'This is a cool website about cats', true);
-=======
 INSERT INTO posts (user_id, thumbnail_photo, date_created, url, title, description, category)
 -- id 1
 VALUES (1, 'https://github.com/psyphur/lhl-midterm/blob/feature_add_seeds/docs/01.png?raw=true', '2020-11-24',  'https://planterina.com/', 'Planterina', 'This is a cool website about plants', 'plants'),
@@ -37,4 +29,3 @@ VALUES (1, 'https://github.com/psyphur/lhl-midterm/blob/feature_add_seeds/docs/0
 (7, 'https://github.com/psyphur/lhl-midterm/blob/feature_add_seeds/docs/14.png?raw=true', '2020-11-24',  'https://www.youtube.com/pokerez', 'Pokemon Youtuber', 'This is a cool youtube channel about pokemon', 'entertainment'),
 -- id 15
 (9, 'https://github.com/psyphur/lhl-midterm/blob/feature_add_seeds/docs/15.png?raw=true', '2020-11-24',  'https://sellfy.com/petermckinnon', 'Photography', 'This is a cool website about photography', 'visual arts');
->>>>>>> master
