@@ -54,7 +54,6 @@ module.exports = (db, helpers) => {
 
   // Login user
   router.post("/login", (req, res) => {
-    
     const user = req.body;
     const email = user.email;
 
@@ -67,8 +66,9 @@ module.exports = (db, helpers) => {
       }
       userRecord.password = undefined;
       req.session.user_id = userRecord.id;
-      const templatevars = {...userRecord};
-      res.render("index", templatevars);
+      const templateVars = {...userRecord};
+      console.log(templateVars);
+      res.render("index", templateVars);
     })
     .catch(err => err);
   });
