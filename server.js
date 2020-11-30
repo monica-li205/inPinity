@@ -91,7 +91,9 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
   res.render("register");
 });
-
+app.get("/search", (req, res) => {
+  res.render("search_result");
+});
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

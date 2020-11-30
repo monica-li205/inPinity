@@ -2,7 +2,7 @@
   <a href="${post.url}" class="card box">
     <div class="card-img-top image_edit">
       <img
-        src="https://cdn.dribbble.com/users/1916467/screenshots/14672568/media/dece46162e75886a40d8e196d5fbcb78.jpg"
+        src="https://cdn.dribbble.com/users/146124/screenshots/14664420/media/48be6b80d8b275d5d54e7fe86c567bc6.jpg"
         alt="image"
         class="thumbnail box_img"
       />
@@ -11,6 +11,7 @@
       <h5 class="title">Fake Title</h5>
       <p class="card-text description">${post.description}</p>
     </div>
+
     <footer class="flex-row-space-center">
       <div class="flex-row-center ml-2">
         <img
@@ -26,22 +27,14 @@
       </div>
     </footer>
   </a>
+  <section class="action-btn flex-row-space m-2">
+    <div>
+      <a href="#" id="edit-post-btn"> <i class="fa fa-pencil"></i></a>
+      <span>Edit</span>
+    </div>
+    <div>
+      <a href="#" id="delete-btn"> <i class="fa fa-trash"></i> </a>
+      <span>Delete</span>
+    </div>
+  </section>
 </article>
-
-<!-- <a href="${post.url}">
-  <img
-    src="${post.thumbnail_photo}"
-    alt="I am a unknown image"
-    class="thumbnail"
-  />
-  <div class="card-body">
-    <h5 class="card-title title">${post.most_title}</h5>
-    <p class="card-text description">${post.most_description}</p>
-  </div>
-  <div class="card-footer">
-    <p class="post-owner">Owner: ${post.most_user_id}</p>
-    <p class="date-posted">${post.most_date_created}</p>
-    <p class="rating">${post.most_rating}</p>
-    <p class="liked">${post.most_is_liked}</p>
-  </div>
-</a> -->

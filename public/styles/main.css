@@ -14,11 +14,7 @@ header i {
 }
 
 /* Box Article */
-.fav_box img {
-  width: 100%;
-}
-
-.box_img {
+article img {
   width: 100%;
 }
 
@@ -84,4 +80,9 @@ article {
 /* edit create board */
 .box-container {
   background-color: lightblue;
+}
+
+/* remove dots from bootstrap */
+.dropdown {
+  list-style-type: none;
 }
