@@ -1,3 +1,5 @@
+let offset = 0;
+
 $(document).ready(function (e) {
   let loadMoreDelay = false;
 
@@ -69,7 +71,6 @@ const loadPosts = function () {
 }
 
 const loadMore = function () {
-  let offset = 0;
   offset += 10;
   $.ajax({
       method: "GET",
