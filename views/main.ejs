@@ -1,4 +1,11 @@
-<%- include('./partials/head'); %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head'); %>
+  <script type="text/javascript" src="/scripts/posts.js"></script>
+
+</head>
+
 <body>
   <%- include('./partials/header'); %>
   <main id="container">
@@ -25,13 +32,12 @@
         </div>
       </section>
     </aside>
-    <section id="post-area">
-      <%- include('./partials/posts_each'); %><%-
-      include('./partials/posts_each'); %><%- include('./partials/posts_each');
-      %><%- include('./partials/posts_each'); %><%-
-      include('./partials/posts_each'); %><%- include('./partials/posts_each');
-      %><%- include('./partials/posts_each'); %>
-    </section>
+    
+  <main id="container" class="container">
+    <div id="post-area" class="item">
+    </div>
+    
   </main>
   <%- include('./partials/footer'); %>
 </body>
+</html>

@@ -47,7 +47,6 @@ module.exports = (db, helpers) => {
     const user = req.body;
     const email = user.email;
 
-    console.log(email);
     helpers.getUserWithEmail(db, email)
     .then(data => {
       const userRecord = data;
@@ -56,6 +55,7 @@ module.exports = (db, helpers) => {
         res.status(401).send("Unauthorized");
         return;
       }
+
       userRecord.password = undefined;
       req.session.user_id = userRecord.id;
       const templateVars = {user: userRecord};

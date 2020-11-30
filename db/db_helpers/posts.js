@@ -87,3 +87,16 @@ const getPostOwner = (db, id) => {
   .catch(err => err);
 }
 exports.getPostOwner = getPostOwner;
+
+const totalPostByUser = (db, id) => {
+  const queryString = `
+  SELECT count(posts.*)
+  FROM posts
+  WHERE user_id = $1
+  GROUP BY user_id;
+  `
+
+  return db.query(queryString, [id])
+  .then(data => data.rows[0])
+  .catch(err => err);
+}
