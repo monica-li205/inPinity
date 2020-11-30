@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+  <%- include('./partials/head'); %>
+  <script type="text/javascript" src="/scripts/posts.js"></script>
+
+</head>
+
+<body>
+  <%- include('./partials/header'); %>
+  <main id="container" class="container">
+    <div id="post-area" class="item">
+    </div>
+    <aside id="aside">
+      <%- include('./partials/profile'); %>
+      <div class="">
+        <h3>Popular Board</h3>
+        <div class="input-group">
+          <select class="custom-select" id="inputGroupSelect01"> 
+            <option selected>Choose...</option>
+            <option value="tag1">Tag 1</option>
+            <option value="tag2">Tag 2</option>
+            <option value="tag3">Tag 3</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <h3>Most Liked</h3>
+        <div id="fav-area">
+          <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
+          <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
+          <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
+          <div class="fav_box"><%- include('./partials/fake_favo'); %></div>
+        </div>
+      </div>
+    </aside>
+  </main>
+  <%- include('./partials/footer'); %>
+</body>
+</html>

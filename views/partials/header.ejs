@@ -1,59 +1,59 @@
+<script type="text/javascript" src="/scripts/app.js"></script>
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="/"><i class="fa fa-scribd fa-2x"></i></a>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="/"
-            >HOME <span class="sr-only">(current)</span></a
-          >
-        </li>
+        <% if (user) { %>
         <li class="nav-item">
           <a class="nav-link" href="/cp">CREATE</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/users">VIEW</a>
         </li>
+        <% } %>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-        />
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" />
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
           Search
         </button>
       </form>
 
       <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-user-circle-o fa-2x mb-4"></i>
         </a>
+        <%- include('../login'); %>
+        <%- include('../register'); %>
+
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="nav-link" href="/login">login</a>
-          <a class="nav-link" href="/register">register</a>
+          <% if (!user) { %>
+          <!-- Button trigger modal -->
+          <ul>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login-form">
+              Login
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#register-form">
+              Register
+            </button>
+
+          </ul>
+
+
+          <% } %>
+          <% if (user) { %>
+          <form action="/logout" method="POST">
+            <button class="btn btn-danger" type="submit">Logout</button>
+          </form>
+          <% } %>
         </div>
       </li>
     </div>
