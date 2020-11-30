@@ -76,6 +76,7 @@
 }
 /* alert box */
 #alert {
+  border-radius: 0.8rem;
   position: absolute;
   top: 40%;
   left: 50%;

@@ -8,6 +8,10 @@ a:hover {
   text-decoration: none;
 }
 
+button {
+  text-transform: uppercase;
+}
+
 /* Nav bar */
 header i {
   margin-left: 0.8rem;
@@ -90,7 +94,6 @@ article {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80vw;
-  height: 60vh;
   padding: 50px;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   transition: 0.5s;
