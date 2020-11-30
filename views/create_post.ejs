@@ -2,29 +2,10 @@
 
 <body>
   <%- include('./partials/header'); %>
-  <main class="box-container flex-col-center">
-    <form action="" class="flex-row-space">
-      <div class="image_create flex-col">
-        <div class="upload-box">
-          <!-- <input
-            id="media-upload-input"
-            type="file"
-            accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff,image/webp"
-            style="
-              cursor: pointer;
-              height: 50%;
-              opacity: 0;
-              position: absolute;
-              width: 50%;
-              left: 0px;
-              top: 0px;
-              font-size: 0px;
-            "
-          /> -->
-        </div>
-        <button>UPLOAD IMAGE</button>
-      </div>
-      <div class="flex-col">
+  <main>
+    <form action="" id="form-container" class="flex-row-space">
+      <%- include('./partials/upload'); %>
+      <section class="flex-col" id="input-field">
         <label for="tag">add tags</label>
         <input type="text" />
         <label for="board">Add to board</label>
@@ -41,8 +22,8 @@
         <textarea name="" id="" cols="30" rows="10"> </textarea>
         <label for="link">add link</label>
         <input type="text" />
-        <button class="mt-2">Save</button>
-      </div>
+        <button class="mt-2 btn btn-info">Save</button>
+      </section>
     </form>
   </main>
   <%- include('./partials/footer'); %>

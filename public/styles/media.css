@@ -3,7 +3,6 @@
     padding: 0.5rem;
   }
   #container {
-    width: 98vw;
     display: grid;
     grid-template-rows: 0.5fr 0.3fr 2fr auto;
     grid-template-areas:
@@ -20,13 +19,6 @@
   main {
     padding: 0.8rem;
   }
-  /* #container {
-    width: 98vw;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-template-areas: "post-area aside";
-    grid-gap: 3rem 1.5rem;
-  } */
 }
 
 /* Tablet: minimum width of 768px  */
@@ -35,7 +27,6 @@
     padding: 2rem;
   }
   #container {
-    width: 98vw;
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-template-areas: "post-area aside";

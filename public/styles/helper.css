@@ -1,7 +1,7 @@
 /* Flex Layout */
 .flex-row-space {
   display: flex;
-  align-items: flex-start;
+  align-items: space-between;
   justify-content: space-between;
 }
 .flex-row-space-center {

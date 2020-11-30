@@ -1,13 +1,10 @@
 <%- include('./partials/head'); %>
 <body>
   <%- include('./partials/header'); %>
-  <section class="flex-col-center box-container">
+  <section class="flex-col-center" id="form-container">
     <form action="" class="flex-row-space">
-      <div class="image_create flex-col">
-        <img src="" alt="create a imag" />
-        <button>UPLOAD IMAGE</button>
-      </div>
-      <div class="form_input flex-col-center">
+      <%- include('./partials/upload'); %>
+      <div class="flex-col">
         <label for="tag">Name</label>
         <input type="text" />
         <label for="title">Tags</label>
