@@ -10,6 +10,15 @@
 
 <body>
   <%- include('./partials/header'); %>
+  <% if (error) { %>
+    <script>
+      $(".input-warning").slideDown("slow");
+    </script>
+    <div class="input-warning">
+      <i class="fas fa-lg fa-exclamation-triangle"></i>
+      <h3><%= error %></h3>
+    </div>
+  <% } %>
   <main id="container" class="container">
     <div id="post-area" class="item">
     </div>

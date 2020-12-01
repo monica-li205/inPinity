@@ -10,11 +10,9 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav navbar-nav mr-auto mt-2 mt-lg-0">
         <% if (user) { %>
+          <%- include('../create_post'); %>
         <li class="nav-item">
-          <a class="nav-link" href="/cp">CREATE</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users">VIEW</a>
+          <a class="nav-link" role="button" data-toggle="modal" data-target="#create-post">CREATE</a>
         </li>
         <% } %>
       </ul>

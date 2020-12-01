@@ -4,6 +4,7 @@ const getAllPosts = (db, offset) => {
     FROM ratings
     RIGHT JOIN posts on post_id = posts.id
     GROUP BY posts.id
+    ORDER BY id DESC
     LIMIT 10 OFFSET $1;
   `
   return db.query(queryString, [offset])
@@ -32,11 +33,12 @@ const addPost = (db, user, params) => {
     params.thumbnail_photo,
     params.url,
     params.title,
-    params.description
+    params.description,
+    params.category
   ];
   const queryString = `
-  INSERT INTO posts (user_id, thumbnail_photo, url, title, description)
-  VALUES ($1, $2, $3, $4, $5);
+  INSERT INTO posts (user_id, thumbnail_photo, url, title, description, category)
+  VALUES ($1, $2, $3, $4, $5, $6);
   `
   return db.query(queryString, queryParams)
   .then(res => res.rows)
@@ -87,16 +89,3 @@ const getPostOwner = (db, id) => {
   .catch(err => err);
 }
 exports.getPostOwner = getPostOwner;
-
-const totalPostByUser = (db, id) => {
-  const queryString = `
-  SELECT count(posts.*)
-  FROM posts
-  WHERE user_id = $1
-  GROUP BY user_id;
-  `
-
-  return db.query(queryString, [id])
-  .then(data => data.rows[0])
-  .catch(err => err);
-}
