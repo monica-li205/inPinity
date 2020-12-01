@@ -25,10 +25,14 @@ module.exports = (db, helpers) => {
   router.post("/", (req, res) => {
     const params = req.body;
     const user = req.session.user_id;
+    const templateVars = {
+      user: user,
+      error: undefined
+    }
     if (user) {
       helpers.addPost(db, user, params)
       .then(post => {
-        res.json(post);
+        res.render("main", templateVars)
       })
       .catch(err => err);
     } else {

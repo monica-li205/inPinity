@@ -4,7 +4,8 @@ const router = express.Router();
 module.exports = (db, helpers) => {
   router.get("/", (req, res) => {
     const templateVars = {
-      user: undefined
+      user: undefined,
+      error: undefined
     }
     if (req.session.user_id) {
       res.redirect("/main");
@@ -14,10 +15,20 @@ module.exports = (db, helpers) => {
   })
 
   router.get("/main", (req, res) => {
-    const templateVars = {
-      user: helpers.getUserWithId(db, req.session.user_id)
-    }
-    res.render("main", templateVars);
+    let templateVars = {};
+    helpers.getUserWithId(db, req.session.user_id)
+    .then(data => {
+      helpers.totalPostsByUser(db, data.id)
+      .then(result => {
+        templateVars = {
+          user: data,
+          count: result.count
+        } 
+        res.render("main", templateVars);
+      })
+      
+    })
+    .catch(err => err);
   })
 
   router.get("/cp", (req, res) => {
@@ -50,15 +61,20 @@ module.exports = (db, helpers) => {
     helpers.getUserWithEmail(db, email)
     .then(data => {
       const userRecord = data;
+      
       if (!userRecord || userRecord.password !== user.password) {
         // res.status(400).send("Invalid login");
-        res.status(401).send("Unauthorized");
+        // res.status(401).send("Unauthorized");
+        const templateVars = {
+          user: undefined,
+          error: "Invalid login",
+        }
+        res.status(401).render("index", templateVars);
         return;
       }
-
+      
       userRecord.password = undefined;
       req.session.user_id = userRecord.id;
-      const templateVars = {user: userRecord};
       // res.render("main", templateVars);
       res.redirect("/main");
     })

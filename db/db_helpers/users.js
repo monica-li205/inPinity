@@ -54,10 +54,11 @@ exports.getUserWithUsername = getUserWithUsername;
 const addUser =  function(db, user) {
   return db.query(`
   INSERT INTO users (name, username, password, email)
-  VALUES ($1, $2, $3, $4);
+  VALUES ($1, $2, $3, $4)
+  RETURNING *;
   `, [user.name, user.username, user.password, user.email])
-  .then(user)
-  .catch(err => console.error('query error', err.stack));
+  .then(res => res.rows)
+  .catch(err => err);
 }
 exports.addUser = addUser;
 
@@ -88,3 +89,15 @@ const editUser = function(db, user, params) {
   .catch(err => err);
 }
 exports.editUser = editUser;
+
+const totalPostsByUser = (db, id) => {
+  const queryString = `
+  SELECT COALESCE(
+    (SELECT count(posts.*) FROM posts WHERE user_id = $1), 0
+  ) as count;
+  `
+  return db.query(queryString, [id])
+  .then(data => data.rows[0])
+  .catch(err => err);
+}
+exports.totalPostsByUser = totalPostsByUser;

@@ -8,14 +8,22 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="login-form flex-col-center" action="/" method="POST">
+        <form class="login-form flex-col-center" action="/api/users/" method="POST">
+          <div class="flex-col">
+            <label for="password">Name:  </label>
+            <input type="text" name="name" />
+          </div>
+          <div class="flex-col">
+            <label for="password">Username: </label>
+            <input type="text" name="username" />
+          </div>
           <div class="flex-col">
             <label for="email">Email: </label>
             <input type="email" name="email" />
           </div>
           <div class="flex-col">
             <label for="password">Password: </label>
-            <input type="text" name="password" />
+            <input type="password" name="password" />
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Register</button>
