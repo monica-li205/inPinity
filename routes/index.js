@@ -33,18 +33,44 @@ module.exports = (db, userHelpers, postHelpers) => {
   });
 
   router.get("/main", (req, res) => {
-    let templateVars = {};
+    // let templateVars = {};
 
-    userHelpers
-      .getUserWithId(db, req.session.user_id)
-      .then((data) => {
-        userHelpers.totalPostsByUser(db, data.id).then((result) => {
+    // userHelpers
+    //   .getUserWithId(db, req.session.user_id)
+    //   .then((data) => {
+    //     userHelpers.totalPostsByUser(db, data.id).then((result) => {
+    //       templateVars = {
+    //         user: data,
+    //         count: result.count,
+    //       };
+    //       res.render("main", templateVars);
+    //     });
+    //   })
+    //   .catch((err) => err);
+    const offset = Number(Object.values(req.query));
+
+    let templateVars = {
+      user: undefined,
+      error: undefined,
+      posts: undefined,
+    };
+    postHelpers
+      .getAllPosts(db, offset)
+      .then((posts) => {
+        if (req.session.user_id) {
           templateVars = {
-            user: data,
-            count: result.count,
+            posts: posts,
           };
           res.render("main", templateVars);
-        });
+        } else {
+          templateVars = {
+            user: undefined,
+            posts: posts,
+            error: undefined,
+          };
+          console.log(posts);
+          res.render("index", templateVars);
+        }
       })
       .catch((err) => err);
   });
