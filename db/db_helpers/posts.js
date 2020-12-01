@@ -92,3 +92,17 @@ const getPostOwner = (db, id) => {
   .catch(err => err);
 }
 exports.getPostOwner = getPostOwner;
+
+const postsWithTheMostLikes = (db, limit = 10) => {
+  const queryString = `
+  SELECT post_id, count(is_liked) as likes
+  FROM likes
+  GROUP BY post_id
+  ORDER BY count(is_liked) DESC
+  LIMIT $1
+  `
+  return db.query(queryString, [limit])
+  .then(data => data.rows[0])
+  .catch(err => err);
+}
+exports.postsWithTheMostLikes = postsWithTheMostLikes;

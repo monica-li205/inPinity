@@ -64,7 +64,7 @@ exports.addUser = addUser;
 
 const editUser = function(db, user, params) {
   const queryParams = [];
-  
+
   let queryString = `UPDATE users SET`;
 
   if (params.email) {
@@ -83,7 +83,7 @@ const editUser = function(db, user, params) {
   }
   queryParams.push(user);
   queryString += ` WHERE id = $${queryParams.length}`;
-  
+
   return db.query(queryString,queryParams)
   .then(res => res.rows)
   .catch(err => err);
@@ -92,9 +92,9 @@ exports.editUser = editUser;
 
 const totalPostsByUser = (db, id) => {
   const queryString = `
-  SELECT COALESCE(
-    (SELECT count(posts.*) FROM posts WHERE user_id = $1), 0
-  ) as count;
+  SELECT count(posts.id)
+  FROM posts
+  WHERE user_id = $1;
   `
   return db.query(queryString, [id])
   .then(data => data.rows[0])
