@@ -40,6 +40,9 @@ const addPost = (db, user, params) => {
   INSERT INTO posts (user_id, thumbnail_photo, url, title, description, category)
   VALUES ($1, $2, $3, $4, $5, $6);
   `
+  // if (params.thumbnail_photo.length > 0 &params.url.length > 0 && params.title.length > 0 && params.description.length > 0 && params.category.length > 0) {
+    
+  // }
   return db.query(queryString, queryParams)
   .then(res => res.rows)
   .catch(err => err);
@@ -88,35 +91,4 @@ const getPostOwner = (db, id) => {
   .then(data => data.rows[0])
   .catch(err => err);
 }
-
 exports.getPostOwner = getPostOwner;
-
-
-const getAllPostsByCategory = (db, category) => {
-  const queryString = `
-  SELECT posts.*
-  FROM posts
-  WHERE category = $1
-  `;
-
-  return db.query(queryString, [category])
-  .then(data => data.rows)
-  .catch(err => err);
-}
-
-exports.getAllPostsByCategory = getAllPostsByCategory;
-
-const getAllPostsByCategoryUnderUser = (db, category, user) => {
-  const queryString = `
-  SELECT posts.*
-  FROM posts
-  WHERE category = $1
-  AND user_id = $2
-  `;
-
-  return db.query(queryString, [category, user])
-  .then(data => data.rows)
-  .catch(err => err);
-}
-
-exports.getAllPostsByCategoryUnderUser = getAllPostsByCategoryUnderUser;

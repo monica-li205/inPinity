@@ -1,3 +1,7 @@
+<script type="text/javascript" src="/scripts/create-post.js"></script>
+<!-- Change the "src" attribute according to your installation path -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
 <div class="modal fade" id="create-post" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -8,7 +12,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="box-container flex-row-space" action="/api/posts" method="POST">
+        <form class="box-container flex-row-space" id="create-post" action="/api/posts" method="POST" name="post-form">
           <%- include('./partials/upload'); %>
           <section class="flex-col" id="input-field">
             <!-- <label for="tag">tags</label>
@@ -20,20 +24,32 @@
               <option value="tag2">Tag 2</option>
               <option value="tag3">Tag 3</option>
             </select> -->
-
+            
             <label for="category">Category</label>
-            <input type="text" name="category"/>
+            <fieldset class="dropdown" name="category">
+              <select class="dropbtn" name="category">Dropdown</button>
+                <option value ="Entertainment">Entertainment</option>
+                <option value ="Sports">Sports</option>
+                <option value ="Techology">Techology</option>
+                <option value ="Fashion">Fashion</option>
+                <option value ="Food">Food</option>
+                <option value ="Animals">Animals</option>
+                <option value ="Plants">Plants</option>
+                <option value ="Art">Art</option>
+              </select>
+            </fieldset>
             <label for="title">title</label>
-            <input type="text" name="title"/>
+            <input type="text" name="title" id="name"/>
             <label for="tag">description</label>
-            <textarea name="description" id="" cols="30" rows="10"> </textarea>
+            <textarea name="description" id="description" cols="30" rows="10"> </textarea>
             <label for="link" >link</label>
-            <input type="text" name="url"/>
+            <input type="text" name="url" id="post-url"/>
             <label for="link" >Image link</label>
-            <input type="text" name="thumbnail_photo"/>
+            <input type="text" name="thumbnail_photo" id="image-url"/>
             <button class="mt-2 btn btn-info" type="submit">Post</button>
+          </form>
+            <button class="mt-2 btn btn-warning" id="generate-image">Generate Image</button>
           </section>
-        </form>
       </div>
     </div>
   </div>

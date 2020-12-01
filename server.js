@@ -12,6 +12,7 @@ const morgan = require("morgan");
 const postHelpers = require("./db/db_helpers/posts.js");
 const userHelpers = require("./db/db_helpers/users.js");
 const cookieSession = require("cookie-session");
+const request = require("request");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
