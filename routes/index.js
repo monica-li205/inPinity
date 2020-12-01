@@ -8,80 +8,42 @@ module.exports = (db, userHelpers, postHelpers) => {
     let templateVars = {
       user: undefined,
       error: undefined,
-<<<<<<< HEAD
+      posts: undefined,
     };
-    if (req.session.user_id) {
-      res.redirect("/main");
-    } else {
-      res.render("index", templateVars);
-    }
+    postHelpers
+      .getAllPosts(db, offset)
+      .then((posts) => {
+        if (req.session.user_id) {
+          templateVars = {
+            posts: posts,
+          };
+          res.render("main", templateVars);
+        } else {
+          templateVars = {
+            user: undefined,
+            posts: posts,
+            error: undefined,
+          };
+          console.log(posts);
+          res.render("index", templateVars);
+          // res.render("index", templateVars);
+        }
+      })
+      .catch((err) => err);
   });
 
   router.get("/main", (req, res) => {
     let templateVars = {};
-    helpers
+
+    userHelpers
       .getUserWithId(db, req.session.user_id)
       .then((data) => {
-        helpers.totalPostsByUser(db, data.id).then((result) => {
+        userHelpers.totalPostsByUser(db, data.id).then((result) => {
           templateVars = {
             user: data,
             count: result.count,
           };
           res.render("main", templateVars);
-        });
-=======
-      posts: undefined
-    }
-    postHelpers.getAllPosts(db, offset)
-    .then(posts => {
-      if (req.session.user_id) {
-        templateVars = {
-          posts: posts
-        }
-        res.render("main", templateVars);
-      } else {
-        templateVars = {
-          user: undefined,
-          posts: posts,
-          error: undefined
-        }
-        console.log(posts);
-        res.render("index", templateVars);
-        // res.render("index", templateVars);
-      }
-    })
-    .catch(err => err);
-  })
-
-  router.get("/main", (req, res) => {
-    let templateVars = {};
-    
-
-    userHelpers.getUserWithId(db, req.session.user_id)
-    .then(data => {
-      userHelpers.totalPostsByUser(db, data.id)
-      .then(result => {
-        templateVars = {
-          user: data,
-          count: result.count
-        } 
-        res.render("main", templateVars);
->>>>>>> d9ecb60c0b5ab9f8c7cfc5bc93e0835918e42c7b
-      })
-      .catch((err) => err);
-  });
-
-  router.get("/users", (req, res) => {
-    let templateVars = {};
-    helpers
-      .getUserWithId(db, req.session.user_id)
-      .then((data) => {
-        helpers.totalPostsByUser(db, data.id).then((result) => {
-          templateVars = {
-            user: data,
-            count: result.count,
-          };
-          res.render("users", templateVars);
         });
       })
       .catch((err) => err);
@@ -89,11 +51,7 @@ module.exports = (db, userHelpers, postHelpers) => {
 
   router.get("/cp", (req, res) => {
     let templateVars = {
-<<<<<<< HEAD
-      user: helpers.getUserWithId(db, req.session.user_id),
-=======
-      user: userHelpers.getUserWithId(db, req.session.user_id)
->>>>>>> d9ecb60c0b5ab9f8c7cfc5bc93e0835918e42c7b
+      user: userHelpers.getUserWithId(db, req.session.user_id),
     };
 
     if (!req.session.user_id) {
@@ -103,56 +61,9 @@ module.exports = (db, userHelpers, postHelpers) => {
     res.render("create_post", templateVars);
   });
 
-  router.get("/cb", (req, res) => {
-    let templateVars = {
-      user: helpers.getUserWithId(db, req.session.user_id),
-    };
-
-    if (!req.session.user_id) {
-      templateVars = { user: undefined };
-    }
-
-    res.render("create_board", templateVars);
-  });
-
-  router.get("/upo", (req, res) => {
-    let templateVars = {};
-    helpers
-      .getUserWithId(db, req.session.user_id)
-      .then((data) => {
-        helpers.totalPostsByUser(db, data.id).then((result) => {
-          templateVars = {
-            user: data,
-            count: result.count,
-          };
-          res.render("user_posts", templateVars);
-        });
-      })
-      .catch((err) => err);
-  });
-
-  router.get("/users", (req, res) => {
-    let templateVars = {};
-    helpers
-      .getUserWithId(db, req.session.user_id)
-      .then((data) => {
-        helpers.totalPostsByUser(db, data.id).then((result) => {
-          templateVars = {
-            user: data,
-            count: result.count,
-          };
-          res.render("users", templateVars);
-        });
-      })
-      .catch((err) => err);
-  });
   router.get("/login", (req, res) => {
     let templateVars = {
-<<<<<<< HEAD
-      user: helpers.getUserWithId(db, req.session.user_id),
-=======
-      user: userHelpers.getUserWithId(db, req.session.user_id)
->>>>>>> d9ecb60c0b5ab9f8c7cfc5bc93e0835918e42c7b
+      user: userHelpers.getUserWithId(db, req.session.user_id),
     };
 
     if (!req.session.user_id) {
@@ -165,8 +76,7 @@ module.exports = (db, userHelpers, postHelpers) => {
     const user = req.body;
     const email = user.email;
 
-<<<<<<< HEAD
-    helpers
+    userHelpers
       .getUserWithEmail(db, email)
       .then((data) => {
         const userRecord = data;
@@ -185,33 +95,10 @@ module.exports = (db, userHelpers, postHelpers) => {
         userRecord.password = undefined;
         req.session.user_id = userRecord.id;
         // res.render("main", templateVars);
-        res.redirect("/main");
+        res.render("main", templateVars);
+        // res.redirect("/main");
       })
       .catch((err) => err);
-=======
-    userHelpers.getUserWithEmail(db, email)
-    .then(data => {
-      const userRecord = data;
-      
-      if (!userRecord || userRecord.password !== user.password) {
-        // res.status(400).send("Invalid login");
-        // res.status(401).send("Unauthorized");
-        const templateVars = {
-          user: undefined,
-          error: "Invalid login",
-        }
-        res.status(401).render("index", templateVars);
-        return;
-      }
-      
-      userRecord.password = undefined;
-      req.session.user_id = userRecord.id;
-      // res.render("main", templateVars);
-      res.render("main", templateVars);
-      // res.redirect("/main");
-    })
-    .catch(err => err);
->>>>>>> d9ecb60c0b5ab9f8c7cfc5bc93e0835918e42c7b
   });
 
   router.post("/logout", (req, res) => {
