@@ -12,7 +12,6 @@ const morgan = require("morgan");
 const postHelpers = require("./db/db_helpers/posts.js");
 const userHelpers = require("./db/db_helpers/users.js");
 const cookieSession = require("cookie-session");
-const request = require("request");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -58,7 +57,7 @@ const index = require("./routes/index");
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db, userHelpers));
 app.use("/api/posts", postRoutes(db, postHelpers));
-app.use("/", index(db, userHelpers));
+app.use("/", index(db, userHelpers, postHelpers));
 
 // Note: mount other resources here, using the same pattern above
 
