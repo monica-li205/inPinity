@@ -32,6 +32,7 @@ module.exports = (db, helpers) => {
     if (user) {
       helpers.addPost(db, user, params)
       .then(post => {
+        // res.render("main", templateVars)
         res.redirect("/main");
       })
       .catch(err => err);

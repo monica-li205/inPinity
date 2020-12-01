@@ -18,7 +18,7 @@
       <ul class="navbar-nav navbar-nav mr-auto mt-2 mt-lg-0">
         <% if (user) { %> <%- include('../create_post'); %>
         <li class="nav-item">
-          <a class="nav-link" href="/cp">CREATE A POST</a>
+          <a class="nav-link" data-toggle="modal" data-target="#create-post">CREATE A POST</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/users">VIEW MY BOARDS</a>
