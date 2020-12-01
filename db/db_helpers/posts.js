@@ -2,7 +2,7 @@ const getAllPosts = (db, offset) => {
   const queryString = `
     SELECT posts.*, ROUND(AVG(ratings.rating)) as rating
     FROM ratings
-    RIGHT JOIN posts on post_id = posts.id
+    LEFT JOIN posts on post_id = posts.id
     GROUP BY posts.id
     ORDER BY id DESC
     LIMIT 10 OFFSET $1;
@@ -41,7 +41,7 @@ const addPost = (db, user, params) => {
   VALUES ($1, $2, $3, $4, $5, $6);
   `
   // if (params.thumbnail_photo.length > 0 &params.url.length > 0 && params.title.length > 0 && params.description.length > 0 && params.category.length > 0) {
-    
+
   // }
   return db.query(queryString, queryParams)
   .then(res => res.rows)
