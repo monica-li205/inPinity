@@ -14,22 +14,12 @@
       <i class="fas fa-lg fa-exclamation-triangle"></i>
       <h3><%= error %></h3>
     </div>
-<<<<<<< HEAD
     <% } %>
-    <main id="container" class="container">
-      <div id="post-area" class="item"></div>
+    <main id="main-container" class="container">
+      <div id="post-area" class="item">
+        <%- include('./partials/posts_each'); %>
+      </div>
     </main>
     <%- include('./partials/footer'); %>
   </body>
 </html>
-=======
-  <% } %>
-  <main id="main-container" class="container">
-    <div id="post-area" class="item">
-    </div>
-    
-  </main>
-  <%- include('./partials/footer'); %>
-</body>
-</html>
->>>>>>> 135593180f95125e323ac095aa08949e2f322413

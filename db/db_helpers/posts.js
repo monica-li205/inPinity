@@ -5,7 +5,7 @@ const getAllPosts = (db, offset) => {
     RIGHT JOIN posts on post_id = posts.id
     GROUP BY posts.id
     ORDER BY id DESC
-    LIMIT 10 OFFSET $1;
+    LIMIT 20 OFFSET $1;
   `
   return db.query(queryString, [offset])
   .then(res => res.rows)

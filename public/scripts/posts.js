@@ -1,5 +1,6 @@
 // let offset = 0;
 
+<<<<<<< HEAD
 // $(document).ready(function (e) {
 //   loadPosts();
 
@@ -78,3 +79,24 @@
 //   div.appendChild(document.createTextNode(str));
 //   return div.innerHTML;
 // };
+=======
+$(document).ready(function (e) {
+  $(window).scroll(function (e) {
+    if ($(window).scrollTop() + 1 >= $(document.body).height() - $(window).height()) {
+      loadMore();
+    }
+  })
+})
+
+const loadMore = function () {
+  offset += 15;
+  $.ajax({
+      method: "GET",
+      url: `/?offset=${offset}`
+    })
+    .then(data => {
+      const $data = $(data).find(".post-body");
+      $("#post-area").append($data);
+    })
+}
+>>>>>>> d9ecb60c0b5ab9f8c7cfc5bc93e0835918e42c7b
