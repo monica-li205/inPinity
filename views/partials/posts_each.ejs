@@ -14,7 +14,6 @@
     </div>
   </a>
 </article> -->
-<script type="text/javascript" src="/scripts/posts.js"></script>
 <% for (const post of posts) { %>
 
 <article class="post-body">
@@ -40,8 +39,12 @@
         <p class="post-owner mt-2 ml-2"><%= post.owner_id %></p>
       </div>
       <div class="flex-row-center mt-2">
-        <p class="rating mr-2"><i class="fa fa-star mr-2"><%= post.rating %></i></p>
-        <p class="liked mr-2"><i class="fa fa-heart mr-2"><%= post.is_liked %></i></p>
+        <p class="rating mr-2">
+          <i class="fa fa-star mr-2"><%= post.rating %></i>
+        </p>
+        <p class="liked mr-2">
+          <i class="fa fa-heart mr-2"><%= post.is_liked %></i>
+        </p>
       </div>
     </footer>
   </a>
