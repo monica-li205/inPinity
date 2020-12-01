@@ -1,24 +1,43 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = (db, helpers) => {
+module.exports = (db, userHelpers, postHelpers) => {
   router.get("/", (req, res) => {
-    const templateVars = {
+    const offset = Number(Object.values(req.query));
+
+    let templateVars = {
       user: undefined,
-      error: undefined
+      error: undefined,
+      posts: undefined
     }
-    if (req.session.user_id) {
-      res.redirect("/main");
-    } else {
-      res.render("index", templateVars);
-    }
+    postHelpers.getAllPosts(db, offset)
+    .then(posts => {
+      if (req.session.user_id) {
+        templateVars = {
+          posts: posts
+        }
+        res.render("main", templateVars);
+      } else {
+        templateVars = {
+          user: undefined,
+          posts: posts,
+          error: undefined
+        }
+        console.log(posts);
+        res.render("index", templateVars);
+        // res.render("index", templateVars);
+      }
+    })
+    .catch(err => err);
   })
 
   router.get("/main", (req, res) => {
     let templateVars = {};
-    helpers.getUserWithId(db, req.session.user_id)
+    
+
+    userHelpers.getUserWithId(db, req.session.user_id)
     .then(data => {
-      helpers.totalPostsByUser(db, data.id)
+      userHelpers.totalPostsByUser(db, data.id)
       .then(result => {
         templateVars = {
           user: data,
@@ -33,7 +52,7 @@ module.exports = (db, helpers) => {
 
   router.get("/cp", (req, res) => {
     let templateVars = {
-      user: helpers.getUserWithId(db, req.session.user_id)
+      user: userHelpers.getUserWithId(db, req.session.user_id)
     };
     
     if (!req.session.user_id) {
@@ -45,7 +64,7 @@ module.exports = (db, helpers) => {
 
   router.get("/login", (req, res) => {
     let templateVars = {
-      user: helpers.getUserWithId(db, req.session.user_id)
+      user: userHelpers.getUserWithId(db, req.session.user_id)
     };
     
     if (!req.session.user_id) {
@@ -58,7 +77,7 @@ module.exports = (db, helpers) => {
     const user = req.body;
     const email = user.email;
 
-    helpers.getUserWithEmail(db, email)
+    userHelpers.getUserWithEmail(db, email)
     .then(data => {
       const userRecord = data;
       
@@ -76,7 +95,8 @@ module.exports = (db, helpers) => {
       userRecord.password = undefined;
       req.session.user_id = userRecord.id;
       // res.render("main", templateVars);
-      res.redirect("/main");
+      res.render("main", templateVars);
+      // res.redirect("/main");
     })
     .catch(err => err);
   });
