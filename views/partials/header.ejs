@@ -11,13 +11,21 @@
       <ul class="navbar-nav navbar-nav mr-auto mt-2 mt-lg-0">
         <% if (user) { %>
         <li class="nav-item">
-          <a class="nav-link" href="/cp">CREATE</a>
+          <a class="nav-link" href="/cp">CREATE A POST</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/users">VIEW</a>
+          <a class="nav-link" href="/users">VIEW MY BOARDS</a>
         </li>
         <% } %>
       </ul>
+      <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#">Category 1</a>
+          <a href="#">Category 1</a>
+          <a href="#">Category 1</a>
+        </div>
+      </div>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" />
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
