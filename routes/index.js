@@ -77,7 +77,7 @@ module.exports = (db, userHelpers, postHelpers) => {
     const offset = Number(Object.values(req.query));
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
-    const getAllUserPosts = postHelpers.getAllUserPosts(db, userSession, offset);
+    const getAllUserPosts = postHelpers.getAllUserPosts(db, userSession,offset);
     Promise.all([getUserRecord, getUserPostsCount, getAllUserPosts])
       .then((data) => {
         console.log("data", data[2]);

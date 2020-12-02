@@ -21,11 +21,11 @@ const getAllUserPosts = (db, offset, userSession) => {
   const queryString = `
   SELECT posts.*,
   users.username,
-  (select round(avg(rating)) from ratings) as rating,
-  (select sum(is_liked::int) as num_of_likes), likes.user_id = $1 as liked_by_user
+  (select round(avg(rating)) from ratings) as rating, likes.user_id = $1 as liked_by_user
   FROM posts
   JOIN users on users.id = posts.user_id
   JOIN likes on users.id = likes.user_id
+  WHERE users.id = $1
   GROUP BY posts.id, users.username, likes.user_id
   ORDER BY posts.id desc
   LIMIT 20 OFFSET $2;
