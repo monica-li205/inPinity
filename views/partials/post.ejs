@@ -13,14 +13,14 @@
   </div>
   <div class="post_detail field">
     <label for="board">url:</label>
-    <p class="url">${post.url}</p>
+    <p class="url"><%= post.url %></p>
     <label for="title">Title</label>
     <label for="Tag">Detail</label>
-    <p class="description">${post.description}</p>
-    <p for="" class="post-owner">Owner: ${post.user_id}</p>
-    <p class="date-posted">${post.date_created}</p>
-    <p for="" class="rating">${post.rating}</p>
-    <p for="" class="liked">${post.is_liked}</p>
+    <p class="description"><%= post.description %></p>
+    <p for="" class="post-owner">Owner: <%= post.user_id %></p>
+    <p class="date-posted"><%= post.date_created %></p>
+    <p for="" class="rating"><%= post.rating %></p>
+    <p for="" class="liked"><%= post.is_liked %></p>
 
     <button class="btn btn-outline-info btn-block" id="edit">Edit</button>
   </div>

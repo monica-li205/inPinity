@@ -1,50 +1,43 @@
-<!-- <article class="">
-  <a href="${post.url}">
-    <img
-      src="${post.thumbnail_photo}"
-      alt="I am a unknown image"
-      class="thumbnail"
-    />
-    <div class="card-body">
-      <h5 class="card-title title">${post.title}</h5>
-      <p class="card-text description">${post.description}</p>
-    </div>
-    <div class="card-footer">
-      <p for="" class="post-owner">Owner: ${post.user_id}</p>
-    </div>
-  </a>
-</article> -->
-<script type="text/javascript" src="/scripts/posts.js"></script>
+<!-- <script type="text/javascript" src="/scripts/posts.js"></script> -->
 <% for (const post of posts) { %>
 
 <article class="post-body">
-  <a href="/api/post/<%= post.id %>" class="card box">
+  <div class="card box">
     <div class="card-img-top image_edit">
-      <img
-        src="<%= post.thumbnail_photo %>"
-        alt="image"
-        class="thumbnail box_img"
-      />
+      <a href="/api/post/<%= post.id %>">
+        <img
+          src="<%= post.thumbnail_photo %>"
+          alt="image"
+          class="thumbnail box_img"
+        />
+      </a>
     </div>
     <div class="card-body">
-      <h5 class="title"><%= post.title %></h5>
-      <p class="card-text description"><%= post.description %></p>
+      <h5 class="title post-title"><%= post.title %></h5>
+      <p class="card-text description post-description">
+        <%= post.description %>
+      </p>
     </div>
-    <footer class="flex-row-space-center">
+    <footer class="flex-row-space-center post-footer">
       <div class="flex-row-center ml-2">
         <img
           src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Round&hairColor=Auburn&facialHairType=Blank&clotheType=Overall&clotheColor=Black&eyeType=Dizzy&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=Light"
           class="avatar mb-2"
           style="width: 2rem"
         />
-        <p class="post-owner mt-2 ml-2"><%= post.owner_id %></p>
+        <p class="post-owner mt-2 ml-2"><%= post.username %></p>
       </div>
       <div class="flex-row-center mt-2">
-        <p class="rating mr-2"><i class="fa fa-star mr-2"><%= post.rating %></i></p>
-        <p class="liked mr-2"><i class="fa fa-heart mr-2"><%= post.is_liked %></i></p>
+        <p class="rating mr-2">
+          <%= post.rating %>/5
+          <i class="fa fa-star mr-2"></i>
+        </p>
+        <p class="liked mr-2">
+          <%= post.num_of_likes %>
+          <i class="fa fa-heart mr-2 liked"></i>
+        </p>
       </div>
     </footer>
-  </a>
+  </div>
 </article>
-
 <% } %>

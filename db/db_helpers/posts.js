@@ -6,20 +6,11 @@ const getAllPosts = (db, offset) => {
     GROUP BY posts.id
     ORDER BY id DESC
     LIMIT 20 OFFSET $1;
-<<<<<<< HEAD
-  `;
-  return db
-    .query(queryString, [offset])
-    .then((res) => res.rows)
-    .catch((err) => err);
-};
-=======
   `
   return db.query(queryString, [offset])
   .then(res => res.rows)
   .catch(err => err);
 }
->>>>>>> d9ecb60c0b5ab9f8c7cfc5bc93e0835918e42c7b
 exports.getAllPosts = getAllPosts;
 
 //get all user's post
