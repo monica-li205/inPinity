@@ -6,6 +6,13 @@ $(document).ready(function (e) {
       loadMore();
     }
   })
+
+  $(".post-body").hover(function(e) {
+    const $description = $(this).find(".post-description");
+    const $footer = $(this).find(".post-footer");
+    $description.toggle("fast");
+    $footer.fadeToggle(100).css("display", "flex")
+  })
 })
 
 const loadMore = function () {

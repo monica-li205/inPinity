@@ -146,4 +146,32 @@ article {
 
 .fa-star {
   color: rgb(255, 148, 47);
+  margin-right: 0!important;
+}
+
+.post-title {
+  color: grey;
+}
+
+.post-description {
+  color: grey;
+  display: none;
+}
+
+.post-footer {
+  color: grey;
+  display: none;
+}
+
+.card {
+  border: none;
+}
+
+.fa-heart:hover {
+  color: rgb(255, 53, 53);
+  cursor: pointer;
+}
+
+.fa-star:hover {
+  cursor: pointer;
 }
