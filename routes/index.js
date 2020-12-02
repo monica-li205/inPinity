@@ -24,7 +24,6 @@ module.exports = (db, userHelpers, postHelpers) => {
             posts: posts,
             error: undefined,
           };
-          console.log(posts);
           res.render("index", templateVars);
         }
       })
