@@ -7,21 +7,22 @@ module.exports = (db, userHelpers, postHelpers) => {
   let templateVars;
   router.get("/", (req, res) => {
     const offset = Number(Object.values(req.query));
-
+    console.log("offset in router", offset);
     templateVars = {
       user: undefined,
       error: undefined,
       posts: undefined,
     };
-    postHelpers.getAllPosts(db, offset)
-      .then(posts => {
+    postHelpers
+      .getAllPosts(db, offset)
+      .then((posts) => {
         if (req.session.user_id) {
           res.redirect("/main");
         } else {
           templateVars = {
             user: undefined,
             posts: posts,
-            error: undefined
+            error: undefined,
           };
           res.render("index", templateVars);
         }
@@ -38,7 +39,7 @@ module.exports = (db, userHelpers, postHelpers) => {
     const getAllPosts = postHelpers.getAllPosts(db, offset);
 
     Promise.all([getUserRecord, getUserPostsCount, getAllPosts])
-      .then(data => {
+      .then((data) => {
         templateVars = {
           user: data[0],
           count: data[1].count,

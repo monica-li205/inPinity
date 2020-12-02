@@ -119,3 +119,17 @@ const totalPostsByUser = (db, id) => {
     .catch((err) => err);
 };
 exports.totalPostsByUser = totalPostsByUser;
+
+const likedPostsByUser = (db, id) => {
+  const queryString = `
+  SELECT post_id, is_liked
+  FROM likes
+  WHERE user_id = $1
+  AND is_liked = true;
+  `;
+  return db
+    .query(queryString, [id])
+    .then((data) => data.rows[0])
+    .catch((err) => err);
+};
+exports.likedPostsByUser = likedPostsByUser;

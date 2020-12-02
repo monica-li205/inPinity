@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <%- include('./partials/head'); %>
-  <script type="text/javascript" src="/scripts/posts.js"></script>
+  <script type="text/javascript" src="/scripts/main-posts.js"></script>
 
 </head>
 
@@ -12,27 +12,28 @@
     <aside id="aside">
       <%- include('./partials/profile'); %>
       <section id="search-area">
-        <h3>Popular Board</h3>
+        <!-- we have no way of rating a board right now.....only a way to rate posts -->
+        <!-- <h3>Browse Most Popular Boards</h3>
         <div class="input-group">
           <select class="custom-select" id="inputGroupSelect01">
-            <option selected>Choose...</option>
+            <option selected>Choose here...</option>
             <option value="tag1">Tag 1</option>
             <option value="tag2">Tag 2</option>
             <option value="tag3">Tag 3</option>
           </select>
-        </div>
+        </div> -->
       </section>
       <section id="fav-area">
-        <h3>Most Liked</h3>
+        <h3>Most Popular Posts</h3>
         <%- include('./partials/most_liked'); %>
       </section>
     </aside>
-    
+
   <main id="main-container" class="container">
     <div id="post-area" class="item">
       <%- include('./partials/posts_each'); %>
     </div>
-    
+
   </main>
   <%- include('./partials/footer'); %>
 </body>
