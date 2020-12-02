@@ -20,19 +20,20 @@ module.exports = (db, helpers) => {
   });
 
   // Get user by ID
-  router.get("/:id", (req, res) => {
-    helpers
-      .getUserWithId(db, req.params.id)
-      .then((user) => {
-        res.json(user);
-      })
-      .catch((err) => {
-        res.status(500).json({
-          error: err.message,
-        });
-      });
-    ``;
-  });
+  // router.get("/:id", (req, res) => {
+  //   console.log("/:id");
+  //   helpers
+  //     .getUserWithId(db, req.params.id)
+  //     .then((user) => {
+  //       res.json(user);
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).json({
+  //         error: err.message,
+  //       });
+  //     });
+  //   ``;
+  // });
 
   // Register new user
   router.post("/", (req, res) => {

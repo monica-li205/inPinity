@@ -8,8 +8,8 @@
       />
     </div>
     <div class="card-body">
-      <h5 class="title">Fake Title</h5>
-      <p class="card-text description">${post.description}</p>
+      <h5 class="title"><%= post.title %></h5>
+      <p class="card-text description"><%= post.description %></p>
     </div>
 
     <footer class="flex-row-space-center">
@@ -19,11 +19,15 @@
           class="avatar mb-2"
           style="width: 2rem"
         />
-        <p class="post-owner mt-2 ml-2">id</p>
+        <p class="post-owner mt-2 ml-2"><%= post.username %></p>
       </div>
       <div class="flex-row-center mt-2">
-        <p class="rating mr-2"><i class="fa fa-star mr-2">rating</i></p>
-        <p class="liked mr-2"><i class="fa fa-heart mr-2">likes</i></p>
+        <p class="rating mr-2">
+          <i class="fa fa-star mr-2"><%= post.rating %></i>
+        </p>
+        <p class="liked mr-2">
+          <i class="fa fa-heart mr-2"><%= post.is_liked %></i>
+        </p>
       </div>
     </footer>
   </a>

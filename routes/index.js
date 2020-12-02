@@ -7,7 +7,6 @@ module.exports = (db, userHelpers, postHelpers) => {
   let templateVars;
   router.get("/", (req, res) => {
     const offset = Number(Object.values(req.query));
-    console.log("offset in router", offset);
     templateVars = {
       user: undefined,
       error: undefined,
@@ -31,8 +30,8 @@ module.exports = (db, userHelpers, postHelpers) => {
   });
 
   router.get("/main", (req, res) => {
-    const userSession = req.session.user_id;
     const offset = Number(Object.values(req.query));
+    const userSession = req.session.user_id;
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
@@ -46,6 +45,48 @@ module.exports = (db, userHelpers, postHelpers) => {
           posts: data[2],
         };
         res.render("main", templateVars);
+      })
+      .catch((err) => err);
+  });
+
+  // Users Boards
+
+  router.get("/users/:id", (req, res) => {
+    const userSession = req.session.user_id;
+    const offset = Number(Object.values(req.query));
+
+    const getUserRecord = userHelpers.getUserWithId(db, userSession);
+    const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
+    const getAllUserPosts = postHelpers.getAllUserPosts(db, offset);
+    Promise.all([getUserRecord, getUserPostsCount, getAllUserPosts])
+      .then((data) => {
+        console.log("data", data[0]);
+        templateVars = {
+          user: data[0].id,
+          count: data[1].count,
+          posts: data[2],
+        };
+        res.render("users", templateVars);
+      })
+      .catch((err) => err);
+  });
+
+  // users board ->posts
+  router.get("/user_posts/:id", (req, res) => {
+    const userSession = req.session.user_id;
+    const offset = Number(Object.values(req.query));
+    const getUserRecord = userHelpers.getUserWithId(db, userSession);
+    const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
+    const getAllUserPosts = postHelpers.getAllUserPosts(db, offset);
+    Promise.all([getUserRecord, getUserPostsCount, getAllUserPosts])
+      .then((data) => {
+        console.log("data", data[0]);
+        templateVars = {
+          user: data[0].id,
+          count: data[1].count,
+          posts: data[2],
+        };
+        res.render("user_posts", templateVars);
       })
       .catch((err) => err);
   });
