@@ -6,7 +6,7 @@ const getAllPosts = (db, offset) => {
   JOIN likes on likes.post_id = posts.id
   JOIN users on ratings.user_id = users.id
   GROUP BY posts.id, users.username
-  ORDER BY posts.date_created DESC
+  ORDER BY posts.id DESC
   LIMIT 20 OFFSET $1;
   `;
   return db

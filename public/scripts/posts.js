@@ -16,7 +16,7 @@ $(document).ready(function (e) {
 })
 
 const loadMore = function () {
-  offset += 15;
+  offset += 20;
   $.ajax({
       method: "GET",
       url: `/?offset=${offset}`
