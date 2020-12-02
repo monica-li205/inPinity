@@ -24,7 +24,6 @@ module.exports = (db, userHelpers, postHelpers) => {
             posts: posts,
             error: undefined,
           };
-          console.log(posts);
           res.render("index", templateVars);
         }
       })
@@ -41,15 +40,16 @@ module.exports = (db, userHelpers, postHelpers) => {
     const getAllPosts = postHelpers.getAllPosts(db, offset);
 
     Promise.all([getUserRecord, getUserPostsCount, getAllPosts])
-      .then(data => {
+      .then((data) => {
+        console.log(data[2]);
         templateVars = {
           user: data[0],
           count: data[1].count,
-          posts: data[2]
+          posts: data[2],
         };
         res.render("main", templateVars);
       })
-      .catch(err => err);
+      .catch((err) => err);
   });
 
   router.get("/cp", (req, res) => {

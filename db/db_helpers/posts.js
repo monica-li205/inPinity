@@ -4,7 +4,7 @@ const getAllPosts = (db, offset) => {
     FROM ratings
     RIGHT JOIN posts on post_id = posts.id
     GROUP BY posts.id
-    ORDER BY id DESC
+    ORDER BY date_created DESC
     LIMIT 20 OFFSET $1;
   `;
   return db

@@ -9,5 +9,4 @@ CREATE TABLE posts (
   title VARCHAR(255) NOT NULL,
   description TEXT,
   category VARCHAR(255) NOT NULL,
-  is_liked BOOLEAN NOT NULL DEFAULT FALSE
 );
