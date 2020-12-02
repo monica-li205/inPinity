@@ -29,10 +29,7 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <fieldset class="dropdown">
-          <select
-            class="drop-menu input-group mr-2 custom-select"
-            id="inputGroupSelect01"
-          >
+          <select class="drop-menu">
             <option>--Pick a Category!--</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Sports">Sports</option>
@@ -44,8 +41,12 @@
             <option value="Art">Art</option>
           </select>
         </fieldset>
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-          Search
+        <button
+          class="btn btn-outline-light my-2 my-sm-0"
+          type="submit"
+          id="sort-posts-button"
+        >
+          Sort
         </button>
       </form>
       <%- include('../login'); %> <%- include('../register'); %>

@@ -41,7 +41,6 @@ module.exports = (db, userHelpers, postHelpers) => {
 
     Promise.all([getUserRecord, getUserPostsCount, getAllPosts])
       .then((data) => {
-        console.log(data[2]);
         templateVars = {
           user: data[0],
           count: data[1].count,

@@ -69,34 +69,6 @@ app.get("/main", (req, res) => {
   res.render("main");
 });
 
-app.get("/users", (req, res) => {
-  res.render("users");
-});
-
-app.get("/cp", (req, res) => {
-  res.render("create_post");
-});
-
-app.get("/cb", (req, res) => {
-  res.render("create_board");
-});
-
-app.get("/upo", (req, res) => {
-  res.render("user_posts");
-});
-
-app.get("/post", (req, res) => {
-  res.render("posts");
-});
-// app.get("/login", (req, res) => {
-//   res.render("login");
-// });
-app.get("/register", (req, res) => {
-  res.render("register");
-});
-app.get("/search", (req, res) => {
-  res.render("search_result");
-});
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

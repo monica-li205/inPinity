@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  
-  
-  <%- include('./partials/head'); %>
-  <!-- <script type="text/javascript" src="/scripts/posts.js"></script> -->
+  <head>
+    <%- include('./partials/head'); %>
+    <script type="text/javascript" src="/scripts/posts.js"></script>
+  </head>
 
-</head>
-
-<body>
-  <%- include('./partials/header'); %>
-  <% if (error) { %>
+  <body>
+    <%- include('./partials/header'); %> <% if (error) { %>
     <script>
       $(".input-warning").slideDown("slow");
     </script>
@@ -18,13 +14,12 @@
       <i class="fas fa-lg fa-exclamation-triangle"></i>
       <h3><%= error %></h3>
     </div>
-  <% } %>
-  <main id="main-container" class="container">
-    <div id="post-area" class="item">
-      <%- include('./partials/posts_each'); %>
-    </div>
-    
-  </main>
-  <%- include('./partials/footer'); %>
-</body>
+    <% } %>
+    <main id="main-container" class="container">
+      <div id="post-area" class="item">
+        <%- include('./partials/posts_each'); %>
+      </div>
+    </main>
+    <%- include('./partials/footer'); %>
+  </body>
 </html>
