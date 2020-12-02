@@ -14,15 +14,19 @@ const getAllPosts = (db, offset) => {
 exports.getAllPosts = getAllPosts;
 
 //get all user's post
-const getAllUserPosts = (db, offset) => {
+const getAllUserPosts = (db, userId, userSession, offset) => {
   const queryString = `
   SELECT posts.*, rating
   FROM posts
-  JOIN ratings ON posts.id = post_id
-  WHERE posts.user_id = $1
+  JOIN users on users.id = posts.user_id
+  JOIN likes on users.id = likes.user_id
+  WHERE users.id = $2
+  GROUP BY posts.id, users.username, likes.user_id
+  ORDER BY posts.id desc
+  LIMIT 20 OFFSET $3
   `;
   return db
-    .query(queryString, [offset])
+    .query(queryString, [userSession, userId, offset])
     .then((res) => res.rows)
     .catch((err) => err);
 };
