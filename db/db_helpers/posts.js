@@ -1,7 +1,10 @@
 const getAllPosts = (db, offset) => {
   console.log("offset of db", offset);
   const queryString = `
-    SELECT posts.*, users.username, (select round(avg(rating)) from ratings) as rating, (select sum(is_liked::int) as num_of_likes)
+    SELECT posts.*,
+    users.username,
+    (select round(avg(rating)) from ratings) as rating,
+    (select sum(is_liked::int) as num_of_likes)
     FROM posts
     JOIN users on users.id = posts.user_id
     JOIN likes on posts.id = likes.post_id
@@ -15,6 +18,26 @@ const getAllPosts = (db, offset) => {
     .catch((err) => err);
 };
 exports.getAllPosts = getAllPosts;
+
+const getAllPostsLoggedIn = (db, userID, offset) => {
+  console.log("offset of db", offset);
+  const queryString = `
+  (select round(avg(rating)) from ratings) as rating,
+  (select sum(is_liked::int) as num_of_likes),
+  likes.user_id = $1 AS liked_by_user
+  FROM posts
+  JOIN users on users.id = posts.user_id
+  JOIN likes on posts.id = likes.post_id
+  GROUP BY posts.id, users.username, likes.user_id
+  ORDER BY posts.id desc
+  LIMIT 20 OFFSET $2;
+  `;
+  return db
+    .query(queryString, [userID, offset])
+    .then((res) => res.rows)
+    .catch((err) => err);
+};
+exports.getAllPostsLoggedIn = getAllPostsLoggedIn;
 
 //get all user's post
 const getAllUserPosts = (db, offset) => {
