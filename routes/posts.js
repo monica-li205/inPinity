@@ -14,14 +14,14 @@ module.exports = (db, helpers) => {
   });
 
   // Get specific post by ID
-  router.get("/:id", (req, res) => {
-    helpers
-      .getPostWithId(db, req.params.id)
-      .then((post) => {
-        res.json(post);
-      })
-      .catch((err) => err);
-  });
+  // router.get("/:id", (req, res) => {
+  //   helpers
+  //     .getPostWithId(db, req.params.id)
+  //     .then((post) => {
+  //       res.json(post);
+  //     })
+  //     .catch((err) => err);
+  // });
 
   // Add new post
   router.post("/", (req, res) => {

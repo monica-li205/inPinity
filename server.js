@@ -60,14 +60,12 @@ app.use("/api/posts", postRoutes(db, postHelpers));
 app.use("/", index(db, userHelpers, postHelpers));
 
 // Note: mount other resources here, using the same pattern above
-
+// app.get("/user_post", (req, res) => {
+//   res.render("user_post ");
+// });
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-
-app.get("/main", (req, res) => {
-  res.render("main");
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
