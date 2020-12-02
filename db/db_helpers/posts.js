@@ -1,6 +1,5 @@
 const getAllPosts = (db, offset) => {
   const queryString = `
-<<<<<<< HEAD
     SELECT posts.*, users.username, (select round(avg(rating)) from ratings) as rating, (select sum(is_liked::int) as num_of_likes)
     FROM posts
     JOIN users on users.id = posts.user_id
@@ -8,16 +7,6 @@ const getAllPosts = (db, offset) => {
     GROUP BY posts.id, users.username
     ORDER BY posts.id desc
     LIMIT 20 OFFSET $1;
-=======
-  SELECT posts.*, users.username, ROUND(AVG(ratings.rating)) as rating, sum(is_liked::int) as likes
-  FROM ratings
-  RIGHT JOIN posts on ratings.post_id = posts.id
-  JOIN likes on likes.post_id = posts.id
-  JOIN users on ratings.user_id = users.id
-  GROUP BY posts.id, users.username
-  ORDER BY posts.id DESC
-  LIMIT 20 OFFSET $1;
->>>>>>> 957358eca6675209c75e3d6982bb0fee76fe05af
   `;
   return db
     .query(queryString, [offset])
