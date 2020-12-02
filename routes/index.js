@@ -1,11 +1,14 @@
+/* eslint-disable camelcase */
+const { response } = require("express");
 const express = require("express");
 const router = express.Router();
 
 module.exports = (db, userHelpers, postHelpers) => {
+  let templateVars;
   router.get("/", (req, res) => {
     const offset = Number(Object.values(req.query));
 
-    let templateVars = {
+    templateVars = {
       user: undefined,
       error: undefined,
       posts: undefined,
@@ -14,10 +17,7 @@ module.exports = (db, userHelpers, postHelpers) => {
       .getAllPosts(db, offset)
       .then((posts) => {
         if (req.session.user_id) {
-          templateVars = {
-            posts: posts,
-          };
-          res.render("main", templateVars);
+          res.redirect("/main");
         } else {
           templateVars = {
             user: undefined,
@@ -26,28 +26,29 @@ module.exports = (db, userHelpers, postHelpers) => {
           };
           console.log(posts);
           res.render("index", templateVars);
-          // res.render("index", templateVars);
         }
       })
       .catch((err) => err);
   });
 
   router.get("/main", (req, res) => {
+    const userSession = req.session.user_id;
     const offset = Number(Object.values(req.query));
-    let templateVars = {
-      user: undefined,
-      error: undefined,
-      posts: undefined,
-    };
-    postHelpers
-      .getAllPosts(db, offset)
-      .then((posts) => {
-        if (req.session.user_id) {
-          templateVars = {
-            posts: posts,
-          };
-          res.render("main", templateVars);
-        }
+
+    // can you send me the hangout link?
+    const getUserRecord = userHelpers.getUserWithId(db, userSession);
+    const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
+    const getAllPosts = postHelpers.getAllPosts(db, offset);
+
+    Promise.all([getUserRecord, getUserPostsCount, getAllPosts])
+      .then((data) => {
+        console.log(data[2]);
+        templateVars = {
+          user: data[0],
+          count: data[1].count,
+          posts: data[2],
+        };
+        res.render("main", templateVars);
       })
       .catch((err) => err);
   });
@@ -74,7 +75,7 @@ module.exports = (db, userHelpers, postHelpers) => {
     }
     res.render("login", templateVars);
   });
-
+  // login route
   router.post("/", (req, res) => {
     const user = req.body;
     const email = user.email;
@@ -94,12 +95,11 @@ module.exports = (db, userHelpers, postHelpers) => {
           res.status(401).render("index", templateVars);
           return;
         }
-
+        // fetch user -> need to find out the function
         userRecord.password = undefined;
         req.session.user_id = userRecord.id;
-        // res.render("main", templateVars);
-        res.render("main", templateVars);
-        // res.redirect("/main");
+        console.log("userRecord", userRecord);
+        res.redirect("/main");
       })
       .catch((err) => err);
   });
