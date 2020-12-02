@@ -13,18 +13,16 @@ module.exports = (db, userHelpers, postHelpers) => {
       error: undefined,
       posts: undefined,
     };
-    postHelpers
-      .getAllPosts(db, offset)
-      .then((posts) => {
+    postHelpers.getAllPosts(db, offset)
+      .then(posts => {
         if (req.session.user_id) {
           res.redirect("/main");
         } else {
           templateVars = {
             user: undefined,
             posts: posts,
-            error: undefined,
-          };
-          console.log(posts);
+            error: undefined
+          }
           res.render("index", templateVars);
         }
       })
@@ -35,7 +33,6 @@ module.exports = (db, userHelpers, postHelpers) => {
     const userSession = req.session.user_id;
     const offset = Number(Object.values(req.query));
 
-    // can you send me the hangout link?
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
     const getAllPosts = postHelpers.getAllPosts(db, offset);

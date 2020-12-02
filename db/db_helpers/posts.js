@@ -1,11 +1,13 @@
 const getAllPosts = (db, offset) => {
   const queryString = `
-    SELECT posts.*, coalesce(ROUND(AVG(ratings.rating)), 0) as rating
-    FROM ratings
-    RIGHT JOIN posts on post_id = posts.id
-    GROUP BY posts.id
-    ORDER BY id DESC
-    LIMIT 20 OFFSET $1;
+  SELECT posts.*, users.username, ROUND(AVG(ratings.rating)) as rating, sum(is_liked::int) as likes
+  FROM ratings
+  RIGHT JOIN posts on ratings.post_id = posts.id
+  JOIN likes on likes.post_id = posts.id
+  JOIN users on ratings.user_id = users.id
+  GROUP BY posts.id, users.username
+  ORDER BY posts.date_created DESC
+  LIMIT 20 OFFSET $1;
   `;
   return db
     .query(queryString, [offset])
@@ -100,7 +102,7 @@ exports.editPost = editPost;
 
 const getPostOwner = (db, id) => {
   const queryString = `
-    SELECT users.id as post_owner
+    SELECT users.id as id, users.username as username
     FROM posts
     JOIN users ON users.id = user_id
     WHERE posts.id = $1;
