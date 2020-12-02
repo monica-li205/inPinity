@@ -103,6 +103,18 @@ module.exports = (db, userHelpers, postHelpers) => {
     res.render("create_post", templateVars);
   });
 
+  router.get("/cb", (req, res) => {
+    let templateVars = {
+      user: userHelpers.getUserWithId(db, req.session.user_id),
+    };
+
+    if (!req.session.user_id) {
+      templateVars = { user: undefined };
+    }
+
+    res.render("create_board", templateVars);
+  });
+
   router.get("/login", (req, res) => {
     let templateVars = {
       user: userHelpers.getUserWithId(db, req.session.user_id),

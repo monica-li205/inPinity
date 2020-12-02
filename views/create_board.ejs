@@ -1,19 +1,43 @@
-<%- include('./partials/head'); %>
-<body>
-  <%- include('./partials/header'); %>
-  <section class="flex-col-center box-container">
-    <form action="" class="flex-row-space">
-      <%- include('./partials/upload'); %>
-      <div class="flex-col">
-        <label for="tag">Name</label>
-        <input type="text" />
-        <label for="title">Tags</label>
-        <input type="text" />
-        <button type="submit" class="mt-2 btn btn-info btn-lg btn-block">
-          create
+
+<script type="text/javascript" src="/scripts/create-board.js"></script>
+<!-- Change the "src" attribute according to your installation path -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+<div class="modal fade" id="create-board" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create a board</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    </form>
-  </section>
-  <%- include('./partials/footer'); %>
-</body>
+      <div class="modal-body">
+        <form class="box-container flex-row-space" id="create-board" action="/api/boards" method="board" name="board-form">
+          <%- include('./partials/upload'); %>
+          <section class="flex-col" id="input-field">           
+            <label for="category">Category</label>
+            <fieldset class="dropdown" name="category">
+              <select class="dropbtn" name="category">Dropdown</button>
+                <option value ="Entertainment">Entertainment</option>
+                <option value ="Sports">Sports</option>
+                <option value ="Techology">Techology</option>
+                <option value ="Fashion">Fashion</option>
+                <option value ="Food">Food</option>
+                <option value ="Animals">Animals</option>
+                <option value ="Plants">Plants</option>
+                <option value ="Art">Art</option>
+              </select>
+            </fieldset>
+            <label for="title">title</label>
+            <input type="text" name="title" id="name"/>
+            <label for="link" >thumbnail link</label>
+            <input type="text" name="thumbnail_photo" id="image-url"/>
+            <button class="mt-2 btn btn-info" type="submit">Create</button>
+          </form>
+            <button class="mt-2 btn btn-warning" id="generate-image">Generate Image</button>
+          </section>
+      </div>
+    </div>
+  </div>
+</div>

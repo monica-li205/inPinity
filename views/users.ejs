@@ -12,8 +12,11 @@
         <span>Edit</span>
       </div>
       <div>
-        <a href="/cb" class="link"> <i class="fa fa-plus"></i></a>
-        <span>add</span>
+        <% if (user) { %> <%- include('create_board'); %>
+          <a class="nav-link" data-toggle="modal" data-target="#create-board"
+            ><i class="fa fa-plus"></i>Add</a
+          >
+        <% } %>
       </div>
     </div>
 
