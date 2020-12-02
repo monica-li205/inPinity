@@ -7,41 +7,27 @@
         class="thumbnail box_img"
       />
     </div>
-    <div class="card-body">
-      <h5 class="title">Fake Title</h5>
-      <p class="card-text description">${post.description}</p>
-    </div>
-    <footer class="flex-row-space-center">
-      <div class="flex-row-center ml-2">
-        <img
-          src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Round&hairColor=Auburn&facialHairType=Blank&clotheType=Overall&clotheColor=Black&eyeType=Dizzy&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=Light"
-          class="avatar mb-2"
-          style="width: 2rem"
-        />
-        <p class="post-owner mt-2 ml-2">id</p>
-      </div>
-      <div class="flex-row-center mt-2">
-        <p class="rating mr-2"><i class="fa fa-star mr-2">rating</i></p>
-        <p class="liked mr-2"><i class="fa fa-heart mr-2">likes</i></p>
-      </div>
-    </footer>
   </a>
-</article>
-
-<!-- <a href="${post.url}">
-  <img
-    src="${post.thumbnail_photo}"
-    alt="I am a unknown image"
-    class="thumbnail"
-  />
   <div class="card-body">
-    <h5 class="card-title title">${post.most_title}</h5>
-    <p class="card-text description">${post.most_description}</p>
+    <h5 class="title">post.title %></h5>
+    <p class="card-text description">post.description %></p>
   </div>
-  <div class="card-footer">
-    <p class="post-owner">Owner: ${post.most_user_id}</p>
-    <p class="date-posted">${post.most_date_created}</p>
-    <p class="rating">${post.most_rating}</p>
-    <p class="liked">${post.most_is_liked}</p>
-  </div>
-</a> -->
+  <footer class="flex-row-space-center">
+    <div class="flex-row-center ml-2">
+      <img
+        src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Round&hairColor=Auburn&facialHairType=Blank&clotheType=Overall&clotheColor=Black&eyeType=Dizzy&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=Light"
+        class="avatar mb-2"
+        style="width: 2rem"
+      />
+      <p class="post-owner mt-2 ml-2">post.id %></p>
+    </div>
+    <div class="flex-row-center mt-2">
+      <p class="rating mr-2">
+        <i class="fa fa-star mr-2">post.rating %></i>
+      </p>
+      <p class="liked mr-2">
+        <i class="fa fa-heart mr-2">post.num_of_likes %></i>
+      </p>
+    </div>
+  </footer>
+</article>
