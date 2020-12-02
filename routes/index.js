@@ -72,15 +72,15 @@ module.exports = (db, userHelpers, postHelpers) => {
   });
 
   // users board ->posts
-  router.get("/user_posts/:id", (req, res) => {
+  router.get("/user_posts", (req, res) => {
     const userSession = req.session.user_id;
     const offset = Number(Object.values(req.query));
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
-    const getAllUserPosts = postHelpers.getAllUserPosts(db, offset);
+    const getAllUserPosts = postHelpers.getAllUserPosts(db, userSession, offset);
     Promise.all([getUserRecord, getUserPostsCount, getAllUserPosts])
       .then((data) => {
-        console.log("data", data[0]);
+        console.log("data", data[2]);
         templateVars = {
           user: data[0].id,
           count: data[1].count,
@@ -113,6 +113,19 @@ module.exports = (db, userHelpers, postHelpers) => {
     }
 
     res.render("create_board", templateVars);
+  });
+
+
+  router.get("/edit-b", (req, res) => {
+    let templateVars = {
+      user: userHelpers.getUserWithId(db, req.session.user_id),
+    };
+
+    if (!req.session.user_id) {
+      templateVars = { user: undefined };
+    }
+
+    res.render("../edit_board", templateVars);
   });
 
   router.get("/login", (req, res) => {

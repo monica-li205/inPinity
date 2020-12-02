@@ -5,26 +5,26 @@
     <%- include('./partials/profile'); %>
 
     <div class="action-btn flex-row-space">
+      <% if (user) { %> 
       <div>
-        <a href="#" id="edit-board-btn" class="link">
+        <%- include('./partials/edit_board'); %> 
+        <a href="#" id="edit-board-btn" class="link" data-toggle="modal" data-target="#edit-board">
           <i class="fa fa-pencil"></i
         ></a>
         <span>Edit</span>
       </div>
       <div>
-        <% if (user) { %> <%- include('create_board'); %>
+        <%- include('create_board'); %>
           <a class="nav-link" data-toggle="modal" data-target="#create-board"
             ><i class="fa fa-plus"></i>Add</a
           >
-        <% } %>
       </div>
+      <% } %>
     </div>
 
     <div class="center">
-      <%- include('./partials/board'); %><%- include('./partials/board'); %><%-
-      include('./partials/board'); %><%- include('./partials/board'); %><%-
-      include('./partials/board'); %><%- include('./partials/board'); %>
+      <%- include('./partials/board'); %>
     </div>
   </main>
-  <%- include('./partials/edit_board'); %> <%- include('./partials/footer'); %>
+  <%- include('./partials/footer'); %>
 </body>
