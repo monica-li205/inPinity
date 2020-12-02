@@ -139,3 +139,11 @@ article {
   margin-top: 1em;
   background-color: rgb(255, 49, 49);
 }
+
+.liked-true {
+  color: rgb(255, 53, 53);
+}
+
+.fa-star {
+  color: rgb(255, 148, 47);
+}

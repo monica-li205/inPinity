@@ -1,6 +1,6 @@
 const getAllPosts = (db, offset) => {
   const queryString = `
-    SELECT posts.*, ROUND(AVG(ratings.rating)) as rating
+    SELECT posts.*, coalesce(ROUND(AVG(ratings.rating)), 0) as rating
     FROM ratings
     RIGHT JOIN posts on post_id = posts.id
     GROUP BY posts.id
