@@ -133,16 +133,4 @@ const likesByUser = (db, id) => {
     .then((data) => data.rows[0])
     .catch((err) => err);
 };
-exports.totalPostsByUser = totalPostsByUser;
-
-const likePost = (db, userID, postID) => {
-  const queryString = `
-INSERT INTO likes (user_id, post_id)
-VALUES ($1, $2)
-  `;
-  return db
-    .query(queryString, [userID, postID])
-    .then((data) => data.rows[0])
-    .catch((err) => err);
-};
-exports.likePost = likePost;
+exports.likesByUser = likesByUser;
