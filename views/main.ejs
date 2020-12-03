@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <%- include('./partials/head'); %>
-  <!-- <script type="text/javascript" src="/scripts/main-posts.js"></script> -->
-<script type="text/javascript" src="../public/scripts/likes.js"></script>
-</head>
+  <head>
+    <%- include('./partials/head'); %>
+    <!-- <script type="text/javascript" src="/scripts/main-posts.js"></script> -->
+    <script type="text/javascript" src="../public/scripts/likes.js"></script>
+  </head>
 
-<body>
-  <%- include('./partials/header'); %>
-  <main id="container">
-    <aside id="aside">
-      <%- include('./partials/profile'); %>
-      <section id="fav-area">
-        <h3>Most Popular Posts</h3>
-        <%- include('./partials/most_liked'); %>
-      </section>
-    </aside>
+  <body>
+    <%- include('./partials/header'); %>
+    <main id="container">
+      <aside id="aside">
+        <%- include('./partials/profile'); %>
+        <section id="fav-area">
+          <h3>Most Popular Posts</h3>
+          <%- include('./partials/most_liked'); %>
+        </section>
+      </aside>
 
-  <main id="main-container">
-    <div id="post-area" class="item">
-      
-      <%- include('./partials/posts_each'); %>
-    </div>
-
-  </main>
-  <%- include('./partials/footer'); %>
-</body>
+      <main id="main-container">
+      <div id="post-area" class="item">
+        <%- include('./partials/posts_each'); %>
+      </div>
+    </main>
+    <section class="footer">
+    <%- include('./partials/footer'); %>
+  </section>
+  </body>
 </html>

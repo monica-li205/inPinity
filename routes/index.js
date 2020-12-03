@@ -36,21 +36,30 @@ module.exports = (db, userHelpers, postHelpers) => {
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
-    const getAllPostsLoggedIn = postHelpers.getAllPostsLoggedIn(db, userSession, offset);
+    const getAllPostsLoggedIn = postHelpers.getAllPostsLoggedIn(
+      db,
+      userSession,
+      offset
+    );
     const mostLiked = postHelpers.postsWithTheMostLikes(db);
 
-    Promise.all([getUserRecord, getUserPostsCount, getAllPostsLoggedIn, mostLiked])
-    .then((data) => {
-      templateVars = {
-        user: data[0],
-        count: data[1].count,
-        posts: data[2],
-        mostLiked: data[3],
-      };
-      console.log('TEMPLATE', templateVars);
-      res.render("main", templateVars);
-    })
-    .catch((err) => console.log(err));
+    Promise.all([
+      getUserRecord,
+      getUserPostsCount,
+      getAllPostsLoggedIn,
+      mostLiked,
+    ])
+      .then((data) => {
+        templateVars = {
+          user: data[0],
+          count: data[1].count,
+          posts: data[2],
+          mostLiked: data[3],
+        };
+        // console.log('TEMPLATE', templateVars);
+        res.render("main", templateVars);
+      })
+      .catch((err) => console.log(err));
   });
 
   // Users Boards
@@ -61,7 +70,10 @@ module.exports = (db, userHelpers, postHelpers) => {
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
-    const getUserPostCategories = postHelpers.getUserPostCategories(db, userSession);
+    const getUserPostCategories = postHelpers.getUserPostCategories(
+      db,
+      userSession
+    );
     Promise.all([getUserRecord, getUserPostsCount, getUserPostCategories])
       .then((data) => {
         templateVars = {
@@ -82,18 +94,25 @@ module.exports = (db, userHelpers, postHelpers) => {
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
-    const getPostsByCategory = postHelpers.getPostsByCategory(db, userSession, category, userSession, offset);
+    const getPostsByCategory = postHelpers.getPostsByCategory(
+      db,
+      userSession,
+      category,
+      userSession,
+      offset
+    );
 
-    Promise.all([getUserRecord, getUserPostsCount, getPostsByCategory])
-    .then(data => {
-      templateVars = {
-        user: data[0],
-        count: data[1].count,
-        posts: data[2],
-        board: category
+    Promise.all([getUserRecord, getUserPostsCount, getPostsByCategory]).then(
+      (data) => {
+        templateVars = {
+          user: data[0],
+          count: data[1].count,
+          posts: data[2],
+          board: category,
+        };
+        res.render("user_posts", templateVars);
       }
-      res.render("user_posts", templateVars);
-    })
+    );
   });
 
   router.get("/:category", (req, res) => {
@@ -103,68 +122,27 @@ module.exports = (db, userHelpers, postHelpers) => {
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
-    const getAllPostsInCategory = postHelpers.getAllPostsInCategory(db, userSession, category);
+    const getAllPostsInCategory = postHelpers.getAllPostsInCategory(
+      db,
+      userSession,
+      category
+    );
     const mostLikedPosts = postHelpers.postsWithTheMostLikes(db);
 
-    Promise.all([getUserRecord, getUserPostsCount, getAllPostsInCategory, mostLikedPosts])
-    .then(data => {
+    Promise.all([
+      getUserRecord,
+      getUserPostsCount,
+      getAllPostsInCategory,
+      mostLikedPosts,
+    ]).then((data) => {
       templateVars = {
         user: data[0],
         count: data[1].count,
         posts: data[2],
         mostLiked: data[3],
-      }
+      };
       res.render("main", templateVars);
-    })
-  })
-
-  router.get("/cb", (req, res) => {
-    let templateVars = {
-      user: userHelpers.getUserWithId(db, req.session.user_id),
-    };
-
-    if (!req.session.user_id) {
-      templateVars = { user: undefined };
-    }
-
-    res.render("create_board", templateVars);
-  });
-
-  router.get("/cp", (req, res) => {
-    let templateVars = {
-      user: userHelpers.getUserWithId(db, req.session.user_id),
-    };
-
-    if (!req.session.user_id) {
-      templateVars = { user: undefined };
-    }
-
-    res.render("create_post", templateVars);
-  });
-
-  router.get("/edit-b", (req, res) => {
-    let templateVars = {
-      user: userHelpers.getUserWithId(db, req.session.user_id),
-    };
-
-    if (!req.session.user_id) {
-      templateVars = { user: undefined };
-    }
-
-    res.render("../edit_board", templateVars);
-  });
-
-
-  router.get("/edit-p", (req, res) => {
-    let templateVars = {
-      user: userHelpers.getUserWithId(db, req.session.user_id),
-    };
-
-    if (!req.session.user_id) {
-      templateVars = { user: undefined };
-    }
-
-    res.render("../edit_post", templateVars);
+    });
   });
 
   router.get("/login", (req, res) => {
@@ -186,24 +164,24 @@ module.exports = (db, userHelpers, postHelpers) => {
     const getUserWithEmail = userHelpers.getUserWithEmail(db, email);
 
     Promise.all([getAllPosts, getUserWithEmail])
-    .then(data => {
-      const userRecord = data[1];
+      .then((data) => {
+        const userRecord = data[1];
 
-      if (!userRecord || userRecord.password !== user.password) {
-        templateVars = {
-          user: undefined,
-          error: "Unable to log in that user",
-          posts: data[0],
+        if (!userRecord || userRecord.password !== user.password) {
+          templateVars = {
+            user: undefined,
+            error: "Unable to log in that user",
+            posts: data[0],
+          };
+          res.render("index", templateVars);
+          return;
         }
-        res.render("index", templateVars);
-        return;
-      }
-      userRecord.password = undefined;
-      req.session.user_id = userRecord.id;
-      console.log("userRecord", userRecord);
-      res.redirect("/main");
-    })
-    .catch(err => err);
+        userRecord.password = undefined;
+        req.session.user_id = userRecord.id;
+        // console.log("userRecord", userRecord);
+        res.redirect("/main");
+      })
+      .catch((err) => err);
   });
 
   router.post("/logout", (req, res) => {
@@ -219,17 +197,16 @@ module.exports = (db, userHelpers, postHelpers) => {
     const getPostWithId = postHelpers.getPostWithId(db, postId);
 
     Promise.all([getUserRecord, getPostWithId])
-    .then(data => {
-      templateVars = {
-        user: data[0],
-        post: data[1], 
-        count: undefined
-      }
-      res.render("./partials/view_post", templateVars);
-    })
-    .catch(err => err);
-    
-  })
+      .then((data) => {
+        templateVars = {
+          user: data[0],
+          post: data[1],
+          count: undefined,
+        };
+        res.render("./partials/view_post", templateVars);
+      })
+      .catch((err) => err);
+  });
 
   return router;
 };

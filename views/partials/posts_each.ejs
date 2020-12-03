@@ -13,10 +13,7 @@
       </a>
     </div>
     <div class="card-body">
-      <a
-        href="/post/<%= post.id %>"
-        
-      >
+      <a href="/post/<%= post.id %>">
         <h5 class="title post-title"><%= post.title %></h5>
         <p class="card-text description post-description">
           <%= post.description.substring(0,40) + '......' %>
@@ -32,20 +29,25 @@
         />
         <p class="post-owner mt-2 ml-2"><%= post.username %></p>
       </div>
+
       <div class="flex-row-center mt-2">
-        <p class="rating mr-2">
-          <% if (post.rating) { %>
-            <p><%= post.rating %>/5</p>
-          <% } else { %>
-            <p>0/5</p>
-          <% } %>
+        <% if (post.rating) { %>
+        <p class="rating mr-2 flex-row-center">
           <i class="fa fa-star mr-2"></i>
+          <%= post.rating %>/5
         </p>
+        <% } else { %>
+        <p class="rating mr-2 flex-row-center">
+          <i class="fa fa-star mr-2"></i>
+          0/5
+        </p>
+        <% } %>
+
         <p class="liked mr-2">
           <% if (post.is_liked) { %>
-            <i class="fa fa-heart mr-2 liked-true"></i>
+          <i class="fa fa-heart mr-2 liked-true"></i>
           <% } else {%>
-            <i class="fa fa-heart mr-2 liked"></i>
+          <i class="fa fa-heart mr-2 liked"></i>
           <% } %>
         </p>
       </div>

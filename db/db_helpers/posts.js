@@ -53,7 +53,7 @@ const getAllPostsLoggedIn = (db, id, offset) => {
 exports.getAllPostsLoggedIn = getAllPostsLoggedIn;
 
 const searchPosts = (db, searchQuery, offset) => {
-  console.log(searchQuery.length);
+  // console.log(searchQuery.length);
   if (searchQuery.length <= 2) {
     const queryString = `
     SELECT posts.*, users.username, (select round(avg(rating)) from ratings) as rating, (select sum(is_liked::int) as num_of_likes)

@@ -40,7 +40,7 @@
       <% if (user) { %>
       <div class="dropdown">
         <button
-          class="btn btn-secondary dropdown-toggle"
+          class="btn btn-outline-secondary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -72,7 +72,7 @@
         <% if (!user) { %>
         <button
           type="button"
-          class="btn btn-primary pl-4 pr-4"
+          class="btn btn-outline-primary pl-4 pr-4 mr-1"
           data-toggle="modal"
           data-target="#login-form"
         >
@@ -80,7 +80,7 @@
         </button>
         <button
           type="button"
-          class="btn btn-warning"
+          class="btn btn-outline-warning"
           data-toggle="modal"
           data-target="#register-form"
         >
@@ -88,17 +88,21 @@
         </button>
       </li>
       <% } %> <% if (user) { %>
-      <button
-        type="button"
-        class="btn btn-warning"
-        data-toggle="modal"
-        data-target="#user-edit"
-      >
-        EDIT
-      </button>
-      <form action="/logout" method="POST">
-        <button class="btn btn-danger" type="submit">Logout</button>
-      </form>
+      <div class="flex-row-space">
+        <button
+          type="button"
+          class="btn btn-outline-warning ml-2 pl-4 pr-4"
+          data-toggle="modal"
+          data-target="#user-edit"
+        >
+          EDIT
+        </button>
+        <form action="/logout" method="POST">
+          <button class="btn btn-outline-danger ml-2" type="submit">
+            Logout
+          </button>
+        </form>
+      </div>
       <% } %>
     </div>
   </nav>
