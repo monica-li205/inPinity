@@ -9,6 +9,8 @@ $(document).ready(function () {
       // if post is not in the obj, $(.liked mr-2).css('colour', 'grey')
       if(!currentLikedPosts.includes(currentPost)) {
         $('.fa fa-heart mr-2 liked').css('colour', 'pink')
+        userHelpers.like();
+
       } else {
         $('.fa fa-heart mr-2 liked').css('colour', 'grey')
       }

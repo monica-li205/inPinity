@@ -1,5 +1,5 @@
 <!-- <script type="text/javascript" src="/scripts/posts.js"></script> -->
-<% for (const post of posts) { %> 
+<% for (const post of posts) { %>
 <article class="post-body">
   <div class="card box">
     <div class="card-img-top image_edit">
@@ -28,14 +28,19 @@
       </div>
       <div class="flex-row-center mt-2">
         <p class="rating mr-2">
-          <%= post.rating %>/5
+          <% if (post.rating) { %>
+            <p><%= post.rating %>/5</p>
+          <% } else { %>
+            <p>0/5</p>
+          <% } %>
           <i class="fa fa-star mr-2"></i>
         </p>
         <p class="liked mr-2">
           <% if (post.is_liked) { %>
-            <p>liked</p>
-            <% } %>
-          <i class="fa fa-heart mr-2 liked"></i>
+            <i class="fa fa-heart mr-2 liked-true"></i>
+          <% } else {%>
+            <i class="fa fa-heart mr-2 liked"></i>
+          <% } %>
         </p>
       </div>
     </footer>

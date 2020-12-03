@@ -119,3 +119,30 @@ const totalPostsByUser = (db, id) => {
     .catch((err) => err);
 };
 exports.totalPostsByUser = totalPostsByUser;
+
+
+const likesByUser = (db, id) => {
+  const queryString = `
+  SELECT likes.*, posts.title, posts.id
+  FROM likes
+  join posts on posts.id = likes.post_id
+  WHERE likes.user_id = 1
+  `;
+  return db
+    .query(queryString, [id])
+    .then((data) => data.rows[0])
+    .catch((err) => err);
+};
+exports.totalPostsByUser = totalPostsByUser;
+
+const likePost = (db, userID, postID) => {
+  const queryString = `
+INSERT INTO likes (user_id, post_id)
+VALUES ($1, $2)
+  `;
+  return db
+    .query(queryString, [userID, postID])
+    .then((data) => data.rows[0])
+    .catch((err) => err);
+};
+exports.likePost = likePost;

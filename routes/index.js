@@ -37,7 +37,6 @@ module.exports = (db, userHelpers, postHelpers) => {
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
     const getAllPosts = postHelpers.getAllPosts(db, offset);
     const getAllPostsLoggedIn = postHelpers.getAllPostsLoggedIn(db, userSession, offset);
-    // const likedPostsByUser = postHelpers.likedPostsByUser(db, userSession);
 
     Promise.all([getUserRecord, getUserPostsCount, getAllPostsLoggedIn])
     .then((data) => {

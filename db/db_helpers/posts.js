@@ -1,14 +1,14 @@
 const getAllPosts = (db, offset) => {
-  // console.log("offset of db", offset);
   const queryString = `
     SELECT posts.*,
     users.username,
-    (select round(avg(rating)) from ratings) as rating,
-    (select count(post_id) as num_of_likes)
+    round(avg(ratings.rating)) as rating,
+    count(likes.post_id) as num_of_likes
     FROM posts
     JOIN users on users.id = posts.user_id
     LEFT JOIN likes on posts.id = likes.post_id
-    GROUP BY posts.id, users.username
+    LEFT JOIN ratings on posts.id = ratings.post_id
+    GROUP BY posts.id, users.username, users.id
     ORDER BY posts.id desc
     LIMIT 20 OFFSET $1;
   `;
@@ -19,40 +19,34 @@ const getAllPosts = (db, offset) => {
 };
 exports.getAllPosts = getAllPosts;
 
-const likedPostsByUser = (db, id) => {
+const getAllPostsLoggedIn = (db, id, offset) => {
   const queryString = `
-  SELECT user_id, post_id
-  from likes
-  where user_id = $1
+    SELECT user_post.id,
+    user_post.title,
+    user_post.username,
+    user_post.description,
+    user_post.thumbnail_photo,
+    user_post.rating,
+    user_post.num_of_likes,
+    likes.user_id = $1 as is_liked
+    FROM
+      (SELECT posts.*,
+      users.id as currentuser,
+      users.username,
+      round(avg(ratings.rating)) as rating ,
+      count(likes.post_id) as num_of_likes
+      FROM posts
+      JOIN users on users.id = posts.user_id
+      LEFT JOIN likes on posts.id = likes.post_id
+      LEFT JOIN ratings on posts.id = ratings.post_id
+      GROUP BY posts.id, users.username, users.id
+      ORDER BY posts.id desc)
+    as user_post
+    LEFT JOIN likes on user_post.id = likes.post_id
+    LIMIT 20 OFFSET $2;
   `;
   return db
-    .query(queryString, [id])
-    .then((data) => data.rows[0])
-    .catch((err) => err);
-};
-exports.likedPostsByUser = likedPostsByUser;
-
-const getAllPostsLoggedIn = (db, offset) => {
-  // console.log("offset of db", offset);
-  // likedPostsByUser(db, userID);
-  const queryString = `
-  select  user_post.id, user_post.title, user_post.username, user_post.rating,
-  user_post.num_of_likes, likes.id as is_liked
-  from (SELECT posts.id, posts.title, users.id as currentuser,
-  users.username,
-  (select round(avg(rating)) from ratings) as rating,
-  (select count(post_id) as num_of_likes)
-  FROM posts
-  JOIN users on users.id = posts.user_id
-  LEFT JOIN likes on posts.id = likes.post_id
-  GROUP BY posts.id, users.username, users.id
-  ORDER BY posts.id desc) as user_post
-  left join likes on user_post.id = likes.post_id
-  and user_post.currentuser = likes.user_id
-  LIMIT 20 OFFSET $1;
-  `;
-  return db
-    .query(queryString, [offset])
+    .query(queryString, [id, offset])
     .then((res) => res.rows)
     .catch((err) => err);
 };
@@ -114,9 +108,10 @@ exports.getPostsByCategory = getPostsByCategory;
 
 const getPostWithId = (db, id) => {
   const queryString = `
-    SELECT posts.*, ROUND(AVG(ratings.rating)) as rating
+    SELECT posts.*, ROUND(AVG(ratings.rating)) as rating, comments.*
     FROM ratings
     JOIN posts on post_id = posts.id
+    JOIN comments on post_id = posts.id
     WHERE posts.id = $1
     GROUP BY posts.id;
   `;
