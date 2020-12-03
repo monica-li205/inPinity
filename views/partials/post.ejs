@@ -1,0 +1,59 @@
+<script type="text/javascript" src="/scripts/post.js"></script>
+<!-- Change the "src" attribute according to your installation path -->
+
+<div
+  class="modal fade"
+  id="post"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="box-container modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Each Post</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="flex-row-space">
+          <div class="left-side">
+            <a href="url">
+              <img
+                src="https://cdn.dribbble.com/users/24158/screenshots/14668889/media/49b861d75d6a43bb96d91356ba37d3d7.jpg"
+                alt=" I am a unknown thumbnail"
+                class="thumbnail"
+              />
+            </a>
+            <button class="btn btn-outline-secondary btn-block" class="mt-2">
+              Delete
+            </button>
+          </div>
+
+          <section class="flex-col right-side" id="post">
+            <label for="board">url:</label>
+            <p class="url">post.url %></p>
+            <label for="title">Title</label>
+            <label for="Tag">Detail</label>
+            <p class="description">post.description %></p>
+            <p for="" class="post-owner">Owner: post.user_id %></p>
+            <p class="date-posted">post.date_created %></p>
+            <p for="" class="rating">post.rating %></p>
+            <p for="" class="liked">post.is_liked %></p>
+
+            <button class="btn btn-outline-secondary" id="edit-btn-post">
+              edit
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
