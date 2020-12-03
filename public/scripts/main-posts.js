@@ -7,6 +7,7 @@ $(document).ready(function (e) {
       $(document.body).height() - $(window).height()
     ) {
       loadMore();
+      // loadMorePopular();
     }
   });
   // $("#post-area").on("mouseenter", ".post-body", function () {
@@ -33,3 +34,16 @@ const loadMore = function () {
     $("#post-area").append($data);
   });
 };
+
+// const loadMorePopular = function () {
+//   offset += 5;
+//   $.ajax({
+//     method: "GET",
+//     url: `/main?offset=${offset}`,
+//   }).then((data) => {
+//     const $data = $(data).find(".fav_box > article");
+//     console.log($data);
+//     $(".fav_box").append($data);
+//   });
+// };
+
