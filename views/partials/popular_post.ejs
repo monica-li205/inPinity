@@ -1,4 +1,4 @@
-<% for (const popular of mostLiked) { %> 
+<% for (const popular of mostLiked) { %>
 
   <div class="fav_box">
   <article>
@@ -12,8 +12,8 @@
       </div>
     </a>
     <div class="card-body">
-      <h5 class="title"> <%= popular.post_id %> </h5>
-      <p class="card-text description">post.description %></p>
+      <h5 class="title"> <%= popular.title %> </h5>
+      <p class="card-text description"><%= popular.description %></p>
     </div>
     <footer class="flex-row-space-center">
       <div class="flex-row-center ml-2">
@@ -22,14 +22,14 @@
           class="avatar mb-2"
           style="width: 2rem"
         />
-        <p class="post-owner mt-2 ml-2">post.id %></p>
+        <p class="post-owner mt-2 ml-2"><%= popular.username %></p>
       </div>
       <div class="flex-row-center mt-2">
         <p class="rating mr-2">
-          <i class="fa fa-star mr-2">post.rating %></i>
+          <i class="fa fa-star mr-2"><%= popular.rating %></i>/5
         </p>
         <p class="liked mr-2">
-          <%= popular.likes %> <i class="fa fa-heart mr-2"></i>
+          <%= popular.num_of_likes %> <i class="fa fa-heart mr-2"></i>
         </p>
       </div>
     </footer>

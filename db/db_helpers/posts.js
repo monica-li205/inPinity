@@ -212,10 +212,16 @@ exports.getPostOwner = getPostOwner;
 
 const postsWithTheMostLikes = (db, offset) => {
   const queryString = `
-  SELECT count(post_id) as likes
-  FROM likes
-  GROUP BY post_id
-  ORDER BY likes DESC
+  SELECT posts.*,
+  users.username,
+  round(avg(ratings.rating)) as rating,
+  count(likes.post_id) as num_of_likes
+  FROM posts
+  JOIN users on users.id = posts.user_id
+  LEFT JOIN likes on posts.id = likes.post_id
+  LEFT JOIN ratings on posts.id = ratings.post_id
+  GROUP BY posts.id, users.username, users.id
+  ORDER BY num_of_likes desc
   LIMIT 5 OFFSET $1
   `;
   return db
