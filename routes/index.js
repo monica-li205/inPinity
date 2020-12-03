@@ -33,21 +33,23 @@ module.exports = (db, userHelpers, postHelpers) => {
   router.get("/main", (req, res) => {
     const userSession = req.session.user_id;
     const offset = Number(Object.values(req.query));
-
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
     const getAllPosts = postHelpers.getAllPosts(db, offset);
+    const getAllPostsLoggedIn = postHelpers.getAllPostsLoggedIn(db, userSession, offset);
+    // const likedPostsByUser = postHelpers.likedPostsByUser(db, userSession);
 
-    Promise.all([getUserRecord, getUserPostsCount, getAllPosts])
-      .then((data) => {
-        templateVars = {
-          user: data[0],
-          count: data[1].count,
-          posts: data[2],
-        };
-        res.render("main", templateVars);
-      })
-      .catch((err) => err);
+    Promise.all([getUserRecord, getUserPostsCount, getAllPostsLoggedIn])
+    .then((data) => {
+      templateVars = {
+        user: data[0],
+        count: data[1].count,
+        posts: data[2],
+      };
+      console.log(templateVars);
+      res.render("main", templateVars);
+    })
+    .catch((err) => console.log(err));
   });
 
   router.get("/cp", (req, res) => {

@@ -33,7 +33,9 @@
           <i class="fa fa-star mr-2"></i>
         </p>
         <p class="liked mr-2">
-          <%= post.num_of_likes %>
+          <% if (post.is_liked) { %>
+            <p>liked</p>
+            <% } %>
           <i class="fa fa-heart mr-2 liked"></i>
         </p>
       </div>

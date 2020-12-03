@@ -1,5 +1,6 @@
 $(document).ready(function () {
  //calls likedPostsByUser() to get the data containing liked posts ids
+
   const likePost = function (userID) {
     const currentLikedPosts = [];
     const currentPost = $(post.id);
