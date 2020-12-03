@@ -75,7 +75,7 @@
   transition: 0.5s;
 }
 /* alert box */
-#alert {
+/* #alert {
   border-radius: 0.8rem;
   position: absolute;
   top: 40%;
@@ -95,7 +95,7 @@
   visibility: visible;
   opacity: 1;
   transition: 0.5s;
-}
+} */
 
 .center {
   position: relative;
