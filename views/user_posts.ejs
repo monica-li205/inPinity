@@ -3,6 +3,7 @@
   <%- include('./partials/header'); %>
   <main class="flex-col main-content">
     <%- include('./partials/profile'); %>
+    <a href="/users/<%= user.id %>">back</a>
     <h1 class="flex-col-center"><%= board %></h1>
 
     <section id="main-container" class="container">

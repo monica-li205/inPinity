@@ -1,0 +1,29 @@
+<% if (user) { %>
+
+<div class="modal fade" id="user-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="login-form flex-col-center" action="/api/users/<%= user.id %>" method="POST">
+          <p>Currently logged in as: <%= user.username %></p>
+          <div class="flex-col">
+            <label for="password">New Password: </label>
+            <input type="password" name="password" />
+            <input type="hidden" name="_method" value="PUT">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% } %>
