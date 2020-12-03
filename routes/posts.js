@@ -55,6 +55,7 @@ module.exports = (db, helpers) => {
       helpers
         .addPost(db, user, params)
         .then(post => {
+          console.log("added");
           res.redirect("/main");
         })
         .catch((err) => err);
