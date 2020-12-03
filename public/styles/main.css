@@ -146,7 +146,7 @@ article {
 
 .fa-star {
   color: rgb(255, 148, 47);
-  margin-right: 0!important;
+  margin-right: 0 !important;
 }
 
 .post-title {
@@ -172,4 +172,14 @@ article {
 
 .fa-star:hover {
   cursor: pointer;
+}
+
+/* equal-side */
+.left-side {
+  width: 50%;
+  margin: 1rem;
+}
+.right-side {
+  width: 50%;
+  margin: 1rem;
 }
