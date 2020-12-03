@@ -211,5 +211,25 @@ module.exports = (db, userHelpers, postHelpers) => {
     res.redirect("/");
   });
 
+  router.get("/post/:id", (req, res) => {
+    const postId = req.params.id;
+    const userSession = req.session.user_id;
+
+    const getUserRecord = userHelpers.getUserWithId(db, userSession);
+    const getPostWithId = postHelpers.getPostWithId(db, postId);
+
+    Promise.all([getUserRecord, getPostWithId])
+    .then(data => {
+      templateVars = {
+        user: data[0],
+        post: data[1], 
+        count: undefined
+      }
+      res.render("./partials/view_post", templateVars);
+    })
+    .catch(err => err);
+    
+  })
+
   return router;
 };

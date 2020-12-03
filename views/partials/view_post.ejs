@@ -1,0 +1,40 @@
+<%- include('./head'); %>
+<body>
+  <%- include('./header'); %>
+  <main class="flex-col main-content">
+    <% if (user) { %>
+      <%- include('./profile'); %>
+    
+
+    <% if (user.id === post[0].user_id) { %>
+      <%- include('./edit_post'); %>
+
+      <button class="btn btn-primary" data-toggle="modal" data-target="#edit-post">Edit</button>
+      <form action="/api/posts/delete/<%= post[0].id %>" method="POST">
+        <button class="btn btn-danger">Delete</button>
+      </form>
+      <% } %>
+    <% } %>
+
+    <img src="<%= post[0].thumbnail_photo %>" alt="">
+    <h1><%= post[0].title %></h1>
+    <h2><%= post[0].description %></h2>
+    <a href="<%= post[0].url %>">Link</a>
+
+    <% for (const comment of post) { %>
+      <% if (comment.comment_text !== null) { %>
+        <p><%= comment.comment_text %></p>
+        <p>- <%= comment.username %></p>
+      <% } %>
+    <% } %>
+    <div class="center">
+    </div>
+    <% if (user) { %> 
+      <form action="/api/posts/comment/<%= post[0].id %>" method="POST">
+        <textarea name="comment" id="" cols="30" rows="10"></textarea>
+        <button type="submit" class="btn btn-primary">Comment</button>
+      </form>
+    <% } %>
+  </main>
+  <%- include('./footer'); %>
+</body>

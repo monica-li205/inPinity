@@ -31,4 +31,8 @@ $(document).ready(function(e) {
     $post_image.attr("src", $("#image-url").val());
     console.log($post_image);
   })
+
+  $("#image-url").change(function() {
+    $(".file-upload-image").attr("src", $(this).val());
+  })
 })
