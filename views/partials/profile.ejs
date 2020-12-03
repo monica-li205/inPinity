@@ -6,9 +6,11 @@
     />
     <h2><%= user.name %></h2>
   </div>
+  <% if (count) { %>
   <div class="flex-col-center">
     <div>
       <span class="ml-2">Posts: <%= count %></span>
     </div>
   </div>
+  <% } %>
 </section>

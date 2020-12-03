@@ -13,6 +13,22 @@ module.exports = (db, helpers) => {
       .catch((err) => err);
   });
 
+  router.get("/search", (req, res) => {
+    const query = `%${req.query.q}%`;
+    const offset = Number(Object.values(req.query));
+
+    helpers.searchPosts(db, query, offset)
+    .then(posts => {
+      templateVars = {
+        user: undefined,
+        posts: posts,
+        error: undefined
+      }
+      res.render("index", templateVars);
+    })
+    .catch(err => err);
+  })
+
   // Get specific post by ID
   // router.get("/:id", (req, res) => {
   //   helpers
@@ -39,6 +55,7 @@ module.exports = (db, helpers) => {
       helpers
         .addPost(db, user, params)
         .then(post => {
+          console.log("added");
           res.redirect("/main");
         })
         .catch((err) => err);
@@ -49,31 +66,46 @@ module.exports = (db, helpers) => {
   });
 
   // Edit specific post by ID
-  router.put("/:id", (req, res) => {
+  router.post("/:id", (req, res) => {
     const queryParams = [req.body];
     helpers
       .editPost(db, req.params.id, queryParams)
-      .then((post) => {
-        res.json(post);
+      .then(post => {
+        res.redirect(`/post/${req.params.id}`)
       })
       .catch((err) => err);
   });
 
   // Delete post if owner
-  router.delete("/:id", (req, res) => {
+  router.post("/delete/:id", (req, res) => {
     helpers
       .getPostOwner(db, req.params.id)
       .then((post) => {
-        if (post.post_owner === req.session.user_id) {
+        console.log(post.user_id);
+        if (post.user_id === req.session.user_id) {
           db.query("DELETE FROM posts WHERE id = $1", [req.params.id])
-            .then(res.status(200).send("Post deleted"))
+            .then(data => {
+              res.redirect("/main");
+            })
             .catch((err) => err);
+        } else {
+          res.status(400).send("Not allowed");
+          return;
         }
-        res.status(400).send("Not allowed");
-        return;
       })
       .catch((err) => err);
   });
+
+  router.post("/comment/:id", (req, res) => {
+    const comment = req.body.comment;
+    const userId = req.session.user_id;
+    const postId = req.params.id;
+    helpers.commentPost(db, userId, postId, comment)
+    .then(data => {
+      res.redirect(`/post/${postId}`);
+    })
+    .catch(err => err);
+  })
 
   return router;
 };
