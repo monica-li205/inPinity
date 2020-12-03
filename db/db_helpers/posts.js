@@ -37,6 +37,38 @@ const getAllUserPosts = (db, userId, userSession, offset) => {
 };
 exports.getAllUserPosts = getAllUserPosts;
 
+const getUserPostCategories = (db, userSession) => {
+  const queryString = `
+    SELECT DISTINCT posts.category
+    FROM posts
+    JOIN users on users.id = posts.user_id
+    WHERE users.id = $1;
+  `
+  return db.query(queryString, [userSession])
+  .then(res => res.rows)
+  .catch(err => err);
+}
+exports.getUserPostCategories = getUserPostCategories;
+
+const getPostsByCategory = (db, userSession, category, userId, offset) => {
+  const queryString = `
+  SELECT posts.*,
+  users.username,
+  (select round(avg(rating)) from ratings) as rating, likes.user_id = $1 as liked_by_user
+  FROM posts
+  JOIN users on users.id = posts.user_id
+  JOIN likes on users.id = likes.user_id
+  WHERE posts.category = $2 AND users.id = $3
+  GROUP BY posts.id, users.username, likes.user_id
+  ORDER BY posts.id desc
+  LIMIT 20 OFFSET $4
+  `
+  return db.query(queryString, [userSession, category, userId, offset])
+  .then(res => res.rows)
+  .catch(err => err);
+}
+exports.getPostsByCategory = getPostsByCategory;
+
 const getPostWithId = (db, id) => {
   const queryString = `
     SELECT posts.*, ROUND(AVG(ratings.rating)) as rating

@@ -57,14 +57,14 @@ module.exports = (db, userHelpers, postHelpers) => {
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
-    const getAllUserPosts = postHelpers.getAllUserPosts(db, offset);
-    Promise.all([getUserRecord, getUserPostsCount, getAllUserPosts])
+    const getUserPostCategories = postHelpers.getUserPostCategories(db, userSession);
+    Promise.all([getUserRecord, getUserPostsCount, getUserPostCategories])
       .then((data) => {
-        console.log("data", data[0]);
+        console.log("data", data[2]);
         templateVars = {
-          user: data[0].id,
+          user: data[0],
           count: data[1].count,
-          posts: data[2],
+          boards: data[2],
         };
         res.render("users", templateVars);
       })
@@ -72,35 +72,25 @@ module.exports = (db, userHelpers, postHelpers) => {
   });
 
   // users board ->posts
-  router.get("/user_posts", (req, res) => {
+  router.get("/user_posts/:category", (req, res) => {
     const userSession = req.session.user_id;
+    const category = req.params.category;
     const offset = Number(Object.values(req.query));
+    
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
-    const getAllUserPosts = postHelpers.getAllUserPosts(db, userSession, userSession, offset);
-    Promise.all([getUserRecord, getUserPostsCount, getAllUserPosts])
-      .then((data) => {
-        console.log(data[2]);
-        templateVars = {
-          user: data[0].id,
-          count: data[1].count,
-          posts: data[2],
-        };
-        res.render("user_posts", templateVars);
-      })
-      .catch((err) => err);
-  });
+    const getPostsByCategory = postHelpers.getPostsByCategory(db, userSession, category, userSession, offset);
 
-  router.get("/cp", (req, res) => {
-    let templateVars = {
-      user: userHelpers.getUserWithId(db, req.session.user_id),
-    };
-
-    if (!req.session.user_id) {
-      templateVars = { user: undefined };
-    }
-
-    res.render("create_post", templateVars);
+    Promise.all([getUserRecord, getUserPostsCount, getPostsByCategory])
+    .then(data => {
+      templateVars = {
+        user: data[0],
+        count: data[1].count,
+        posts: data[2],
+        board: category
+      }
+      res.render("user_posts", templateVars);
+    })
   });
 
   router.get("/cb", (req, res) => {

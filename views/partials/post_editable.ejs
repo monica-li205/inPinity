@@ -4,7 +4,7 @@
     <div class="card-img-top image_edit">
       <a href="/post" class="card box">
       <img
-        src="https://cdn.dribbble.com/users/146124/screenshots/14664420/media/48be6b80d8b275d5d54e7fe86c567bc6.jpg"
+        src="<%= post.thumbnail_photo %>"
         alt="image"
         class="thumbnail box_img"
       />
@@ -26,7 +26,7 @@
       </div>
       <div class="flex-row-center mt-2">
         <p class="rating mr-2">
-          <i class="fa fa-star mr-2"><%= post.rating %></i>
+          <%= post.rating %><i class="fa fa-star mr-2"></i>
         </p>
         <p class="liked mr-2">
           <i class="fa fa-heart mr-2"><%= post.is_liked %></i>
