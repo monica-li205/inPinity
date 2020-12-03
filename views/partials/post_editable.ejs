@@ -4,8 +4,8 @@
     <div class="card-img-top image_edit">
       <a href="/post" class="card box">
       <img
-        src="https://cdn.dribbble.com/users/146124/screenshots/14664420/media/48be6b80d8b275d5d54e7fe86c567bc6.jpg"
-        alt="image"
+      src="<%= post.thumbnail_photo %>"
+      alt="image"
         class="thumbnail box_img"
       />
     </a>
@@ -26,7 +26,7 @@
       </div>
       <div class="flex-row-center mt-2">
         <p class="rating mr-2">
-          <i class="fa fa-star mr-2"><%= post.rating %></i>
+          <%= post.rating %><i class="fa fa-star mr-2"></i>
         </p>
         <p class="liked mr-2">
           <i class="fa fa-heart mr-2"><%= post.is_liked %></i>
@@ -36,12 +36,13 @@
   
   <section class="action-btn flex-row-space m-2">
     <div>
-      <a href="#" id="edit-post-btn"> <i class="fa fa-pencil"></i></a>
-      <span>Edit</span>
+      <%- include('edit_post'); %> 
+      <a href="#" id="edit-post-btn" data-toggle="modal" data-target="#edit-post"> <i class="fa fa-pencil"><span>Edit</span></i></a>
+      
     </div>
     <div>
-      <a href="#" id="delete-btn"> <i class="fa fa-trash"></i> </a>
-      <span>Delete</span>
+      <a href="#" id="delete-btn" data-toggle="modal" data-target="#alert"> <i class="fa fa-trash"><span>Delete</span></i> </a>
+      
     </div>
   </section>
 </article>

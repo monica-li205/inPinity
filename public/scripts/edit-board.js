@@ -18,10 +18,10 @@ $(document).ready(function(e) {
     }
   })
 
-  const $edit_board_image = $("#edit-board-image");
+  const $edit_board_image = $("#post-image");
   $("#generate-image").click(function(e) {
     console.log("generated")
     $edit_board_image.attr("src", $("#image-url").val());
-    console.log($edit-board_image);
+    console.log($edit_board_image);
   })
 })
