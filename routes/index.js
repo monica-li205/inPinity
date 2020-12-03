@@ -105,6 +105,17 @@ module.exports = (db, userHelpers, postHelpers) => {
     res.render("create_board", templateVars);
   });
 
+  router.get("/cp", (req, res) => {
+    let templateVars = {
+      user: userHelpers.getUserWithId(db, req.session.user_id),
+    };
+
+    if (!req.session.user_id) {
+      templateVars = { user: undefined };
+    }
+
+    res.render("create_post", templateVars);
+  });
 
   router.get("/edit-b", (req, res) => {
     let templateVars = {
@@ -116,6 +127,19 @@ module.exports = (db, userHelpers, postHelpers) => {
     }
 
     res.render("../edit_board", templateVars);
+  });
+
+
+  router.get("/edit-p", (req, res) => {
+    let templateVars = {
+      user: userHelpers.getUserWithId(db, req.session.user_id),
+    };
+
+    if (!req.session.user_id) {
+      templateVars = { user: undefined };
+    }
+
+    res.render("../edit_post", templateVars);
   });
 
   router.get("/login", (req, res) => {
