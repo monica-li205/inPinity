@@ -3,7 +3,7 @@
 <article class="post-body">
   <div class="card box">
     <div class="card-img-top image_edit">
-      <a href="/api/post/<%= post.id %>">
+      <a href="<%= post.url %>" target="_blank">
         <img
           src="<%= post.thumbnail_photo %>"
           alt="image"
@@ -12,6 +12,7 @@
       </a>
     </div>
     <div class="card-body">
+      <h4><%= post.category %></h4>
       <h5 class="title post-title"><%= post.title %></h5>
       <p class="card-text description post-description">
         <%= post.description.substring(0,40) + '......' %>

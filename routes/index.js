@@ -30,19 +30,21 @@ module.exports = (db, userHelpers, postHelpers) => {
   });
 
   router.get("/main", (req, res) => {
-    const offset = Number(Object.values(req.query));
+    let offset = Number(Object.values(req.query));
     const userSession = req.session.user_id;
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
     const getAllPosts = postHelpers.getAllPosts(db, offset);
+    const mostLikedPosts = postHelpers.postsWithTheMostLikes(db,);
 
-    Promise.all([getUserRecord, getUserPostsCount, getAllPosts])
+    Promise.all([getUserRecord, getUserPostsCount, getAllPosts, mostLikedPosts])
       .then((data) => {
         templateVars = {
           user: data[0],
           count: data[1].count,
           posts: data[2],
+          mostLiked: data[3]
         };
         res.render("main", templateVars);
       })
@@ -60,7 +62,6 @@ module.exports = (db, userHelpers, postHelpers) => {
     const getUserPostCategories = postHelpers.getUserPostCategories(db, userSession);
     Promise.all([getUserRecord, getUserPostsCount, getUserPostCategories])
       .then((data) => {
-        console.log("data", data[2]);
         templateVars = {
           user: data[0],
           count: data[1].count,
@@ -76,7 +77,7 @@ module.exports = (db, userHelpers, postHelpers) => {
     const userSession = req.session.user_id;
     const category = req.params.category;
     const offset = Number(Object.values(req.query));
-    
+
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
     const getPostsByCategory = postHelpers.getPostsByCategory(db, userSession, category, userSession, offset);
@@ -92,6 +93,28 @@ module.exports = (db, userHelpers, postHelpers) => {
       res.render("user_posts", templateVars);
     })
   });
+
+  router.get("/:category", (req, res) => {
+    const userSession = req.session.user_id;
+    const category = req.params.category;
+    const offset = Number(Object.values(req.query));
+
+    const getUserRecord = userHelpers.getUserWithId(db, userSession);
+    const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
+    const getAllPostsInCategory = postHelpers.getAllPostsInCategory(db, userSession, category);
+    const mostLikedPosts = postHelpers.postsWithTheMostLikes(db,);
+
+    Promise.all([getUserRecord, getUserPostsCount, getAllPostsInCategory, mostLikedPosts])
+    .then(data => {
+      templateVars = {
+        user: data[0],
+        count: data[1].count,
+        posts: data[2],
+        mostLiked: data[3],
+      }
+      res.render("main", templateVars);
+    })
+  })
 
   router.get("/cb", (req, res) => {
     let templateVars = {
