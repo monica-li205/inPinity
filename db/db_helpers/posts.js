@@ -26,6 +26,7 @@ const getAllPostsLoggedIn = (db, id, offset) => {
     user_post.username,
     user_post.description,
     user_post.thumbnail_photo,
+    user_post.url,
     user_post.rating,
     user_post.num_of_likes,
     likes.user_id = $1 as is_liked

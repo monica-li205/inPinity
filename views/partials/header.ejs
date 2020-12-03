@@ -27,43 +27,47 @@
           <a class="nav-link" href="/users/<%= user.id %>">VIEW MY BOARDS</a>
         </li>
         <% } %>
+        <li class="nav-item">
+  
+          <form class="form-inline mb-2">
+            <input
+              class="form-control mr-sm-2 search-form"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </form>
+        </li>
+        <li class="nav-item">
+          <% if (user) { %>
+          <div class="dropdown mr-1 mb-2">
+            <button
+              class="btn btn-outline-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Sort by:
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/">All</a>
+              <a class="dropdown-item" href="/Entertainment">Entertainment</a>
+              <a class="dropdown-item" href="/Sports">Sports</a>
+              <a class="dropdown-item" href="/Technology">Technology</a>
+              <a class="dropdown-item" href="/Fashion">Fashion</a>
+              <a class="dropdown-item" href="/Food">Food</a>
+              <a class="dropdown-item" href="/Animals">Animals</a>
+              <a class="dropdown-item" href="/Plants">Plants</a>
+              <a class="dropdown-item" href="/Art">Art</a>
+              <a class="dropdown-item" href="/Lifestyle">Lifestyle</a>
+              <a class="dropdown-item" href="/Science">Science</a>
+            </div>
+            <% } %>
+          </div>
+        </li>
       </ul>
-      <form class="form-inline mb-2">
-        <input
-          class="form-control mr-sm-2 search-form"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <div id="search-result"></div>
-      </form>
-      <% if (user) { %>
-      <div class="dropdown mr-1 mb-2">
-        <button
-          class="btn btn-outline-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Sort by:
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/">All</a>
-          <a class="dropdown-item" href="/Entertainment">Entertainment</a>
-          <a class="dropdown-item" href="/Sports">Sports</a>
-          <a class="dropdown-item" href="/Technology">Technology</a>
-          <a class="dropdown-item" href="/Fashion">Fashion</a>
-          <a class="dropdown-item" href="/Food">Food</a>
-          <a class="dropdown-item" href="/Animals">Animals</a>
-          <a class="dropdown-item" href="/Plants">Plants</a>
-          <a class="dropdown-item" href="/Art">Art</a>
-          <a class="dropdown-item" href="/Lifestyle">Lifestyle</a>
-          <a class="dropdown-item" href="/Science">Science</a>
-        </div>
-        <% } %>
-      </div>
 
       <%- include('../login'); %> <%- include('../register'); %> <%-
       include('../edit-user'); %>
@@ -95,7 +99,7 @@
           data-toggle="modal"
           data-target="#user-edit"
         >
-          EDIT
+          User
         </button>
         <form action="/logout" method="POST">
           <button class="btn btn-outline-danger ml-2" type="submit">

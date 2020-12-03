@@ -2,7 +2,7 @@
 
 <div class="fav_box">
   <article>
-    <a href="/post" class="card box">
+    <a href="<%= popular.url %>" target="_blank" class="card box">
       <div class="card-img-top image_edit">
         <img
           src="<%= popular.thumbnail_photo %>"
@@ -12,10 +12,12 @@
       </div>
     </a>
     <div class="card-body">
-      <h5 class="title"><%= popular.title %></h5>
-      <p class="card-text description">
-        <%= popular.description.substring(0,40) + '......' %>
-      </p>
+      <a href="/post/<%= popular.id %>">
+        <h5 class="title"><%= popular.title %></h5>
+        <p class="card-text description">
+          <%= popular.description.substring(0,40) + '......' %>
+        </p>
+      </a>
     </div>
     <footer class="flex-row-space-center">
       <div class="flex-row-center ml-4">
