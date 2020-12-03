@@ -12,13 +12,8 @@
   </div>
 
   <div class="card-body">
-    <%- include('post'); %>
     <a
-      href="#"
-      id="each-post-btn"
-      class="card box link"
-      data-toggle="modal"
-      data-target="#post"
+      href="/post/<%= post.id %>"
     >
       <h5 class="title"><%= post.title %></h5>
       <p class="card-text description"><%= post.description %></p>
@@ -45,33 +40,7 @@
   </footer>
 
   <section class="action-btn flex-row-space m-2">
-    <div>
-      <%- include('edit_post'); %>
-      <a
-        href="#"
-        id="edit-post-btn"
-        class="link"
-        data-toggle="modal"
-        data-target="#edit-post"
-      >
-        <i class="fa fa-pencil"></i
-      ></a>
-      <span>Edit</span>
-    </div>
-    <div>
-      <%- include('alert'); %>
-
-      <a
-        href="#"
-        id="delete-btn"
-        class="link"
-        data-toggle="modal"
-        data-target="#alert"
-      >
-        <i class="fa fa-trash"></i>
-      </a>
-      <span>Delete</span>
-    </div>
+    
   </section>
 </article>
 <% } %>

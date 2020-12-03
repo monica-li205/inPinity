@@ -15,6 +15,34 @@ const getAllPosts = (db, offset) => {
 };
 exports.getAllPosts = getAllPosts;
 
+const searchPosts = (db, searchQuery, offset) => {
+  console.log(searchQuery.length);
+  if (searchQuery.length <= 2) {
+    const queryString = `
+    SELECT posts.*, users.username, (select round(avg(rating)) from ratings) as rating, (select sum(is_liked::int) as num_of_likes)
+    FROM posts
+    LEFT JOIN users on users.id = posts.user_id
+    LEFT JOIN likes on posts.id = likes.post_id
+    GROUP BY posts.id, users.username
+    ORDER BY posts.id desc
+    LIMIT 20 OFFSET $1;
+  `;
+  return db
+    .query(queryString, [offset])
+    .then((res) => res.rows)
+    .catch((err) => err);
+  } else {
+    return db.query(`
+    SELECT * FROM posts
+    WHERE title LIKE $1 OR description like $1
+    LIMIT 5
+  `, [searchQuery])
+  .then(res => res.rows)
+  .catch(err => err);
+  }
+} 
+exports.searchPosts = searchPosts;
+
 //get all user's post
 const getAllUserPosts = (db, userId, userSession, offset) => {
   const queryString = `
@@ -89,15 +117,17 @@ exports.getAllPostsInCategory = getAllPostsInCategory;
 
 const getPostWithId = (db, id) => {
   const queryString = `
-    SELECT posts.*, ROUND(AVG(ratings.rating)) as rating
-    FROM ratings
-    JOIN posts on post_id = posts.id
-    WHERE posts.id = $1
-    GROUP BY posts.id;
+  SELECT users.username, posts.*, coalesce(ROUND(AVG(ratings.rating)),0) as rating, comments.comment_text
+  FROM posts
+  LEFT JOIN comments on comments.post_id = posts.id
+  LEFT JOIN users on users.id = comments.user_id
+  LEFT JOIN ratings on posts.id = ratings.post_id
+  WHERE posts.id = $1
+  GROUP BY posts.id, comments.id, users.id;
   `;
   return db
     .query(queryString, [id])
-    .then((res) => res.rows[0])
+    .then(res => res.rows)
     .catch((err) => err);
 };
 exports.getPostWithId = getPostWithId;
@@ -151,14 +181,14 @@ const editPost = (db, id, params) => {
   `;
   return db
     .query(queryString, queryParams)
-    .then((res) => res.rows)
+    .then(res => res.rows)
     .catch((err) => err);
 };
 exports.editPost = editPost;
 
 const getPostOwner = (db, id) => {
   const queryString = `
-    SELECT users.id as id, users.username as username
+    SELECT users.id as user_id, users.username as username
     FROM posts
     JOIN users ON users.id = user_id
     WHERE posts.id = $1;
@@ -185,3 +215,14 @@ const postsWithTheMostLikes = (db, offset) => {
     .catch((err) => err);
 };
 exports.postsWithTheMostLikes = postsWithTheMostLikes;
+
+const commentPost = (db, user_id, post_id, comment) => {
+  const queryString = `
+  INSERT INTO comments (user_id, post_id, comment_text)
+  VALUES ($1, $2, $3);
+  `
+  return db.query(queryString, [user_id, post_id, comment])
+  .then(res => res.rows)
+  .catch(err => err);
+}
+exports.commentPost = commentPost;

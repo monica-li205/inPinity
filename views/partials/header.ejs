@@ -1,3 +1,4 @@
+<script type="text/javascript" src="/scripts/search.js"></script>
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="/"><i class="fa fa-scribd fa-2x"></i></a>
@@ -27,6 +28,12 @@
         </li>
         <% } %>
       </ul>
+      <nav class="navbar navbar-light">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2 search-form" type="search" placeholder="Search" aria-label="Search">
+          <div id="search-result"></div>
+        </form>
+      </nav>
       <% if (user) { %>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
