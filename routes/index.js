@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+const { promiseImpl } = require("ejs");
 const { response } = require("express");
 const express = require("express");
 const router = express.Router();
@@ -30,7 +31,7 @@ module.exports = (db, userHelpers, postHelpers) => {
   });
 
   router.get("/main", (req, res) => {
-    const offset = Number(Object.values(req.query));
+    let offset = Number(Object.values(req.query));
     const userSession = req.session.user_id;
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
@@ -62,7 +63,6 @@ module.exports = (db, userHelpers, postHelpers) => {
     const getUserPostCategories = postHelpers.getUserPostCategories(db, userSession);
     Promise.all([getUserRecord, getUserPostsCount, getUserPostCategories])
       .then((data) => {
-        console.log("data", data[2]);
         templateVars = {
           user: data[0],
           count: data[1].count,
@@ -95,6 +95,28 @@ module.exports = (db, userHelpers, postHelpers) => {
     })
   });
 
+  router.get("/:category", (req, res) => {
+    const userSession = req.session.user_id;
+    const category = req.params.category;
+    const offset = Number(Object.values(req.query));
+
+    const getUserRecord = userHelpers.getUserWithId(db, userSession);
+    const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
+    const getAllPostsInCategory = postHelpers.getAllPostsInCategory(db, userSession, category);
+    const mostLikedPosts = postHelpers.postsWithTheMostLikes(db,);
+
+    Promise.all([getUserRecord, getUserPostsCount, getAllPostsInCategory, mostLikedPosts])
+    .then(data => {
+      templateVars = {
+        user: data[0],
+        count: data[1].count,
+        posts: data[2],
+        mostLiked: data[3],
+      }
+      res.render("main", templateVars);
+    })
+  })
+
   router.get("/cb", (req, res) => {
     let templateVars = {
       user: userHelpers.getUserWithId(db, req.session.user_id),
@@ -107,6 +129,17 @@ module.exports = (db, userHelpers, postHelpers) => {
     res.render("create_board", templateVars);
   });
 
+  router.get("/cp", (req, res) => {
+    let templateVars = {
+      user: userHelpers.getUserWithId(db, req.session.user_id),
+    };
+
+    if (!req.session.user_id) {
+      templateVars = { user: undefined };
+    }
+
+    res.render("create_post", templateVars);
+  });
 
   router.get("/edit-b", (req, res) => {
     let templateVars = {
@@ -118,6 +151,19 @@ module.exports = (db, userHelpers, postHelpers) => {
     }
 
     res.render("../edit_board", templateVars);
+  });
+
+
+  router.get("/edit-p", (req, res) => {
+    let templateVars = {
+      user: userHelpers.getUserWithId(db, req.session.user_id),
+    };
+
+    if (!req.session.user_id) {
+      templateVars = { user: undefined };
+    }
+
+    res.render("../edit_post", templateVars);
   });
 
   router.get("/login", (req, res) => {
@@ -134,29 +180,29 @@ module.exports = (db, userHelpers, postHelpers) => {
   router.post("/", (req, res) => {
     const user = req.body;
     const email = user.email;
+    const offset = Number(Object.values(req.query));
+    const getAllPosts = postHelpers.getAllPosts(db, offset);
+    const getUserWithEmail = userHelpers.getUserWithEmail(db, email);
 
-    userHelpers
-      .getUserWithEmail(db, email)
-      .then((data) => {
-        const userRecord = data;
+    Promise.all([getAllPosts, getUserWithEmail])
+    .then(data => {
+      const userRecord = data[1];
 
-        if (!userRecord || userRecord.password !== user.password) {
-          // res.status(400).send("Invalid login");
-          // res.status(401).send("Unauthorized");
-          const templateVars = {
-            user: undefined,
-            error: "Invalid login",
-          };
-          res.status(401).render("index", templateVars);
-          return;
+      if (!userRecord || userRecord.password !== user.password) {
+        templateVars = {
+          user: undefined,
+          error: "Unable to log in that user",
+          posts: data[0],
         }
-        // fetch user -> need to find out the function
-        userRecord.password = undefined;
-        req.session.user_id = userRecord.id;
-        console.log("userRecord", userRecord);
-        res.redirect("/main");
-      })
-      .catch((err) => err);
+        res.render("index", templateVars);
+        return;
+      }
+      userRecord.password = undefined;
+      req.session.user_id = userRecord.id;
+      console.log("userRecord", userRecord);
+      res.redirect("/main");
+    })
+    .catch(err => err);
   });
 
   router.post("/logout", (req, res) => {

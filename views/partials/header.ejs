@@ -27,31 +27,30 @@
         </li>
         <% } %>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <fieldset class="dropdown">
-          <select class="drop-menu">
-            <option selected>--Pick a Category!--</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Sports">Sports</option>
-            <option value="Techology">Techology</option>
-            <option value="Fashion">Fashion</option>
-            <option value="Food">Food</option>
-            <option value="Animals">Animals</option>
-            <option value="Plants">Plants</option>
-            <option value="Art">Art</option>
-            <option value="Lifestyle">Lifestyle</option>
-            <option value="Science">Science</option>
-          </select>
-        </fieldset>
-        <button
-          class="btn btn-outline-light my-2 my-sm-0"
-          type="submit"
-          id="sort-posts-button"
-        >
-          Sort
-        </button>
-      </form>
+      <% if (user) { %>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort by: 
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/">All</a>
+            <a class="dropdown-item" href="/Entertainment">Entertainment</a>
+            <a class="dropdown-item" href="/Sports">Sports</a>
+            <a class="dropdown-item" href="/Technology">Technology</a>
+            <a class="dropdown-item" href="/Fashion">Fashion</a>
+            <a class="dropdown-item" href="/Food">Food</a>
+            <a class="dropdown-item" href="/Animals">Animals</a>
+            <a class="dropdown-item" href="/Plants">Plants</a>
+            <a class="dropdown-item" href="/Art">Art</a>
+            <a class="dropdown-item" href="/Lifestyle">Lifestyle</a>
+            <a class="dropdown-item" href="/Science">Science</a>
+          </div>
+        <% } %>
+        </div>
+
       <%- include('../login'); %> <%- include('../register'); %>
+      <%- include('../edit-user'); %>
+
       <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle"
@@ -83,6 +82,8 @@
             Register
           </button>
           <% } %> <% if (user) { %>
+            
+            <button class="btn btn-warning" data-toggle="modal" data-target="#user-edit">EDIT</button>
           <form action="/logout" method="POST">
             <button class="btn btn-danger" type="submit">Logout</button>
           </form>
