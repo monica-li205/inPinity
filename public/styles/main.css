@@ -71,6 +71,10 @@ article .thumbnail {
   border-image: url(../images/gold.jpeg) 30 stretch;
 }
 
+article footer {
+  padding-bottom: 1rem;
+}
+
 /* Post Elements */
 .avatar {
   border-radius: 50%;

@@ -21,7 +21,7 @@
   </div>
 
   <footer class="flex-row-space-center">
-    <div class="flex-row-center ml-2">
+    <div class="flex-row-center ml-4 mt-3">
       <img
         src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Round&hairColor=Auburn&facialHairType=Blank&clotheType=Overall&clotheColor=Black&eyeType=Dizzy&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=Light"
         class="avatar mb-2"
@@ -29,16 +29,16 @@
       />
       <p class="post-owner mt-2 ml-2"><%= post.username %></p>
     </div>
-    <div class="flex-row-center mt-2">
+
+    <div class="flex-row-center mt-2 mr-2">
       <span class="rating mr-2">
-        <%= post.rating %><i class="fa fa-star mr-2"></i>
+        <i class="fa fa-star mr-2"></i>
+        <%= post.rating %>
       </span>
       <span class="liked mr-2">
         <i class="fa fa-heart mr-2"><%= post.is_liked %></i>
       </span>
     </div>
   </footer>
-
-  <section class="action-btn flex-row-space m-2"></section>
 </article>
 <% } %>
