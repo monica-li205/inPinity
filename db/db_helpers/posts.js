@@ -30,7 +30,7 @@ const getAllPostsLoggedIn = (db, id, offset) => {
     user_post.num_of_likes,
     likes.user_id = $1 as is_liked
     FROM
-      (SELECT posts.*,
+      (SELECT DISTINCT posts.*,
       users.id as currentuser,
       users.username,
       round(avg(ratings.rating)) as rating ,
@@ -230,3 +230,15 @@ const postsWithTheMostLikes = (db, offset) => {
     .catch((err) => err);
 };
 exports.postsWithTheMostLikes = postsWithTheMostLikes;
+
+const likePost = function(db, user_id, post_id) {
+  const queryString = `
+  INSERT INTO likes (user_id, post_id)
+  VALUES ($1, $2)
+  RETURNING *
+  `;
+  return db
+    .query(queryString, [user_id, post_id])
+    .then((data) => data.rows[0])
+}
+exports.likePost = likePost;

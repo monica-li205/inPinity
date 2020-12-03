@@ -203,6 +203,8 @@ module.exports = (db, userHelpers, postHelpers) => {
       console.log("userRecord", userRecord);
       res.redirect("/main");
     })
+    // res.status(500)
+    // .catch is not doing anything /hiding bugs
     .catch(err => err);
   });
 
@@ -212,4 +214,5 @@ module.exports = (db, userHelpers, postHelpers) => {
   });
 
   return router;
+
 };
