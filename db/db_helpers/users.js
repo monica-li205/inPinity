@@ -120,16 +120,17 @@ const totalPostsByUser = (db, id) => {
 };
 exports.totalPostsByUser = totalPostsByUser;
 
-const likedPostsByUser = (db, id) => {
+
+const likesByUser = (db, id) => {
   const queryString = `
-  SELECT post_id, is_liked
+  SELECT likes.*, posts.title, posts.id
   FROM likes
-  WHERE user_id = $1
-  AND is_liked = true;
+  join posts on posts.id = likes.post_id
+  WHERE likes.user_id = 1
   `;
   return db
     .query(queryString, [id])
     .then((data) => data.rows[0])
     .catch((err) => err);
 };
-exports.likedPostsByUser = likedPostsByUser;
+exports.likesByUser = likesByUser;

@@ -1,16 +1,24 @@
-$(document).ready(function () {
- //calls likedPostsByUser() to get the data containing liked posts ids
-  const likePost = function (userID) {
-    const currentLikedPosts = [];
-    const currentPost = $(post.id);
+// const { Pool } = require("pg");
 
-    $('.fa fa-heart mr-2 liked').click(function() {
-      // if post is not in the obj, $(.liked mr-2).css('colour', 'grey')
-      if(!currentLikedPosts.includes(currentPost)) {
-        $('.fa fa-heart mr-2 liked').css('colour', 'pink')
-      } else {
-        $('.fa fa-heart mr-2 liked').css('colour', 'grey')
-      }
-    })
-  }
+$(document).ready(function () {
+//   /**
+//  * Add a property to the database
+//  * @param {{}} post An object containing all of the property details.
+//  * @return {Promise<{}>} A promise to the property.
+//  */
+//   const likePost = function(post) {
+//     return Pool.query(`
+//     INSERT INTO likes (user_id, post_id)
+//     VALUES ($1, $2)
+//     RETURNING *
+//     `, [post.user_id, post.post_id])
+//     .then(res => res.rows[0])
+//     .catch(err => console.error('query error', err.stack));
+//   }
+  $('.fa fa-heart mr-2 liked').click(function() {
+    const currentPost = $(this)
+    alert('hello');
+    console.log('isclicked');
+    // likePost(currentPost);
+  })
 });

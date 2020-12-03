@@ -1,10 +1,14 @@
 const getAllPosts = (db, offset) => {
   const queryString = `
-    SELECT posts.*, users.username, (select round(avg(rating)) from ratings) as rating, (select sum(is_liked::int) as num_of_likes)
+    SELECT posts.*,
+    users.username,
+    round(avg(ratings.rating)) as rating,
+    count(likes.post_id) as num_of_likes
     FROM posts
-    LEFT JOIN users on users.id = posts.user_id
+    JOIN users on users.id = posts.user_id
     LEFT JOIN likes on posts.id = likes.post_id
-    GROUP BY posts.id, users.username
+    LEFT JOIN ratings on posts.id = ratings.post_id
+    GROUP BY posts.id, users.username, users.id
     ORDER BY posts.id desc
     LIMIT 20 OFFSET $1;
   `;
@@ -14,6 +18,39 @@ const getAllPosts = (db, offset) => {
     .catch((err) => err);
 };
 exports.getAllPosts = getAllPosts;
+
+const getAllPostsLoggedIn = (db, id, offset) => {
+  const queryString = `
+    SELECT user_post.id,
+    user_post.title,
+    user_post.username,
+    user_post.description,
+    user_post.thumbnail_photo,
+    user_post.rating,
+    user_post.num_of_likes,
+    likes.user_id = $1 as is_liked
+    FROM
+      (SELECT posts.*,
+      users.id as currentuser,
+      users.username,
+      round(avg(ratings.rating)) as rating ,
+      count(likes.post_id) as num_of_likes
+      FROM posts
+      JOIN users on users.id = posts.user_id
+      LEFT JOIN likes on posts.id = likes.post_id
+      LEFT JOIN ratings on posts.id = ratings.post_id
+      GROUP BY posts.id, users.username, users.id
+      ORDER BY posts.id desc)
+    as user_post
+    LEFT JOIN likes on user_post.id = likes.post_id
+    LIMIT 20 OFFSET $2;
+  `;
+  return db
+    .query(queryString, [id, offset])
+    .then((res) => res.rows)
+    .catch((err) => err);
+};
+exports.getAllPostsLoggedIn = getAllPostsLoggedIn;
 
 const searchPosts = (db, searchQuery, offset) => {
   console.log(searchQuery.length);
@@ -107,7 +144,7 @@ const getAllPostsInCategory = (db, userSession, category) => {
   WHERE posts.category = $2
   GROUP BY posts.id, users.username, likes.user_id
   ORDER BY posts.id desc
-  LIMIT 20 
+  LIMIT 20
   `
   return db.query(queryString, [userSession, category])
   .then(res => res.rows)
@@ -203,10 +240,16 @@ exports.getPostOwner = getPostOwner;
 
 const postsWithTheMostLikes = (db, offset) => {
   const queryString = `
-  SELECT post_id, sum(is_liked::int) as likes
-  FROM likes
-  GROUP BY post_id
-  ORDER BY likes DESC
+  SELECT posts.*,
+  users.username,
+  round(avg(ratings.rating)) as rating,
+  count(likes.post_id) as num_of_likes
+  FROM posts
+  JOIN users on users.id = posts.user_id
+  LEFT JOIN likes on posts.id = likes.post_id
+  LEFT JOIN ratings on posts.id = ratings.post_id
+  GROUP BY posts.id, users.username, users.id
+  ORDER BY num_of_likes desc
   LIMIT 5 OFFSET $1
   `;
   return db
