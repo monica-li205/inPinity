@@ -1,6 +1,6 @@
 <script type="text/javascript" src="/scripts/search.js"></script>
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark">
     <a class="navbar-brand" href="/"><i class="fa fa-scribd fa-2x"></i></a>
 
     <button
@@ -28,75 +28,82 @@
         </li>
         <% } %>
       </ul>
-      <nav class="navbar navbar-light">
-        <form class="form-inline">
-          <input class="form-control mr-sm-2 search-form" type="search" placeholder="Search" aria-label="Search">
-          <div id="search-result"></div>
-        </form>
-      </nav>
+      <form class="form-inline mb-2">
+        <input
+          class="form-control mr-sm-2 search-form"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <div id="search-result"></div>
+      </form>
       <% if (user) { %>
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sort by: 
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/">All</a>
-            <a class="dropdown-item" href="/Entertainment">Entertainment</a>
-            <a class="dropdown-item" href="/Sports">Sports</a>
-            <a class="dropdown-item" href="/Technology">Technology</a>
-            <a class="dropdown-item" href="/Fashion">Fashion</a>
-            <a class="dropdown-item" href="/Food">Food</a>
-            <a class="dropdown-item" href="/Animals">Animals</a>
-            <a class="dropdown-item" href="/Plants">Plants</a>
-            <a class="dropdown-item" href="/Art">Art</a>
-            <a class="dropdown-item" href="/Lifestyle">Lifestyle</a>
-            <a class="dropdown-item" href="/Science">Science</a>
-          </div>
-        <% } %>
-        </div>
-
-      <%- include('../login'); %> <%- include('../register'); %>
-      <%- include('../edit-user'); %>
-
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdown"
-          role="button"
+      <div class="dropdown mr-1 mb-2">
+        <button
+          class="btn btn-outline-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
         >
-          <i class="fa fa-user-circle-o fa-2x"></i>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% if (!user) { %>
-          <button
-            type="button"
-            class="btn btn-primary pl-4 pr-4"
-            data-toggle="modal"
-            data-target="#login-form"
-          >
-            Login
-          </button>
-          <button
-            type="button"
-            class="btn btn-warning"
-            data-toggle="modal"
-            data-target="#register-form"
-          >
-            Register
-          </button>
-          <% } %> <% if (user) { %>
-            
-            <button class="btn btn-warning" data-toggle="modal" data-target="#user-edit">EDIT</button>
-          <form action="/logout" method="POST">
-            <button class="btn btn-danger" type="submit">Logout</button>
-          </form>
-          <% } %>
+          Sort by:
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/">All</a>
+          <a class="dropdown-item" href="/Entertainment">Entertainment</a>
+          <a class="dropdown-item" href="/Sports">Sports</a>
+          <a class="dropdown-item" href="/Technology">Technology</a>
+          <a class="dropdown-item" href="/Fashion">Fashion</a>
+          <a class="dropdown-item" href="/Food">Food</a>
+          <a class="dropdown-item" href="/Animals">Animals</a>
+          <a class="dropdown-item" href="/Plants">Plants</a>
+          <a class="dropdown-item" href="/Art">Art</a>
+          <a class="dropdown-item" href="/Lifestyle">Lifestyle</a>
+          <a class="dropdown-item" href="/Science">Science</a>
         </div>
+        <% } %>
+      </div>
+
+      <%- include('../login'); %> <%- include('../register'); %> <%-
+      include('../edit-user'); %>
+
+      <li class="nav-item dropdown">
+        <% if (!user) { %>
+        <button
+          type="button"
+          class="btn btn-outline-primary pl-4 pr-4"
+          data-toggle="modal"
+          data-target="#login-form"
+        >
+          Login
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-warning"
+          data-toggle="modal"
+          data-target="#register-form"
+        >
+          Register
+        </button>
       </li>
+      <% } %> <% if (user) { %>
+      <div class="flex-row-space">
+        <button
+          type="button"
+          class="btn btn-outline-warning pl-4 pr-4"
+          data-toggle="modal"
+          data-target="#user-edit"
+        >
+          EDIT
+        </button>
+        <form action="/logout" method="POST">
+          <button class="btn btn-outline-danger ml-2" type="submit">
+            Logout
+          </button>
+        </form>
+      </div>
+      <% } %>
     </div>
   </nav>
 </header>

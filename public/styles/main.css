@@ -1,3 +1,35 @@
+:root {
+  --deepest-green: #0a4c4e;
+}
+
+body {
+  background-color: #44544a;
+  margin: 0;
+}
+
+button {
+  font-family: "Texturina", serif;
+}
+
+h1,
+h3,
+h4,
+h5 {
+  color: #fff;
+}
+
+
+.card-body {
+  color: #fcf8d8;
+}
+
+h5 {
+  color: #e0dcbf;
+}
+p {
+  color: #fcf8d8;
+}
+
 /* Styles */
 
 a {
@@ -13,13 +45,28 @@ button {
 }
 
 /* Nav bar */
+nav {
+  background-color: #313c35;
+}
+
+
 header i {
   margin-left: 0.8rem;
 }
 
 /* Box Article */
 article img {
+  border-radius: 0.3rem;
   width: 100%;
+}
+
+article .thumbnail {
+  border: 5px solid transparent;
+  border-image: url(../images/gold.jpeg) 30 stretch;
+}
+
+article footer {
+  padding-bottom: 1rem;
 }
 
 /* Post Elements */
@@ -30,30 +77,25 @@ article img {
 
 /* Each Post */
 article {
-  border-radius: 0.8rem;
+  border-radius: 1rem;
   font-size: 1rem;
   box-sizing: border-box;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Grid */
-#container {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-template-areas: "post-area aside";
-  grid-gap: 3rem 1.5rem;
-}
 /* grid area */
 #aside {
   grid-area: aside;
   display: grid;
-  grid-template-rows: 1fr 0.2fr auto;
+  grid-template-rows: 1fr auto;
   grid-template-areas:
     "profile"
-    "search-area"
     "fav-post";
   grid-gap: 1rem;
   place-self: start end;
+}
+#main-container {
+  grid-area: main-container;
 }
 
 #post-area {
@@ -81,13 +123,10 @@ article {
 #profile {
   grid-area: profile;
 }
-#search-area {
-  grid-area: search-area;
-}
 
 /* edit create board */
 .box-container {
-  background-color: rgb(247, 246, 226);
+  background-color: #262e29;
   border-radius: 1rem;
   position: absolute;
   top: 50%;
@@ -98,8 +137,10 @@ article {
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   transition: 0.5s;
 }
-.box-container label {
+label {
   text-transform: uppercase;
+  font-weight: 800;
+  color: white;
 }
 #input-field {
   width: 50%;
@@ -107,7 +148,33 @@ article {
 }
 #upload-field {
   width: 50%;
-  padding: 2rem;
+}
+
+#upload-field img {
+  border-radius: 3rem;
+  background-color: gray;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+input {
+  border-radius: 5rem;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+}
+textarea {
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  font-weight: 500;
+}
+select {
+  border-radius: 5rem;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
 }
 
 /* remove dots from bootstrap */
@@ -149,20 +216,9 @@ article {
   margin-right: 0 !important;
 }
 
-.post-title {
-  color: grey;
-}
-
-.post-description {
-  color: grey;
-}
-
-.post-footer {
-  color: grey;
-}
-
 .card {
-  border: none;
+  background-color: #556359;
+  opacity: 0.8;
 }
 
 .fa-heart:hover {
@@ -175,6 +231,15 @@ article {
 }
 
 /* equal-side */
+.mid-container {
+  background-color: #313c35;
+  border-radius: 1rem;
+  max-width: 80%;
+  padding: 50px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  transition: 0.5s;
+}
+
 .left-side {
   width: 50%;
   margin: 1rem;
@@ -182,4 +247,16 @@ article {
 .right-side {
   width: 50%;
   margin: 1rem;
+}
+
+/* image to fit  */
+.post-img {
+  width: 100%;
+}
+.comments {
+  color: white;
+}
+
+.modal-content {
+  background: black;
 }

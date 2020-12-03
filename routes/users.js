@@ -75,14 +75,14 @@ module.exports = (db, helpers) => {
         if (!user || user.id !== req.session.user_id) {
           templateVars = {
             user: undefined,
-            error: "Invalid login"
-          }
+            error: "Invalid login",
+          };
           res.redirect("/main");
         }
         const params = req.body;
         helpers
           .editUser(db, user.id, params)
-          .then(data => {
+          .then((data) => {
             console.log(data);
             res.redirect("/main");
           })

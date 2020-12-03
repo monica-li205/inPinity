@@ -15,8 +15,8 @@
           <%- include('./partials/upload'); %>
           <section class="flex-col" id="input-field">           
             <label for="category">Category</label>
-            <fieldset class="dropdown" name="category">
-              <select class="dropbtn" name="category">Dropdown</button>
+            <!-- <fieldset class="dropdown " name="category"> -->
+              <select class="dropbtn d-block" name="category">Dropdown</button>
                 <option value ="Entertainment">Entertainment</option>
                 <option value ="Sports">Sports</option>
                 <option value ="Techology">Techology</option>
@@ -26,16 +26,16 @@
                 <option value ="Plants">Plants</option>
                 <option value ="Art">Art</option>
               </select>
-            </fieldset>
+            <!-- </fieldset> -->
             <label for="title">title</label>
-            <input type="text" name="title" id="name"/>
+            <input class="d-block" type="text" name="title" id="name"/>
             <label for="tag">description</label>
             <textarea name="description" id="description" cols="30" rows="10"> </textarea>
             <label for="link" >link</label>
-            <input type="text" name="url" id="post-url"/>
+            <input class="d-block" type="text" name="url" id="post-url"/>
             <label for="link" >Image link</label>
-            <input type="text" name="thumbnail_photo" id="image-url"/>
-            <button class="mt-2 btn btn-info" type="submit">Post</button>
+            <input class="d-block" type="text" name="thumbnail_photo" id="image-url"/>
+            <button class="mt-3 btn btn-outline-info" type="submit">Post</button>
           </form>
           </section>
       </div>

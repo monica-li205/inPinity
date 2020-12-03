@@ -1,41 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <%- include('./partials/head'); %>
-  <!-- <script type="text/javascript" src="/scripts/main-posts.js"></script> -->
+<%- include('./partials/head'); %>
 <script type="text/javascript" src="../public/scripts/likes.js"></script>
-</head>
+<script type="text/javascript" src="/scripts/main-posts.js"></script>
 
 <body>
   <%- include('./partials/header'); %>
   <main id="container">
     <aside id="aside">
       <%- include('./partials/profile'); %>
-      <section id="search-area">
-        <!-- we have no way of rating a board right now.....only a way to rate posts -->
-        <!-- <h3>Browse Most Popular Boards</h3>
-        <div class="input-group">
-          <select class="custom-select" id="inputGroupSelect01">
-            <option selected>Choose here...</option>
-            <option value="tag1">Tag 1</option>
-            <option value="tag2">Tag 2</option>
-            <option value="tag3">Tag 3</option>
-          </select>
-        </div> -->
-      </section>
       <section id="fav-area">
         <h3>Most Popular Posts</h3>
         <%- include('./partials/most_liked'); %>
       </section>
     </aside>
 
-  <main id="main-container" class="container">
-    <div id="post-area" class="item">
-      
-      <%- include('./partials/posts_each'); %>
-    </div>
+    <main id="main-container">
+      <h3>Checkout These Posts</h3>
 
+      <div id="post-area" class="item">
+        <%- include('./partials/posts_each'); %>
+      </div>
+    </main>
   </main>
-  <%- include('./partials/footer'); %>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"
+  ></script>
 </body>
-</html>

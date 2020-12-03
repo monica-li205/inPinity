@@ -17,17 +17,18 @@ module.exports = (db, helpers) => {
     const query = `%${req.query.q}%`;
     const offset = Number(Object.values(req.query));
 
-    helpers.searchPosts(db, query, offset)
-    .then(posts => {
-      templateVars = {
-        user: undefined,
-        posts: posts,
-        error: undefined
-      }
-      res.render("index", templateVars);
-    })
-    .catch(err => err);
-  })
+    helpers
+      .searchPosts(db, query, offset)
+      .then((posts) => {
+        templateVars = {
+          user: undefined,
+          posts: posts,
+          error: undefined,
+        };
+        res.render("index", templateVars);
+      })
+      .catch((err) => err);
+  });
 
   // Get specific post by ID
   // router.get("/:id", (req, res) => {
@@ -54,7 +55,7 @@ module.exports = (db, helpers) => {
     if (user) {
       helpers
         .addPost(db, user, params)
-        .then(post => {
+        .then((post) => {
           console.log("added");
           res.redirect("/main");
         })
@@ -70,8 +71,8 @@ module.exports = (db, helpers) => {
     const queryParams = [req.body];
     helpers
       .editPost(db, req.params.id, queryParams)
-      .then(post => {
-        res.redirect(`/post/${req.params.id}`)
+      .then((post) => {
+        res.redirect(`/post/${req.params.id}`);
       })
       .catch((err) => err);
   });
@@ -84,7 +85,7 @@ module.exports = (db, helpers) => {
         console.log(post.user_id);
         if (post.user_id === req.session.user_id) {
           db.query("DELETE FROM posts WHERE id = $1", [req.params.id])
-            .then(data => {
+            .then((data) => {
               res.redirect("/main");
             })
             .catch((err) => err);
@@ -100,12 +101,13 @@ module.exports = (db, helpers) => {
     const comment = req.body.comment;
     const userId = req.session.user_id;
     const postId = req.params.id;
-    helpers.commentPost(db, userId, postId, comment)
-    .then(data => {
-      res.redirect(`/post/${postId}`);
-    })
-    .catch(err => err);
-  })
+    helpers
+      .commentPost(db, userId, postId, comment)
+      .then((data) => {
+        res.redirect(`/post/${postId}`);
+      })
+      .catch((err) => err);
+  });
 
   return router;
 };

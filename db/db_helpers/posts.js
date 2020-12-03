@@ -53,7 +53,7 @@ const getAllPostsLoggedIn = (db, id, offset) => {
 exports.getAllPostsLoggedIn = getAllPostsLoggedIn;
 
 const searchPosts = (db, searchQuery, offset) => {
-  console.log(searchQuery.length);
+  // console.log(searchQuery.length);
   if (searchQuery.length <= 2) {
     const queryString = `
     SELECT posts.*, users.username, (select round(avg(rating)) from ratings) as rating, (select sum(is_liked::int) as num_of_likes)
@@ -64,20 +64,24 @@ const searchPosts = (db, searchQuery, offset) => {
     ORDER BY posts.id desc
     LIMIT 20 OFFSET $1;
   `;
-  return db
-    .query(queryString, [offset])
-    .then((res) => res.rows)
-    .catch((err) => err);
+    return db
+      .query(queryString, [offset])
+      .then((res) => res.rows)
+      .catch((err) => err);
   } else {
-    return db.query(`
+    return db
+      .query(
+        `
     SELECT * FROM posts
     WHERE title LIKE $1 OR description like $1
     LIMIT 5
-  `, [searchQuery])
-  .then(res => res.rows)
-  .catch(err => err);
+  `,
+        [searchQuery]
+      )
+      .then((res) => res.rows)
+      .catch((err) => err);
   }
-} 
+};
 exports.searchPosts = searchPosts;
 
 //get all user's post
@@ -107,11 +111,12 @@ const getUserPostCategories = (db, userSession) => {
     FROM posts
     JOIN users on users.id = posts.user_id
     WHERE users.id = $1;
-  `
-  return db.query(queryString, [userSession])
-  .then(res => res.rows)
-  .catch(err => err);
-}
+  `;
+  return db
+    .query(queryString, [userSession])
+    .then((res) => res.rows)
+    .catch((err) => err);
+};
 exports.getUserPostCategories = getUserPostCategories;
 
 const getPostsByCategory = (db, userSession, category, userId, offset) => {
@@ -126,11 +131,12 @@ const getPostsByCategory = (db, userSession, category, userId, offset) => {
   GROUP BY posts.id, users.username, likes.user_id
   ORDER BY posts.id desc
   LIMIT 20 OFFSET $4
-  `
-  return db.query(queryString, [userSession, category, userId, offset])
-  .then(res => res.rows)
-  .catch(err => err);
-}
+  `;
+  return db
+    .query(queryString, [userSession, category, userId, offset])
+    .then((res) => res.rows)
+    .catch((err) => err);
+};
 exports.getPostsByCategory = getPostsByCategory;
 
 const getAllPostsInCategory = (db, userSession, category) => {
@@ -145,11 +151,12 @@ const getAllPostsInCategory = (db, userSession, category) => {
   GROUP BY posts.id, users.username, likes.user_id
   ORDER BY posts.id desc
   LIMIT 20
-  `
-  return db.query(queryString, [userSession, category])
-  .then(res => res.rows)
-  .catch(err => err);
-}
+  `;
+  return db
+    .query(queryString, [userSession, category])
+    .then((res) => res.rows)
+    .catch((err) => err);
+};
 exports.getAllPostsInCategory = getAllPostsInCategory;
 
 const getPostWithId = (db, id) => {
@@ -164,7 +171,7 @@ const getPostWithId = (db, id) => {
   `;
   return db
     .query(queryString, [id])
-    .then(res => res.rows)
+    .then((res) => res.rows)
     .catch((err) => err);
 };
 exports.getPostWithId = getPostWithId;
@@ -218,7 +225,7 @@ const editPost = (db, id, params) => {
   `;
   return db
     .query(queryString, queryParams)
-    .then(res => res.rows)
+    .then((res) => res.rows)
     .catch((err) => err);
 };
 exports.editPost = editPost;
@@ -263,9 +270,10 @@ const commentPost = (db, user_id, post_id, comment) => {
   const queryString = `
   INSERT INTO comments (user_id, post_id, comment_text)
   VALUES ($1, $2, $3);
-  `
-  return db.query(queryString, [user_id, post_id, comment])
-  .then(res => res.rows)
-  .catch(err => err);
-}
+  `;
+  return db
+    .query(queryString, [user_id, post_id, comment])
+    .then((res) => res.rows)
+    .catch((err) => err);
+};
 exports.commentPost = commentPost;

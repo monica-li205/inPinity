@@ -1,22 +1,24 @@
 <% for (const popular of mostLiked) { %>
 
-  <div class="fav_box">
+<div class="fav_box">
   <article>
     <a href="/post" class="card box">
       <div class="card-img-top image_edit">
         <img
-          src="https://cdn.dribbble.com/users/1916467/screenshots/14672568/media/dece46162e75886a40d8e196d5fbcb78.jpg"
+          src="<%= popular.thumbnail_photo %>"
           alt="image"
           class="thumbnail box_img"
         />
       </div>
     </a>
     <div class="card-body">
-      <h5 class="title"> <%= popular.title %> </h5>
-      <p class="card-text description"><%= popular.description %></p>
+      <h5 class="title"><%= popular.title %></h5>
+      <p class="card-text description">
+        <%= popular.description.substring(0,40) + '......' %>
+      </p>
     </div>
     <footer class="flex-row-space-center">
-      <div class="flex-row-center ml-2">
+      <div class="flex-row-center ml-4">
         <img
           src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Round&hairColor=Auburn&facialHairType=Blank&clotheType=Overall&clotheColor=Black&eyeType=Dizzy&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=Light"
           class="avatar mb-2"
@@ -24,7 +26,7 @@
         />
         <p class="post-owner mt-2 ml-2"><%= popular.username %></p>
       </div>
-      <div class="flex-row-center mt-2">
+      <div class="flex-row-center mt-2 mr-2">
         <p class="rating mr-2">
           <i class="fa fa-star mr-2"></i><%= popular.rating %>/5
         </p>
