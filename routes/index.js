@@ -47,7 +47,6 @@ module.exports = (db, userHelpers, postHelpers) => {
         posts: data[2],
         mostLiked: data[3],
       };
-      console.log('TEMPLATE', templateVars);
       res.render("main", templateVars);
     })
     .catch((err) => console.log(err));
