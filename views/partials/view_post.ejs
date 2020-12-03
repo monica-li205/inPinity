@@ -1,0 +1,57 @@
+<%- include('./head'); %>
+<body>
+  <%- include('./header'); %>
+  <main class="flex-col-center main-content">
+    <% if (user) { %> <%- include('./profile'); %><% } %> 
+    <section class="mid-container flex-row-space">
+      <div class="left-side">
+        <img class="post-img" src="<%= post[0].thumbnail_photo %>" alt="" />
+
+        <h3><%= post[0].title %></h3>
+        <h5><%= post[0].description %></h5>
+        <a href="<%= post[0].url %>">Link</a>
+        
+          
+          <div class="comment-section"></div>
+          <% for (const comment of post) { %> 
+            <% if
+          (comment.comment_text !== null) { %>
+          <p>
+            <%= comment.comment_text %> <span>- <%= comment.username %></span>
+          </p>
+        
+        <% } %> 
+        <% } %>
+      </div>
+      </div>
+      <div class="flex-col right-side">
+        <% if (user) { %>
+        <% if (user.id === post[0].user_id) { %> <%- include('./edit_post'); %>
+        <div class="flex-row-space">
+          <button
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#edit-post"
+          >
+            Edit
+          </button>
+          <form action="/api/posts/delete/<%= post[0].id %>" method="POST">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+        <% } %>
+        <% } %>
+        <form
+          class="flex-col mt-2"
+          action="/api/posts/comment/<%= post[0].id %>"
+          method="POST"
+        >
+          <textarea name="comment" id="" cols="30" rows="10"></textarea>
+          <button type="submit" class="btn btn-primary mt-2">Comment</button>
+        </form>
+      </div>
+    </section>
+    
+  </main>
+  <%- include('./footer'); %>
+</body>

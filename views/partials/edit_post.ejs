@@ -11,10 +11,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="box-container flex-row-space" id="edit-post" action="/api/posts" method="post" name="edit-post-form">
-          <%- include('upload'); %>
+        <form class="box-container flex-row-space" id="edit-post" action="/api/posts/<%= post[0].id %>" method="post" name="edit-post-form">
+          <section id="upload-field" class="flex-col">
+            <img class="file-upload-image" src="<%= post[0].thumbnail_photo %>" alt="Link an image" id="post-image" />
+            <div class="file-upload"></div>
+          </section>
+          
           <section class="flex-col" id="input-field">           
-            <label for="category">Category</label>
+            <!-- <label for="category">Category</label>
             <fieldset class="dropdown" name="category">
               <select class="dropbtn" name="category">Dropdown</button>
                 <option value ="Entertainment">Entertainment</option>
@@ -26,22 +30,17 @@
                 <option value ="Plants">Plants</option>
                 <option value ="Art">Art</option>
               </select>
-            </fieldset>
-            <label for="title">title</label>
+            </fieldset> -->
+            <label for="title">New title</label>
             <input type="text" name="title" id="name"/>
-            <label for="tag">description</label>
+            <label for="tag">New description</label>
             <textarea name="description" id="description" cols="30" rows="10"> </textarea>
-            <label for="link" >link</label>
+            <!-- <label for="link" >link</label>
             <input type="text" name="url" id="post-url"/>
             <label for="link" >Image link</label>
-            <input type="text" name="thumbnail_photo" id="image-url"/>
-            <button class="btn btn-outline-secondary" id="delete-btn-post">
-              Delete
-            </button>
-            <button class="btn btn-outline-info" id="cancel-btn">Cancel</button>
-            <button class="btn btn-outline-info" id="update">Update</button>
+            <input type="text" name="thumbnail_photo" id="image-url"/> -->
+            <button class="btn btn-outline-info" id="update">Save</button>
           </form>
-            <button class="mt-2 btn btn-warning" id="generate-image">Generate Image</button>
           </section>
       </div>
     </div>

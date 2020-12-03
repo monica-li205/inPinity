@@ -4,12 +4,19 @@
   }
   #container {
     display: grid;
-    grid-template-rows: 0.5fr 0.3fr 2fr auto;
+    grid-template-rows: 2.5fr auto;
+    grid-template-areas:
+      "aside"
+      "main-container";
+    grid-gap: 2rem;
+  }
+
+  #aside {
+    display: grid;
+    grid-template-rows: 0.5fr 2fr;
     grid-template-areas:
       "profile"
-      "search-area"
-      "fav-post"
-      "post-area";
+      "fav-post";
     grid-gap: 2rem;
   }
 }
@@ -29,7 +36,7 @@
   #container {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-template-areas: "post-area aside";
+    grid-template-areas: "main-container aside";
     grid-gap: 3rem 1.5rem;
   }
 }

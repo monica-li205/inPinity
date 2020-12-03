@@ -36,24 +36,19 @@ article {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Grid */
-#container {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-template-areas: "post-area aside";
-  grid-gap: 3rem 1.5rem;
-}
 /* grid area */
 #aside {
   grid-area: aside;
   display: grid;
-  grid-template-rows: 1fr 0.2fr auto;
+  grid-template-rows: 1fr auto;
   grid-template-areas:
     "profile"
-    "search-area"
     "fav-post";
   grid-gap: 1rem;
   place-self: start end;
+}
+#main-container {
+  grid-area: main-container;
 }
 
 #post-area {
@@ -80,9 +75,6 @@ article {
 /* Grid name define */
 #profile {
   grid-area: profile;
-}
-#search-area {
-  grid-area: search-area;
 }
 
 /* edit create board */
@@ -175,6 +167,15 @@ article {
 }
 
 /* equal-side */
+.mid-container {
+  background-color: rgb(247, 246, 226);
+  border-radius: 1rem;
+  max-width: 80%;
+  padding: 50px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  transition: 0.5s;
+}
+
 .left-side {
   width: 50%;
   margin: 1rem;
@@ -182,4 +183,12 @@ article {
 .right-side {
   width: 50%;
   margin: 1rem;
+}
+
+/* image to fit  */
+.post-img {
+  width: 100%;
+}
+.comment-section {
+  background-color: aliceblue;
 }
