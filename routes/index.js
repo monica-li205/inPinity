@@ -36,15 +36,16 @@ module.exports = (db, userHelpers, postHelpers) => {
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
-    const getAllPosts = postHelpers.getAllPosts(db, offset);
     const getAllPostsLoggedIn = postHelpers.getAllPostsLoggedIn(db, userSession, offset);
+    const mostLiked = postHelpers.postsWithTheMostLikes(db);
 
-    Promise.all([getUserRecord, getUserPostsCount, getAllPostsLoggedIn])
+    Promise.all([getUserRecord, getUserPostsCount, getAllPostsLoggedIn, mostLiked])
     .then((data) => {
       templateVars = {
         user: data[0],
         count: data[1].count,
         posts: data[2],
+        mostLiked: data[3],
       };
       console.log(templateVars);
       res.render("main", templateVars);
@@ -103,7 +104,7 @@ module.exports = (db, userHelpers, postHelpers) => {
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const getUserPostsCount = userHelpers.totalPostsByUser(db, userSession);
     const getAllPostsInCategory = postHelpers.getAllPostsInCategory(db, userSession, category);
-    const mostLikedPosts = postHelpers.postsWithTheMostLikes(db,);
+    const mostLikedPosts = postHelpers.postsWithTheMostLikes(db);
 
     Promise.all([getUserRecord, getUserPostsCount, getAllPostsInCategory, mostLikedPosts])
     .then(data => {

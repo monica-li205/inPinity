@@ -212,7 +212,7 @@ exports.getPostOwner = getPostOwner;
 
 const postsWithTheMostLikes = (db, offset) => {
   const queryString = `
-  SELECT post_id, sum(is_liked::int) as likes
+  SELECT count(post_id) as likes
   FROM likes
   GROUP BY post_id
   ORDER BY likes DESC
