@@ -1,7 +1,7 @@
-$(document).ready(function (e) {
+$(document).ready(function(e) {
   console.log("dom ready");
 
-  $(".login-form").submit(function (e) {
+  $(".login-form").submit(function(e) {
     const data = $(this).serialize();
     e.preventDefault();
 

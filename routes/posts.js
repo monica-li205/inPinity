@@ -14,23 +14,27 @@ module.exports = (db, helpers) => {
   });
 
   // Get specific post by ID
-  router.get("/:id", (req, res) => {
-    helpers
-      .getPostWithId(db, req.params.id)
-      .then((post) => {
-        res.json(post);
-      })
-      .catch((err) => err);
-  });
+  // router.get("/:id", (req, res) => {
+  //   helpers
+  //     .getPostWithId(db, req.params.id)
+  //     .then((post) => {
+  //       res.json(post);
+  //     })
+  //     .catch((err) => err);
+  // });
 
   // Add new post
   router.post("/", (req, res) => {
     const params = req.body;
     const user = req.session.user_id;
+    const offset = Number(Object.values(req.query));
     const templateVars = {
       user: user,
-      error: undefined,
+      error: "Your post has been submitted",
     };
+
+    const addPost = helpers.addPost(db, user, params);
+    const getAllPosts = helpers.getAllPosts(db, offset);
     if (user) {
       helpers
         .addPost(db, user, params)

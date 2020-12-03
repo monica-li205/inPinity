@@ -1,24 +1,16 @@
 <%- include('./partials/head'); %>
 <body>
   <%- include('./partials/header'); %>
-  <main class="flex-col main-content" id="blur">
+  <main class="flex-col main-content">
     <%- include('./partials/profile'); %>
-    <h1 class="flex-col-center">Board name</h1>
-    <div class="alert"><%- include('./partials/alert'); %></div>
+    <h1 class="flex-col-center"><%= board %></h1>
 
-    <div class="center" id="blur">
-      <%- include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %> <%-
-      include('./partials/post_editable'); %>
-    </div>
+    <section id="main-container" class="container">
+      <div id="post-area" class="item">
+        <%- include('./partials/post_editable'); %>
+      </div>
+    </section>
+
   </main>
   <%- include('./partials/edit_post'); %> <%- include('./partials/footer'); %>
 </body>
