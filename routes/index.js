@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+const { promiseImpl } = require("ejs");
 const { response } = require("express");
 const express = require("express");
 const router = express.Router();
@@ -179,29 +180,29 @@ module.exports = (db, userHelpers, postHelpers) => {
   router.post("/", (req, res) => {
     const user = req.body;
     const email = user.email;
+    const offset = Number(Object.values(req.query));
+    const getAllPosts = postHelpers.getAllPosts(db, offset);
+    const getUserWithEmail = userHelpers.getUserWithEmail(db, email);
 
-    userHelpers
-      .getUserWithEmail(db, email)
-      .then((data) => {
-        const userRecord = data;
+    Promise.all([getAllPosts, getUserWithEmail])
+    .then(data => {
+      const userRecord = data[1];
 
-        if (!userRecord || userRecord.password !== user.password) {
-          // res.status(400).send("Invalid login");
-          // res.status(401).send("Unauthorized");
-          const templateVars = {
-            user: undefined,
-            error: "Invalid login",
-          };
-          res.status(401).render("index", templateVars);
-          return;
+      if (!userRecord || userRecord.password !== user.password) {
+        templateVars = {
+          user: undefined,
+          error: "Unable to log in that user",
+          posts: data[0],
         }
-        // fetch user -> need to find out the function
-        userRecord.password = undefined;
-        req.session.user_id = userRecord.id;
-        console.log("userRecord", userRecord);
-        res.redirect("/main");
-      })
-      .catch((err) => err);
+        res.render("index", templateVars);
+        return;
+      }
+      userRecord.password = undefined;
+      req.session.user_id = userRecord.id;
+      console.log("userRecord", userRecord);
+      res.redirect("/main");
+    })
+    .catch(err => err);
   });
 
   router.post("/logout", (req, res) => {

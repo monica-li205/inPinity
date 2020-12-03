@@ -10,6 +10,7 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db, helpers) => {
+  let templateVars = {};
   router.get("/", (req, res) => {
     db.query("SELECT * FROM users;").then((data) => {
       const users = data.rows;
@@ -38,7 +39,7 @@ module.exports = (db, helpers) => {
   // Register new user
   router.post("/", (req, res) => {
     const user = req.body;
-    let templateVars = {
+    templateVars = {
       user: undefined,
       error: undefined,
     };
@@ -67,17 +68,24 @@ module.exports = (db, helpers) => {
   });
 
   // Edit user info
-  router.put("/:id", (req, res) => {
+  router.post("/:id", (req, res) => {
     helpers
       .getUserWithId(db, req.params.id)
       .then((user) => {
         if (!user || user.id !== req.session.user_id) {
-          res.status(400).send("Unauthorized");
+          templateVars = {
+            user: undefined,
+            error: "Invalid login"
+          }
+          res.redirect("/main");
         }
         const params = req.body;
         helpers
           .editUser(db, user.id, params)
-          .then(res.status(200).send("User info successfully changed"))
+          .then(data => {
+            console.log(data);
+            res.redirect("/main");
+          })
           .catch((err) => err);
       })
       .catch((err) => err);
