@@ -27,10 +27,14 @@ module.exports = (db, helpers) => {
   router.post("/", (req, res) => {
     const params = req.body;
     const user = req.session.user_id;
+    const offset = Number(Object.values(req.query));
     const templateVars = {
       user: user,
-      error: undefined,
+      error: "Your post has been submitted",
     };
+
+    const addPost = helpers.addPost(db, user, params);
+    const getAllPosts = helpers.getAllPosts(db, offset);
     if (user) {
       helpers
         .addPost(db, user, params)
