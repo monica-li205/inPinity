@@ -2,8 +2,7 @@ $(document).ready(function () {
   console.log('loaded likes')
 
   $('.fa-heart').click(function() {
-    // const currentPost = $(this)
-    // alert('hello');
+
     const post_id = $(this).data('postid');
     const data = {
       post_id,
