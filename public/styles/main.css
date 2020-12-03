@@ -17,17 +17,7 @@ h4,
 h5 {
   color: #fff;
 }
-/* Footer */
-.page-footer {
-  padding: 2rem;
-  background-color: #3b423d;
-  margin: 0;
-  padding-top: 20px;
-  box-sizing: border-box;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
+
 
 .card-body {
   color: #fcf8d8;
@@ -58,6 +48,8 @@ button {
 nav {
   background-color: #313c35;
 }
+
+
 header i {
   margin-left: 0.8rem;
 }
