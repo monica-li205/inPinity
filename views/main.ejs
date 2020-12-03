@@ -1,28 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <%- include('./partials/head'); %>
-    <!-- <script type="text/javascript" src="/scripts/main-posts.js"></script> -->
-    <script type="text/javascript" src="../public/scripts/likes.js"></script>
-  </head>
+<%- include('./partials/head'); %>
 
-  <body>
-    <%- include('./partials/header'); %>
-    <main id="container">
-      <aside id="aside">
-        <%- include('./partials/profile'); %>
-        <section id="fav-area">
-          <h3>Most Popular Posts</h3>
-          <%- include('./partials/most_liked'); %>
-        </section>
-      </aside>
+<body>
+  <%- include('./partials/header'); %>
+  <main id="container">
+    <aside id="aside">
+      <%- include('./partials/profile'); %>
+      <section id="fav-area">
+        <h3>Most Popular Posts</h3>
+        <%- include('./partials/most_liked'); %>
+      </section>
+    </aside>
 
-      <main id="main-container">
-        <div id="post-area" class="item">
-          <%- include('./partials/posts_each'); %>
-        </div>
-      </main>
+    <main id="main-container">
+      <div id="post-area" class="item">
+        <%- include('./partials/posts_each'); %>
+      </div>
     </main>
-    <%- include('./partials/footer'); %>
-  </body>
-</html>
+  </main>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"
+  ></script>
+</body>

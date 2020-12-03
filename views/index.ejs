@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <%- include('./partials/head'); %>
-  <script type="text/javascript" src="/scripts/index-posts.js"></script>
-  <script type="text/javascript" src="/scripts/main-posts.js"></script>
+<%- include('./partials/head'); %>
 
-  <body>
-    <%- include('./partials/header'); %> <% if (error) { %>
-    <script>
-      $(".input-warning").slideDown("slow");
-    </script>
-    <div class="input-warning">
-      <i class="fas fa-lg fa-exclamation-triangle"></i>
-      <h3><%= error %></h3>
+<body>
+  <%- include('./partials/header'); %> <% if (error) { %>
+  <script>
+    $(".input-warning").slideDown("slow");
+  </script>
+  <div class="input-warning">
+    <i class="fas fa-lg fa-exclamation-triangle"></i>
+    <h3><%= error %></h3>
+  </div>
+  <% } %>
+  <main id="main-container">
+    <div id="post-area" class="item">
+      <%- include('./partials/posts_each'); %>
     </div>
-    <% } %>
-    <main id="main-container">
-      <div id="post-area" class="item">
-        <%- include('./partials/posts_each'); %>
-      </div>
-    </main>
-    <%- include('./partials/footer'); %>
-  </body>
-</html>
+  </main>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"
+  ></script>
+</body>
