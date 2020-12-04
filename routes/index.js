@@ -41,7 +41,7 @@ module.exports = (db, userHelpers, postHelpers) => {
       userSession,
       offset
     );
-    const mostLiked = postHelpers.postsWithTheMostLikes(db);
+    const mostLiked = postHelpers.postsWithTheMostLikes(db, offset);
 
     Promise.all([
       getUserRecord,
