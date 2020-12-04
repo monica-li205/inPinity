@@ -14,23 +14,22 @@ module.exports = (db, helpers, userHelpers) => {
   });
 
   router.post("/search", (req, res) => {
-    const query = `%${req.body.q}%`;
+    const query = `%${req.body.q.toLowerCase()}%`;
     const userSession = req.session.user_id;
 
     const getUserRecord = userHelpers.getUserWithId(db, userSession);
     const searchPost = helpers.searchPosts(db, query);
 
-    Promise.all([getUserRecord, searchPost])
-    .then(data => {
+    Promise.all([getUserRecord, searchPost]).then((data) => {
       const searchQueryShow = query.slice(1, query.length - 1);
       templateVars = {
         user: data[0],
         posts: data[1],
         search: searchQueryShow,
-        searchCount: data[1].length
-      }
+        searchCount: data[1].length,
+      };
       res.render("search_result", templateVars);
-    }) 
+    });
   });
 
   // Add new post
@@ -63,12 +62,13 @@ module.exports = (db, helpers, userHelpers) => {
     const postRating = req.body.rating;
     const userId = req.session.user_id;
 
-    helpers.ratePost(db, userId, postId, postRating)
-    .then(data => {
-      res.redirect(`/post/${postId}`);
-    })
-    .catch(err => err);
-  })
+    helpers
+      .ratePost(db, userId, postId, postRating)
+      .then((data) => {
+        res.redirect(`/post/${postId}`);
+      })
+      .catch((err) => err);
+  });
 
   // Edit specific post by ID
   router.post("/:id", (req, res) => {

@@ -55,15 +55,16 @@ exports.getAllPostsLoggedIn = getAllPostsLoggedIn;
 
 const searchPosts = (db, searchQuery) => {
   // console.log(searchQuery.length);
-  return db.query(
-    `
+  return db
+    .query(
+      `
     SELECT * FROM posts
-    WHERE title LIKE $1 OR description like $1
-    LIMIT 5`, [searchQuery]
+    WHERE LOWER(title) LIKE $1 OR LOWER(description) like $1
+    LIMIT 5`,
+      [searchQuery]
     )
     .then((res) => res.rows)
     .catch((err) => err);
-
 };
 exports.searchPosts = searchPosts;
 
@@ -311,8 +312,9 @@ const ratePost = (db, userId, postId, postRating) => {
   const queryString = `
     INSERT INTO ratings (user_id, post_id, rating)
     VALUES ($1, $2, $3)
-  `
-  return db.query(queryString, [userId, postId, postRating])
-  .then(res => res.rows);
-}
+  `;
+  return db
+    .query(queryString, [userId, postId, postRating])
+    .then((res) => res.rows);
+};
 exports.ratePost = ratePost;
