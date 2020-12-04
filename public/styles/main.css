@@ -2,11 +2,6 @@
   --deepest-green: #0a4c4e;
 }
 
-body {
-  background-color: #44544a;
-  margin: 0;
-}
-
 button {
   font-family: "Texturina", serif;
 }
@@ -15,19 +10,7 @@ h1,
 h3,
 h4,
 h5 {
-  color: #fff;
-}
-
-
-.card-body {
-  color: #fcf8d8;
-}
-
-h5 {
-  color: #e0dcbf;
-}
-p {
-  color: #fcf8d8;
+  color: #244751;
 }
 
 /* Styles */
@@ -48,7 +31,6 @@ button {
 nav {
   background-color: #313c35;
 }
-
 
 header i {
   margin-left: 0.8rem;
@@ -140,7 +122,7 @@ article {
 label {
   text-transform: uppercase;
   font-weight: 800;
-  color: white;
+  /* color: white; */
 }
 #input-field {
   width: 50%;
@@ -216,11 +198,6 @@ select {
   margin-right: 0 !important;
 }
 
-.card {
-  background-color: #556359;
-  opacity: 0.8;
-}
-
 .fa-heart:hover {
   color: rgb(255, 53, 53);
   cursor: pointer;
@@ -254,7 +231,7 @@ select {
   width: 100%;
 }
 .comments {
-  color: white;
+  /* color: white; */
 }
 
 .modal-content {
