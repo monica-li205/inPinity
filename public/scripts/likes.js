@@ -2,13 +2,13 @@ $(document).ready(function () {
   console.log("loaded likes");
   $(".fa-heart").click(function () {
     console.log("isclicked");
-    const post_id = $(this).data("mainpostid");
+    const post_id = $(this).data("postid");
     const data = {
       post_id,
     };
     $.ajax({
       type: "POST",
-      url: "/main",
+      url: "/api/likes",
       data: data,
     }).then(() => {
       console.log("liked");
