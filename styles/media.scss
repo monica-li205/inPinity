@@ -5,13 +5,18 @@
   #container {
     display: grid;
     grid-template-rows: 2.5fr auto;
-    grid-template-areas: "aside" "main-container";
+    grid-template-areas:
+      "aside"
+      "main-container";
     grid-gap: 2rem;
   }
+
   #aside {
     display: grid;
     grid-template-rows: 0.5fr 2fr;
-    grid-template-areas: "profile" "fav-post";
+    grid-template-areas:
+      "profile"
+      "fav-post";
     grid-gap: 2rem;
   }
 }
@@ -41,5 +46,6 @@
   main {
     padding: 2rem;
   }
+
   /* Write CSS rules that target Tablets screen sizes downwards - including smartphones */
 }

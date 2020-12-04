@@ -7,10 +7,9 @@ button {
 a {
   text-decoration: none;
   color: gray;
-}
-
-a :hover {
-  text-decoration: none;
+  :hover {
+    text-decoration: none;
+  }
 }
 
 label {
@@ -18,7 +17,6 @@ label {
   font-weight: 800;
   color: white;
 }
-
 h2,
 span {
   color: black;
@@ -30,7 +28,6 @@ input {
   outline: none;
   padding: 0.5rem;
 }
-
 textarea {
   border-radius: 1rem;
   border: none;
@@ -38,7 +35,6 @@ textarea {
   padding: 1rem;
   font-weight: 800;
 }
-
 select {
   border-radius: 5rem;
   border: none;
@@ -47,12 +43,15 @@ select {
 }
 
 /* Header Nav bar */
-header nav {
-  background-color: #415b4b;
-}
 
-header i {
-  margin-left: 0.8rem;
+header {
+  nav {
+    background-color: #415b4b;
+  }
+
+  i {
+    margin-left: 0.8rem;
+  }
 }
 
 /* Each Article Post */
@@ -61,25 +60,24 @@ article {
   font-size: 1rem;
   box-sizing: border-box;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
 
-article img {
-  border-radius: 0.3rem;
-  width: 100%;
-}
+  img {
+    border-radius: 0.3rem;
+    width: 100%;
+  }
 
-article .thumbnail {
-  border: 5px solid transparent;
-  border-image: url(../images/gold.jpeg) 30 stretch;
-}
+  .thumbnail {
+    border: 5px solid transparent;
+    border-image: url(../images/gold.jpeg) 30 stretch;
+  }
+  .avatar {
+    border-radius: 50%;
+    width: 2rem;
+  }
 
-article .avatar {
-  border-radius: 50%;
-  width: 2rem;
-}
-
-article footer {
-  padding-bottom: 1rem;
+  footer {
+    padding-bottom: 1rem;
+  }
 }
 
 /* Grid area - the big container is define in media. */
@@ -91,7 +89,9 @@ article footer {
   grid-area: aside;
   display: grid;
   grid-template-rows: 1fr auto;
-  grid-template-areas: "profile" "fav-post";
+  grid-template-areas:
+    "profile"
+    "fav-post";
   grid-gap: 1rem;
   place-self: start end;
 }
@@ -103,7 +103,6 @@ article footer {
   grid-gap: 1rem;
   place-self: start end;
 }
-
 #fav-post-area {
   grid-area: fav-post;
   display: grid;
@@ -141,18 +140,17 @@ article footer {
   width: 50%;
   padding: 2rem;
 }
-
 #upload-field {
   width: 50%;
+  img {
+    border-radius: 3rem;
+    background-color: gray;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
 }
 
-#upload-field img {
-  border-radius: 3rem;
-  background-color: gray;
-  width: 100%;
-  margin-bottom: 2rem;
-}
-
+// rating input box
 #rate {
   border-radius: 0.5rem;
   text-align: center;
@@ -165,12 +163,15 @@ article footer {
 }
 
 /* Individual Post Page */
+
 .thumbnail {
   width: 100%;
 }
 
-.image_edit img {
-  width: 100%;
+.image_edit {
+  img {
+    width: 100%;
+  }
 }
 
 .input-warning {
@@ -181,24 +182,25 @@ article footer {
   border: 3px solid orange;
   border-radius: 8px;
   margin-top: 1em;
-  background-color: #ff3131;
+  background-color: rgb(255, 49, 49);
 }
 
 .liked-true {
-  color: #ff3535;
+  color: rgb(255, 53, 53);
 }
+
+// icon on hover effect
 
 .fa-star {
-  color: #ff942f;
+  color: rgb(255, 148, 47);
   margin-right: 0 !important;
-}
-
-.fa-star :hover {
-  cursor: pointer;
+  :hover {
+    cursor: pointer;
+  }
 }
 
 .fa-heart:hover {
-  color: #ff3535;
+  color: rgb(255, 53, 53);
   cursor: pointer;
 }
 
@@ -216,12 +218,12 @@ article footer {
   width: 50%;
   margin: 1rem;
 }
-
 .right-side {
   width: 50%;
   margin: 1rem;
 }
 
+// Modal box
 .modal-content {
   background: #44544a;
 }

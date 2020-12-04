@@ -31,7 +31,7 @@ const getAllPostsLoggedIn = (db, id, offset) => {
     user_post.num_of_likes,
     likes.user_id = $1 as is_liked
     FROM
-      (SELECT posts.*,
+      (SELECT DISTINCT posts.*,
       users.id as currentuser,
       users.username,
       round(avg(ratings.rating)) as rating ,
@@ -53,70 +53,32 @@ const getAllPostsLoggedIn = (db, id, offset) => {
 };
 exports.getAllPostsLoggedIn = getAllPostsLoggedIn;
 
-const searchPosts = (db, userId, searchQuery, offset) => {
+const searchPosts = (db, searchQuery, offset) => {
   // console.log(searchQuery.length);
   if (searchQuery.length <= 2) {
-    console.log("search all");
     const queryString = `
-    SELECT user_post.id,
-    user_post.title,
-    user_post.username,
-    user_post.description,
-    user_post.thumbnail_photo,
-    user_post.url,
-    user_post.rating,
-    user_post.num_of_likes,
-    likes.user_id = $1 as is_liked
-    FROM
-      (SELECT posts.*,
-      users.id as currentuser,
-      users.username,
-      round(avg(ratings.rating)) as rating ,
-      count(likes.post_id) as num_of_likes
-      FROM posts
-      JOIN users on users.id = posts.user_id
-      LEFT JOIN likes on posts.id = likes.post_id
-      LEFT JOIN ratings on posts.id = ratings.post_id
-      GROUP BY posts.id, users.username, users.id
-      ORDER BY posts.id desc)
-    as user_post
-    LEFT JOIN likes on user_post.id = likes.post_id
-    LIMIT 20 OFFSET $2;
+    SELECT posts.*, users.username, (select round(avg(rating)) from ratings) as rating, (select sum(is_liked::int) as num_of_likes)
+    FROM posts
+    LEFT JOIN users on users.id = posts.user_id
+    LEFT JOIN likes on posts.id = likes.post_id
+    GROUP BY posts.id, users.username
+    ORDER BY posts.id desc
+    LIMIT 20 OFFSET $1;
   `;
     return db
-      .query(queryString, [userId, offset])
+      .query(queryString, [offset])
       .then((res) => res.rows)
       .catch((err) => err);
   } else {
     return db
       .query(
         `
-    SELECT user_post.id,
-    user_post.title,
-    user_post.username,
-    user_post.description,
-    user_post.thumbnail_photo,
-    user_post.url,
-    user_post.rating,
-    user_post.num_of_likes,
-    likes.user_id = $1 as is_liked
-    FROM
-      (SELECT posts.*,
-      users.id as currentuser,
-      users.username,
-      round(avg(ratings.rating)) as rating ,
-      count(likes.post_id) as num_of_likes
-      FROM posts
-      JOIN users on users.id = posts.user_id
-      LEFT JOIN likes on posts.id = likes.post_id
-      LEFT JOIN ratings on posts.id = ratings.post_id
-      GROUP BY posts.id, users.username, users.id
-      ORDER BY posts.id desc)
-    as user_post
-    WHERE user_post.title LIKE $2 OR user_post.description LIKE $2
-    LEFT JOIN likes on user_post.id = likes.post_id
-    LIMIT 5;
-  `,[userId, searchQuery])
+    SELECT * FROM posts
+    WHERE title LIKE $1 OR description like $1
+    LIMIT 5
+  `,
+        [searchQuery]
+      )
       .then((res) => res.rows)
       .catch((err) => err);
   }
@@ -305,6 +267,52 @@ const postsWithTheMostLikes = (db, offset) => {
 };
 exports.postsWithTheMostLikes = postsWithTheMostLikes;
 
+const likePost = function (db, user_id, post_id) {
+  // const q1 = `
+  //   SELECT * FROM likes WHERE post_id = $1;
+  // `
+
+  // db.query(q1, [post_id])
+  // .then(res => {
+  //   if (res.rows.length > 0) {
+  //     console.log("exists, removing like");
+  //     return db.query(`DELETE FROM likes WHERE post_id = $1 AND user_id = $2 RETURNING *`, [post_id, user_id])
+  //     .then(res => res);
+  //   } else {
+  //     const q2 = `
+  //     INSERT INTO likes (user_id, post_id)
+  //     VALUES ($1, $2)
+  //     RETURNING *
+  //     `;
+  //     console.log("does not exist, adding");
+  //     return db.query(q2, [user_id, post_id])
+  //     .then(res => res);
+  //   }
+  // })
+
+  const queryString = `
+  INSERT INTO likes (user_id, post_id)
+  VALUES ($1, $2)
+  RETURNING *`;
+
+  return db.query(queryString, [user_id, post_id]).then((data) => data.rows);
+};
+exports.likePost = likePost;
+
+const dislikePost = (db, user_id, post_id) => {
+  const queryString = `
+  DELETE FROM likes
+  WHERE user_id = $1 AND post_id = $2
+  AND EXISTS
+  (SELECT * FROM likes
+  WHERE user_id = $1 AND post_id = $2 LIMIT 1)
+  RETURNING *
+  `;
+  return db.query(queryString, [user_id, post_id]).then((data) => data.rows);
+};
+
+exports.dislikePost = likePost;
+
 const commentPost = (db, user_id, post_id, comment) => {
   const queryString = `
   INSERT INTO comments (user_id, post_id, comment_text)
@@ -316,14 +324,3 @@ const commentPost = (db, user_id, post_id, comment) => {
     .catch((err) => err);
 };
 exports.commentPost = commentPost;
-
-const ratePost = (db, userId, postId, rating) => {
-  const queryString = `
-    INSERT INTO ratings (user_id, post_id, rating)
-    VALUES ($1, $2, $3);
-  `
-  return db.query(queryString, [userId, postId, rating])
-  .then(res => res.rows)
-  .catch(err => err);
-}
-exports.ratePost = ratePost;

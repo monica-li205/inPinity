@@ -32,25 +32,28 @@
     </div>
     <div class="flex-row-center mt-2 mr-2">
       <% if (post.rating) { %>
-        <p class="rating mr-2 flex-row-center">
-          <span>
-          <%= post.rating %>/5 <i class="fa fa-star mr-2"></i>
-          </span>
+      <p class="rating mr-2 flex-row-center">
+        <span> <%= post.rating %>/5 <i class="fa fa-star mr-2"></i> </span>
       </p>
       <% } else { %>
       <p class="rating mr-2 flex-row-center">
-        <span>
-          0/5 <i class="fa fa-star mr-2"></i>
-        </span>
+        <span> 0/5 <i class="fa fa-star mr-2"></i> </span>
       </p>
       <% } %>
 
-      <p class="liked mr-2">
-        <%= post.num_of_likes %> 
+      <p class="liked mr-2" id="like-test">
         <% if (post.is_liked) { %>
-        <i class="fa fa-heart mr-2 liked-true"></i>
+        <button type="submit">
+          <i
+            class="fa fa-heart mr-2 liked-true"
+            data-mainpostid="<%= post.id%>"
+          ></i>
+        </button>
+
         <% } else {%>
-        <i class="fa fa-heart mr-2 liked"></i>
+        <button type="submit">
+          <i class="fa fa-heart mr-2 liked" data-mainpostid="<%= post.id%>"></i>
+        </button>
         <% } %>
       </p>
     </div>
