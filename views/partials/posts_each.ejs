@@ -41,19 +41,11 @@
       </p>
       <% } %>
 
-      <p class="liked mr-2" id="like-test">
+      <p class="liked mr-2">
         <% if (post.is_liked) { %>
-        <button type="submit">
-          <i
-            class="fa fa-heart mr-2 liked-true"
-            data-mainpostid="<%= post.id%>"
-          ></i>
-        </button>
-
+          <i class="fa fa-heart mr-2 liked-true" data-postid='<%= post.id%>'></i>
         <% } else {%>
-        <button type="submit">
-          <i class="fa fa-heart mr-2 liked" data-mainpostid="<%= post.id%>"></i>
-        </button>
+          <i class="fa fa-heart mr-2 liked" data-postid='<%= post.id%>'></i>
         <% } %>
       </p>
     </div>
