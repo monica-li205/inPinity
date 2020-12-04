@@ -11,7 +11,7 @@ $(document).ready(function (e) {
         loadMore()
         setTimeout(function () {
           loadMoreDelay = false;
-        }, 3000);
+        }, 2000);
       }
     }
 
@@ -21,7 +21,7 @@ $(document).ready(function (e) {
         loadMorePopular();
         setTimeout(function () {
           loadMorePopularDelay = false;
-        }, 3000);
+        }, 2000);
       }
     }
   })
