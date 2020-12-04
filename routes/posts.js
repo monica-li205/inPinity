@@ -16,16 +16,18 @@ module.exports = (db, helpers) => {
   router.get("/search", (req, res) => {
     const query = `%${req.query.q}%`;
     const offset = Number(Object.values(req.query));
+    const userId = req.session.user_id;
 
     helpers
-      .searchPosts(db, query, offset)
+      .searchPosts(db, userId, query, offset)
       .then((posts) => {
         templateVars = {
           user: undefined,
           posts: posts,
           error: undefined,
         };
-        res.render("index", templateVars);
+        console.log(posts);
+        res.render("main", templateVars);
       })
       .catch((err) => err);
   });
@@ -66,6 +68,19 @@ module.exports = (db, helpers) => {
     }
   });
 
+  router.post("/rate/:id", (req, res) => {
+    const postId = req.params.id;
+    const postRating = req.body.rating;
+    const userId = req.session.user_id;
+    console.log(postId, postRating);
+
+    helpers.ratePost(db, userId, postId, postRating)
+    .then(data => {
+      res.redirect(`/post/${postId}`);
+    })
+    .catch(err => err);
+  })
+
   // Edit specific post by ID
   router.post("/:id", (req, res) => {
     const queryParams = [req.body];
@@ -82,7 +97,6 @@ module.exports = (db, helpers) => {
     helpers
       .getPostOwner(db, req.params.id)
       .then((post) => {
-        console.log(post.user_id);
         if (post.user_id === req.session.user_id) {
           db.query("DELETE FROM posts WHERE id = $1", [req.params.id])
             .then((data) => {

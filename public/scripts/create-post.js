@@ -34,5 +34,8 @@ $(document).ready(function(e) {
 
   $("#image-url").change(function() {
     $(".file-upload-image").attr("src", $(this).val());
+    if ($(this).val()) {
+      $("#upload-caption").css("display", "none");
+    }
   })
 })

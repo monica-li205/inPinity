@@ -1,15 +1,19 @@
 let offset = 0;
 
 $(document).ready(function (e) {
-  $(window).scroll(function (e) {
-    if (
-      $(window).scrollTop() + 1 >=
-      $(document.body).height() - $(window).height()
-    ) {
+  window.onscroll = function(ev) {
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+      // you're at the bottom of the page
       loadMore();
-      // loadMorePopular();
+      console.log("Bottom of page");
     }
-  });
+};
+  // $(window).scroll(function (e) {
+  //   if ($(window).scrollTop() + $(window).height() === $(document.body).height()) {
+  //     console.log("end");
+  //     loadMore();
+  //   }
+  // });
 });
 
 const loadMore = function () {

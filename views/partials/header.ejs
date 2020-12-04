@@ -28,18 +28,18 @@
         </li>
         <% } %>
         <li class="nav-item">
-  
-          <form class="form-inline mb-2">
-            <input
-              class="form-control mr-sm-2 search-form"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </form>
-        </li>
-        <li class="nav-item">
           <% if (user) { %>
+            <li class="nav-item">
+      
+              <form class="form-inline mb-2">
+                <input
+                  class="form-control mr-sm-2 search-form"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+              </form>
+            </li>
           <div class="dropdown mr-1 mb-2">
             <button
               class="btn btn-outline-secondary dropdown-toggle"
@@ -74,36 +74,36 @@
 
       <li class="nav-item dropdown">
         <% if (!user) { %>
+          <button
+            type="button"
+            class="btn btn-outline-warning"
+            data-toggle="modal"
+            data-target="#register-form"
+          >
+          <i class="fas fa-user"></i>
+          </button>
         <button
           type="button"
-          class="btn btn-outline-primary pl-4 pr-4"
+          class="btn btn-outline-primary pr-4"
           data-toggle="modal"
           data-target="#login-form"
         >
-          Login
-        </button>
-        <button
-          type="button"
-          class="btn btn-outline-warning"
-          data-toggle="modal"
-          data-target="#register-form"
-        >
-          Register
+        <i class="fas fa-sign-in-alt"></i>
         </button>
       </li>
       <% } %> <% if (user) { %>
       <div class="flex-row-space">
         <button
           type="button"
-          class="btn btn-outline-warning pl-4 pr-4"
+          class="btn btn-outline-warning ml-2"
           data-toggle="modal"
           data-target="#user-edit"
         >
-          User
+        <i class="far fa-user"></i>
         </button>
         <form action="/logout" method="POST">
           <button class="btn btn-outline-danger ml-2" type="submit">
-            Logout
+            <i class="fas fa-sign-out-alt"></i>
           </button>
         </form>
       </div>

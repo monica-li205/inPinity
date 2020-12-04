@@ -1,11 +1,10 @@
 let offset = 0;
 
 $(document).ready(function (e) {
+  console.log("got here");
   $(window).scroll(function (e) {
-    if (
-      $(window).scrollTop() + 1 >=
-      $(document.body).height() - $(window).height()
-    ) {
+    if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+      console.log("end");
       loadMore();
     }
   });

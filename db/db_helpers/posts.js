@@ -53,32 +53,70 @@ const getAllPostsLoggedIn = (db, id, offset) => {
 };
 exports.getAllPostsLoggedIn = getAllPostsLoggedIn;
 
-const searchPosts = (db, searchQuery, offset) => {
+const searchPosts = (db, userId, searchQuery, offset) => {
   // console.log(searchQuery.length);
   if (searchQuery.length <= 2) {
+    console.log("search all");
     const queryString = `
-    SELECT posts.*, users.username, (select round(avg(rating)) from ratings) as rating, (select sum(is_liked::int) as num_of_likes)
-    FROM posts
-    LEFT JOIN users on users.id = posts.user_id
-    LEFT JOIN likes on posts.id = likes.post_id
-    GROUP BY posts.id, users.username
-    ORDER BY posts.id desc
-    LIMIT 20 OFFSET $1;
+    SELECT user_post.id,
+    user_post.title,
+    user_post.username,
+    user_post.description,
+    user_post.thumbnail_photo,
+    user_post.url,
+    user_post.rating,
+    user_post.num_of_likes,
+    likes.user_id = $1 as is_liked
+    FROM
+      (SELECT posts.*,
+      users.id as currentuser,
+      users.username,
+      round(avg(ratings.rating)) as rating ,
+      count(likes.post_id) as num_of_likes
+      FROM posts
+      JOIN users on users.id = posts.user_id
+      LEFT JOIN likes on posts.id = likes.post_id
+      LEFT JOIN ratings on posts.id = ratings.post_id
+      GROUP BY posts.id, users.username, users.id
+      ORDER BY posts.id desc)
+    as user_post
+    LEFT JOIN likes on user_post.id = likes.post_id
+    LIMIT 20 OFFSET $2;
   `;
     return db
-      .query(queryString, [offset])
+      .query(queryString, [userId, offset])
       .then((res) => res.rows)
       .catch((err) => err);
   } else {
     return db
       .query(
         `
-    SELECT * FROM posts
-    WHERE title LIKE $1 OR description like $1
-    LIMIT 5
-  `,
-        [searchQuery]
-      )
+    SELECT user_post.id,
+    user_post.title,
+    user_post.username,
+    user_post.description,
+    user_post.thumbnail_photo,
+    user_post.url,
+    user_post.rating,
+    user_post.num_of_likes,
+    likes.user_id = $1 as is_liked
+    FROM
+      (SELECT posts.*,
+      users.id as currentuser,
+      users.username,
+      round(avg(ratings.rating)) as rating ,
+      count(likes.post_id) as num_of_likes
+      FROM posts
+      JOIN users on users.id = posts.user_id
+      LEFT JOIN likes on posts.id = likes.post_id
+      LEFT JOIN ratings on posts.id = ratings.post_id
+      GROUP BY posts.id, users.username, users.id
+      ORDER BY posts.id desc)
+    as user_post
+    WHERE user_post.title LIKE $2 OR user_post.description LIKE $2
+    LEFT JOIN likes on user_post.id = likes.post_id
+    LIMIT 5;
+  `,[userId, searchQuery])
       .then((res) => res.rows)
       .catch((err) => err);
   }
@@ -278,3 +316,14 @@ const commentPost = (db, user_id, post_id, comment) => {
     .catch((err) => err);
 };
 exports.commentPost = commentPost;
+
+const ratePost = (db, userId, postId, rating) => {
+  const queryString = `
+    INSERT INTO ratings (user_id, post_id, rating)
+    VALUES ($1, $2, $3);
+  `
+  return db.query(queryString, [userId, postId, rating])
+  .then(res => res.rows)
+  .catch(err => err);
+}
+exports.ratePost = ratePost;
