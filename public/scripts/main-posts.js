@@ -40,7 +40,7 @@ const loadMore = function () {
 }
 
 const loadMorePopular = function() {
-  offset += 5;
+  offset += 10;
   $.ajax({
     method: "GET",
     url: `/main?offset=${offset}`

@@ -35,17 +35,18 @@
 
       <div class="flex-col-space right-side ">
         
-            <div class="comment-section">
+        <div class="comment-section">
               <label>Comments:</label>
-    
+              
               <% for (const comment of post) { %> <% if (comment.comment_text !==
-              null) { %>
-              <div class="comments">
-                <p class="m-2" style="font-style: italic;">"<%= comment.comment_text %>"<span> -<%= comment.username %></span></p>
-                
-              </div>
-              <% } %> <% } %>
-            </div>
+                null) { %>
+                  <div class="comments">
+                    <p class="m-2" style="font-style: italic;">"<%= comment.comment_text %>"<span> -<%= comment.username %></span></p>
+                    
+                  </div>
+                  <% } %> <% } %>
+                </div>
+                <% if (user) { %>
         <form
           class="flex-col mt-2"
           action="/api/posts/comment/<%= post[0].id %>"
@@ -64,6 +65,7 @@
         </form>
         
       </div>
+      <% } %>
     </section>
   </main>
   <%- include('./footer'); %>
