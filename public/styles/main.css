@@ -6,15 +6,6 @@ button {
   font-family: "Texturina", serif;
 }
 
-h1,
-h3,
-h4,
-h5 {
-  color: #244751;
-}
-
-/* Styles */
-
 a {
   text-decoration: none;
   color: gray;
@@ -29,7 +20,7 @@ button {
 
 /* Nav bar */
 nav {
-  background-color: #313c35;
+  background-color: #415b4b;
 }
 
 header i {
@@ -108,7 +99,7 @@ article {
 
 /* edit create board */
 .box-container {
-  background-color: #262e29;
+  background-color: #435a4c;
   border-radius: 1rem;
   position: absolute;
   top: 50%;
@@ -122,7 +113,7 @@ article {
 label {
   text-transform: uppercase;
   font-weight: 800;
-  /* color: white; */
+  color: white;
 }
 #input-field {
   width: 50%;
@@ -145,12 +136,19 @@ input {
   outline: none;
   padding: 0.5rem;
 }
+
+#rate {
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: 800;
+}
+
 textarea {
   border-radius: 1rem;
   border: none;
   outline: none;
   padding: 1rem;
-  font-weight: 500;
+  font-weight: 800;
 }
 select {
   border-radius: 5rem;
@@ -209,7 +207,7 @@ select {
 
 /* equal-side */
 .mid-container {
-  background-color: #313c35;
+  background-color: #4c6e58;
   border-radius: 1rem;
   max-width: 80%;
   padding: 50px;
@@ -235,5 +233,5 @@ select {
 }
 
 .modal-content {
-  background: black;
+  background: #44544a;
 }
