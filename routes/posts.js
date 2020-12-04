@@ -27,6 +27,7 @@ module.exports = (db, helpers, userHelpers) => {
         user: data[0],
         posts: data[1],
         search: searchQueryShow,
+        searchCount: data[1].length
       }
       res.render("search_result", templateVars);
     }) 
@@ -62,7 +63,6 @@ module.exports = (db, helpers, userHelpers) => {
     const postId = req.params.id;
     const postRating = req.body.rating;
     const userId = req.session.user_id;
-    console.log(postId, postRating);
 
     helpers.ratePost(db, userId, postId, postRating)
     .then(data => {

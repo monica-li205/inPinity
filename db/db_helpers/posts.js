@@ -306,3 +306,13 @@ const commentPost = (db, user_id, post_id, comment) => {
     .catch((err) => err);
 };
 exports.commentPost = commentPost;
+
+const ratePost = (db, userId, postId, postRating) => {
+  const queryString = `
+    INSERT INTO ratings (user_id, post_id, rating)
+    VALUES ($1, $2, $3)
+  `
+  return db.query(queryString, [userId, postId, postRating])
+  .then(res => res.rows);
+}
+exports.ratePost = ratePost;
