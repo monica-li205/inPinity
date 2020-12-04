@@ -1,20 +1,42 @@
 $(document).ready(function () {
-  console.log("loaded likes");
-  $(".fa-heart").click(function () {
-    console.log("isclicked");
-    const post_id = $(this).data("postid");
+  console.log('loaded likes')
+
+  $('.fa-heart').click(function() {
+
+    const post_id = $(this).data('postid');
     const data = {
       post_id,
-    };
+    }
+    console.log('isclicked');
     $.ajax({
-      type: "POST",
-      url: "/api/likes",
+      type: 'POST',
+      url: '/api/likes',
       data: data,
-    }).then(() => {
-      console.log("liked");
-      $(this).toggle("liked-true");
+    })
+    .then((data) =>{
+      console.log('liked', data);
+      $(this).toggleClass('liked-true');
     });
-  });
+  })
+});
+
+// $(document).ready(function () {
+//   console.log("loaded likes");
+//   $(".fa-heart").click(function () {
+//     console.log("isclicked");
+//     const post_id = $(this).data("postid");
+//     const data = {
+//       post_id,
+//     };
+//     $.ajax({
+//       type: "POST",
+//       url: "/api/likes",
+//       data: data,
+//     }).then(() => {
+//       console.log("liked");
+//       $(this).toggle("liked-true");
+//     });
+//   });
 
   // $(".mainpost").ready(function() {
   //   console.log("dom loaded");
@@ -35,4 +57,4 @@ $(document).ready(function () {
   //     })
   //   })
   // })
-});
+// });
