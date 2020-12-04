@@ -40,18 +40,18 @@
         </form>
         <% if (user) { %> <% if (user.id === post[0].user_id) { %> <%-
         include('./edit_post'); %>
-        <div class="flex-row-space">
+        <div class="flex-row-space mt-2">
           <button
           class="btn btn-outline-info pl-4 pr-4"
             data-toggle="modal"
             data-target="#edit-post"å
           >
           <i class="fa fa-pencil"></i
-            ><span class="ml-1">Edit</span></button>
+            ></button>
             
           </button>
           <form action="/api/posts/delete/<%= post[0].id %>" method="POST">
-            <button class="btn btn-outline-danger" ><i class="fa fa-trash"></i>      <span>Delete</span>
+            <button class="btn btn-outline-danger" ><i class="fa fa-trash"></i>
             </button>
           </form>
         </div>
