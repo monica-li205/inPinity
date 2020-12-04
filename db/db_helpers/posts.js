@@ -311,7 +311,7 @@ const dislikePost = (db, user_id, post_id) => {
   return db.query(queryString, [user_id, post_id]).then((data) => data.rows);
 };
 
-exports.dislikePost = likePost;
+exports.dislikePost = dislikePost;
 
 const commentPost = (db, user_id, post_id, comment) => {
   const queryString = `

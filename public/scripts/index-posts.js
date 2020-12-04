@@ -8,6 +8,15 @@ $(document).ready(function (e) {
       loadMore();
     }
   });
+
+  $("#post-area").on("click", "i.fa-heart", function () {
+    $("this").click().alert("Please log in to checkout more features.");
+  });
+
+  console.log("loaded likes");
+  $(".fa-heart").click(function () {
+    alert("Please log in to checkout more features.");
+  });
 });
 
 const loadMore = function () {
