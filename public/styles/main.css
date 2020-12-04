@@ -258,3 +258,7 @@ span #post-rating {
 #fav-area > h3 {
   color: grey;
 }
+
+.btn {
+  font-family: "Texturina", serif;
+}
