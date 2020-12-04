@@ -34,9 +34,9 @@
           <textarea name="comment" id="" cols="30" rows="10"></textarea>
           <button type="submit" class="btn btn-outline-info mt-3">Comment</button>
         </form>
-        <form action="/api/posts/rate/<%= post[0].id %>" class="flex-row mt-2" method="POST">
-          <input type="number" style="width: 5em;" name="rating" min="1" max="5">
-          <button class=" btn btn-primary">Rate</button>
+        <form action="/api/posts/rate/<%= post[0].id %>" class="flex-row-space mt-2" method="POST">
+          <input id="rate" type="number" style="width: 5em;" name="rating" min="1" max="5">
+          <button class="btn btn-outline-light">Rate</button>
         </form>
         <% if (user) { %> <% if (user.id === post[0].user_id) { %> <%-
         include('./edit_post'); %>
