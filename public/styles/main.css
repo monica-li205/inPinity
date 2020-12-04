@@ -28,7 +28,7 @@ button {
 
 /* Nav bar */
 nav {
-  background-color: #313c35;
+  background-color: #415b4b;
 }
 
 header i {
@@ -107,7 +107,7 @@ article {
 
 /* edit create board */
 .box-container {
-  background-color: #262e29;
+  background-color: #435a4c;
   border-radius: 1rem;
   position: absolute;
   top: 50%;
@@ -215,7 +215,7 @@ select {
 
 /* equal-side */
 .mid-container {
-  background-color: #313c35;
+  background-color: #4c6e58;
   border-radius: 1rem;
   max-width: 80%;
   padding: 50px;
@@ -241,5 +241,5 @@ select {
 }
 
 .modal-content {
-  background: black;
+  background: #44544a;
 }
