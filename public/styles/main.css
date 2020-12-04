@@ -230,3 +230,7 @@ article footer {
 .post-img {
   width: 100%;
 }
+
+.modal-title {
+  color: white;
+}
