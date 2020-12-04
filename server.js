@@ -57,7 +57,7 @@ const likes = require("./routes/likes");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db, userHelpers));
-app.use("/api/posts", postRoutes(db, postHelpers));
+app.use("/api/posts", postRoutes(db, postHelpers, userHelpers));
 app.use("/", index(db, userHelpers, postHelpers));
 app.use("/api/likes", likes(db));
 // Note: mount other resources here, using the same pattern above

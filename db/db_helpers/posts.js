@@ -53,35 +53,17 @@ const getAllPostsLoggedIn = (db, id, offset) => {
 };
 exports.getAllPostsLoggedIn = getAllPostsLoggedIn;
 
-const searchPosts = (db, searchQuery, offset) => {
+const searchPosts = (db, searchQuery) => {
   // console.log(searchQuery.length);
-  if (searchQuery.length <= 2) {
-    const queryString = `
-    SELECT posts.*, users.username, (select round(avg(rating)) from ratings) as rating, (select sum(is_liked::int) as num_of_likes)
-    FROM posts
-    LEFT JOIN users on users.id = posts.user_id
-    LEFT JOIN likes on posts.id = likes.post_id
-    GROUP BY posts.id, users.username
-    ORDER BY posts.id desc
-    LIMIT 20 OFFSET $1;
-  `;
-    return db
-      .query(queryString, [offset])
-      .then((res) => res.rows)
-      .catch((err) => err);
-  } else {
-    return db
-      .query(
-        `
+  return db.query(
+    `
     SELECT * FROM posts
     WHERE title LIKE $1 OR description like $1
-    LIMIT 5
-  `,
-        [searchQuery]
-      )
-      .then((res) => res.rows)
-      .catch((err) => err);
-  }
+    LIMIT 5`, [searchQuery]
+    )
+    .then((res) => res.rows)
+    .catch((err) => err);
+
 };
 exports.searchPosts = searchPosts;
 

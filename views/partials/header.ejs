@@ -31,18 +31,19 @@
           <% if (user) { %>
             <li class="nav-item">
       
-              <form class="form-inline mb-2">
+              <form class="form-inline mb-2" method="POST" action="/api/posts/search/">
                 <input
                   class="form-control mr-sm-2 search-form"
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  name="q"
                 />
               </form>
             </li>
           <div class="dropdown mr-1 mb-2">
             <button
-              class="btn btn-outline-secondary dropdown-toggle"
+              class="btn btn-secondary dropdown-toggle"
               type="button"
               id="dropdownMenuButton"
               data-toggle="dropdown"
@@ -76,7 +77,7 @@
         <% if (!user) { %>
           <button
             type="button"
-            class="btn btn-outline-warning mr-2"
+            class="btn btn-warning mr-2"
             data-toggle="modal"
             data-target="#register-form"
           >
@@ -84,7 +85,7 @@
           </button>
         <button
           type="button"
-          class="btn btn-outline-primary pr-4"
+          class="btn btn-primary pr-4"
           data-toggle="modal"
           data-target="#login-form"
         >
@@ -95,14 +96,14 @@
       <div class="flex-row-space">
         <button
           type="button"
-          class="btn btn-outline-warning"
+          class="btn btn-warning"
           data-toggle="modal"
           data-target="#user-edit"
         >
         <i class="far fa-user mr-3"></i>
         </button>
         <form action="/logout" method="POST">
-          <button class="btn btn-outline-danger ml-2" type="submit">
+          <button class="btn btn-danger ml-2" type="submit">
             <i class="fas fa-sign-out-alt mr-2"></i>
           </button>
         </form>

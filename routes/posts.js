@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (db, helpers) => {
+module.exports = (db, helpers, userHelpers) => {
   router.get("/", (req, res) => {
     const offset = Number(Object.values(req.query));
 
@@ -13,34 +13,24 @@ module.exports = (db, helpers) => {
       .catch((err) => err);
   });
 
-  router.get("/search", (req, res) => {
-    const query = `%${req.query.q}%`;
-    const offset = Number(Object.values(req.query));
-    const userId = req.session.user_id;
+  router.post("/search", (req, res) => {
+    const query = `%${req.body.q}%`;
+    const userSession = req.session.user_id;
 
-    helpers
-      .searchPosts(db, userId, query, offset)
-      .then((posts) => {
-        templateVars = {
-          user: undefined,
-          posts: posts,
-          error: undefined,
-        };
-        console.log(posts);
-        res.render("main", templateVars);
-      })
-      .catch((err) => err);
+    const getUserRecord = userHelpers.getUserWithId(db, userSession);
+    const searchPost = helpers.searchPosts(db, query);
+
+    Promise.all([getUserRecord, searchPost])
+    .then(data => {
+      const searchQueryShow = query.slice(1, query.length - 1);
+      templateVars = {
+        user: data[0],
+        posts: data[1],
+        search: searchQueryShow,
+      }
+      res.render("search_result", templateVars);
+    }) 
   });
-
-  // Get specific post by ID
-  // router.get("/:id", (req, res) => {
-  //   helpers
-  //     .getPostWithId(db, req.params.id)
-  //     .then((post) => {
-  //       res.json(post);
-  //     })
-  //     .catch((err) => err);
-  // });
 
   // Add new post
   router.post("/", (req, res) => {
