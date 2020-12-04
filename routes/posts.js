@@ -43,13 +43,12 @@ module.exports = (db, helpers, userHelpers) => {
       error: "Your post has been submitted",
     };
 
-    const addPost = helpers.addPost(db, user, params);
-    const getAllPosts = helpers.getAllPosts(db, offset);
+    // const addPost = helpers.addPost(db, user, params);
+    // const getAllPosts = helpers.getAllPosts(db, offset);
     if (user) {
       helpers
         .addPost(db, user, params)
         .then((post) => {
-          console.log("added");
           res.redirect("/main");
         })
         .catch((err) => err);
