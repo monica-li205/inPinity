@@ -45,10 +45,10 @@
       <% } %>
       <p class="liked mr-2" id="like-test">
         <% if (post.is_liked) { %>
-        <i class="fa fa-heart mr-2" data-postid="<%= post.id%>"></i>
+        <i class="fa fa-heart liked-true mr-2" data-postid="<%= post.id%>"></i>
 
         <% } else {%>
-        <i class="fa fa-heart mr-2" data-postid="<%= post.id%>"></i>
+        <i class="fa fa-heart liked-false mr-2" data-postid="<%= post.id%>"></i>
         <% } %>
       </p>
     </div>

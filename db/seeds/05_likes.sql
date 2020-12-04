@@ -111,3 +111,8 @@ insert into likes (user_id, post_id) values (9, 203);
 insert into likes (user_id, post_id) values (9, 2);
 insert into likes (user_id, post_id) values (9, 3);
 insert into likes (user_id, post_id) values (9, 1);
+insert into likes (user_id, post_id) values (9, 1500);
+insert into likes (user_id, post_id) values (9, 1498);
+insert into likes (user_id, post_id) values (9, 1499);
+insert into likes (user_id, post_id) values (9, 1498);
+insert into likes (user_id, post_id) values (9, 1497);

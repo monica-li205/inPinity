@@ -188,6 +188,10 @@ article footer {
   color: #ff3535;
 }
 
+.liked-false {
+  color: #454545;
+}
+
 .fa-star {
   color: #ff942f;
   margin-right: 0 !important;

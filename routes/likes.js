@@ -3,7 +3,7 @@ const router = express.Router();
 const postHelper = require("../db/db_helpers/posts.js");
 
 module.exports = (db, helpers) => {
-  router.post("/:id", (req, res) => {
+  router.put("/:id", (req, res) => {
     const user_id = req.session.user_id;
     const post_id = req.params.id;
 
@@ -16,7 +16,7 @@ module.exports = (db, helpers) => {
       .catch((err) => err);
   });
 
-  router.post("/:id", (req, res) => {
+  router.put("/:id", (req, res) => {
     const user_id = req.session.user_id;
     const post_id = req.params.id;
     postHelper

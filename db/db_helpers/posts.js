@@ -310,8 +310,21 @@ const dislikePost = (db, user_id, post_id) => {
   `;
   return db.query(queryString, [user_id, post_id]).then((data) => data.rows);
 };
-
 exports.dislikePost = dislikePost;
+
+// const showLikedPost = (db, user_id, post_id) => {
+//   const queryString = `
+//   DELETE FROM likes
+//   WHERE user_id = $1 AND post_id = $2
+//   AND EXISTS
+//   (SELECT * FROM likes
+//   WHERE user_id = $1 AND post_id = $2 LIMIT 1)
+//   RETURNING *
+//   `;
+//   return db.query(queryString, [user_id, post_id]).then((data) => data.rows);
+// };
+
+// exports.showLikedPost = showLikedPost;
 
 const commentPost = (db, user_id, post_id, comment) => {
   const queryString = `

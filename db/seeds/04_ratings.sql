@@ -998,3 +998,6 @@ insert into ratings (user_id, post_id, rating) values (47, 194, 3);
 insert into ratings (user_id, post_id, rating) values (39, 268, 4);
 insert into ratings (user_id, post_id, rating) values (24, 374, 2);
 insert into ratings (user_id, post_id, rating) values (55, 93, 5);
+insert into ratings (user_id, post_id, rating) values (9, 1500, 5);
+insert into ratings (user_id, post_id, rating) values (9, 1499, 4);
+insert into ratings (user_id, post_id, rating) values (9, 1498, 3);
