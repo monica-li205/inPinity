@@ -21,7 +21,7 @@ label {
 
 h2,
 span {
-  color: black;
+  color: grey;
 }
 
 input {
@@ -237,4 +237,24 @@ article footer {
 
 article:hover {
   box-shadow: 0 5px 10px grey;
+}
+
+article > footer {
+  color: grey;
+}
+
+span #post-rating {
+  color: grey;
+}
+
+.post-link:hover {
+  text-decoration: none;
+}
+
+#main-container > h3 {
+  color: grey;
+}
+
+#fav-area > h3 {
+  color: grey;
 }

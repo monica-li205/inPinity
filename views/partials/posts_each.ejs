@@ -13,7 +13,7 @@
   </div>
 
   <div class="card-body">
-    <a href="/post/<%= post.id %>">
+    <a class="post-link" href="/post/<%= post.id %>">
       <h5 class="title post-title"><%= post.title %></h5>
       <p class="card-text description post-description">
         <%= post.description.substring(0,40) + '......' %>
@@ -33,7 +33,7 @@
     <div class="flex-row-center mt-2 mr-2">
       <% if (post.rating) { %>
       <p class="rating mr-2 flex-row-center">
-        <span> <%= post.rating %>/5 <i class="fa fa-star mr-2"></i> </span>
+        <span id="post-rating"> <%= post.rating %>/5 <i class="fa fa-star mr-2"></i> </span>
       </p>
       <% } else { %>
       <p class="rating mr-2 flex-row-center">
