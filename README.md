@@ -29,7 +29,11 @@ Users can:
 8. Visit `http://localhost:8080/`
 
 ## Screenshots
-
+![Homepage](https://github.com/monica-li205/inPinity/blob/master/public/images/screenshoots/inpinity-home.png?raw=true)
+![Homepage-Loggedin]()
+![User's Boards]()
+![Login Screen]()
+![Create a Post]()
 
 ## Dependencies
 
