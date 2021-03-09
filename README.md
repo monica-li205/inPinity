@@ -29,11 +29,11 @@ Users can:
 8. Visit `http://localhost:8080/`
 
 ## Screenshots
-![Homepage](https://github.com/monica-li205/inPinity/blob/master/public/images/screenshoots/inpinity-home.png?raw=true)
-![Homepage-Loggedin]()
-![User's Boards]()
-![Login Screen]()
-![Create a Post]()
+![Homepage](https://github.com/monica-li205/inPinity/blob/master/public/images/screenshots/inpinity.png?raw=true)
+![Homepage-Loggedin](https://github.com/monica-li205/inPinity/blob/master/public/images/screenshots/inpinity-home.png?raw=true)
+![User's Boards](https://github.com/monica-li205/inPinity/blob/master/public/images/screenshots/inpinity-my_boards.png?raw=true)
+![Login Screen](https://github.com/monica-li205/inPinity/blob/master/public/images/screenshots/inpinity-login.png?raw=true)
+![Create a Post](https://github.com/monica-li205/inPinity/blob/master/public/images/screenshots/inpinity-create_post.png?raw=true)
 
 ## Dependencies
 
@@ -50,3 +50,7 @@ Users can:
 - jquery-validation 1.19.2
 - morgan 1.9.1
 - node-sass-middleware 0.11.0
+
+## Contributors
+- [Angie Xu](https://github.com/agxcd)
+- [Shaun Yap](https://github.com/shaun-ws-yap)
